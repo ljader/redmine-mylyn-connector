@@ -1,0 +1,3 @@
+= mylyn_connector
+
+Description goes here
