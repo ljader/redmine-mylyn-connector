@@ -1,9 +1,0 @@
-xml.instruct! :xml, :encoding => "UTF-8"
-xml.issue :xmlns => 'http://redmine-mylyn.sf.net/schemas/issue' do
-  xml.assignedToId @issue.assigned_to_id
-  xml.authorId @issue.author_id
-  xml.id @issue.id
-  xml.availableStatus {
-    xml << render(:partial => 'issue_status.rxml', :collection => available_status(@issue))
-  }
-end

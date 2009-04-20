@@ -1,0 +1,3 @@
+xml.version :id => version.id do
+  xml.name version.name
+end

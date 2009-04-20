@@ -1,5 +1,4 @@
 
-
 module MylynConnector::IssuesHelper
   def available_status issue
     status = issue.new_statuses_allowed_to(User.current)

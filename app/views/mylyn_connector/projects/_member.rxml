@@ -1,0 +1,4 @@
+xml.member :id => member.user.id do
+  xml.name member.user.name
+  xml.isAssignable :val => member.role.assignable
+end

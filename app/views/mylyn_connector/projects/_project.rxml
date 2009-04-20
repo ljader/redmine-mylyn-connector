@@ -1,0 +1,29 @@
+xml.project :xmlns => 'http://redmine-mylyn.sf.net/schemas/WS-API-2.6', :id => project.id do
+  #unused: description, homepage, is_public, parent_id, projects_count, status, created_on, updated_on
+
+  xml.identifier project.identifier
+  xml.name project.name
+  xml.issueEditAllowed :val => edit_issues_allowed?(project)
+
+  xml.trackers {
+    xml << render(:partial => 'tracker.rxml', :collection => get_trackers(project))
+  }
+  xml.versions{
+    xml << render(:partial => 'version.rxml', :collection => get_versions(project))
+  }
+  xml.members {
+    xml << render(:partial => 'member.rxml', :collection => get_members(project))
+  }
+  xml.queries {
+    xml << render(:partial => 'query.rxml', :collection => get_queries(project))
+  }
+
+  xml.issueCategories {
+    xml << render(:partial => 'issue_category.rxml', :collection => get_issue_categories(project))
+  }
+  xml.issueCustomFields {
+    xml << render(:partial => 'issue_custom_field.rxml', :collection => get_issue_custom_fields(project))
+  }
+
+
+end

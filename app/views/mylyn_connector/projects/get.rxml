@@ -1,0 +1,2 @@
+xml.instruct! :xml, :encoding => "UTF-8"
+xml << render(:partial => 'project.rxml')

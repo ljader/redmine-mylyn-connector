@@ -1,0 +1,3 @@
+xml.query :id => query.id do
+  xml.name query.name
+end

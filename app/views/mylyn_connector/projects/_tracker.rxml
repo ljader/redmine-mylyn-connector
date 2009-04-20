@@ -1,0 +1,3 @@
+xml.tracker :id => tracker.id do
+  xml.name tracker.name
+end
