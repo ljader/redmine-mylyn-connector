@@ -1,0 +1,12 @@
+xml.instruct! :xml, :encoding => "UTF-8"
+xml.priorities :xmlns => 'http://redmine-mylyn.sf.net/schemas/WS-API-2.6' do
+  @priorities.each do |priority|
+    xml.priority(
+      :id => priority.id,
+      :default => priority.is_default,
+      :position => priority.position) do
+
+      xml.name priority.name
+    end
+  end
+end

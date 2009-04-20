@@ -1,0 +1,12 @@
+xml.instruct! :xml, :encoding => "UTF-8"
+xml.issueStatuses :xmlns => 'http://redmine-mylyn.sf.net/schemas/WS-API-2.6' do
+  @issue_status.each do |status|
+    xml.issueStatus(
+      :id => status.id,
+      :closed => status.is_closed,
+      :default => status.is_default) do
+
+      xml.name status.name
+    end
+  end
+end

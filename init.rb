@@ -6,5 +6,5 @@ Redmine::Plugin.register :redmine_mylyn_connector do
   name 'Mylyn Connector plugin'
   author 'Sven Krzyzak'
   description 'This plugin provides a webservice API for Eclipse Mylyn'
-  version 'v2.5.0'
+  version MylynConnector::Version
 end

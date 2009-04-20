@@ -1,12 +1,15 @@
-xml.issueCustomField :id => issue_custom_field.id do
+xml.issueCustomField(
+  :id => issue_custom_field.id,
+  :fieldFormat => issue_custom_field.field_format,
+  :minLength => issue_custom_field.min_length,
+  :maxLength => issue_custom_field.max_length,
+  :filter => issue_custom_field.is_filter,
+  :required => issue_custom_field.is_required) do
+
   xml.name issue_custom_field.name
-  xml.fieldFormat :val => issue_custom_field.field_format
-  xml.minLength :val => issue_custom_field.min_length
-  xml.maxLength :val => issue_custom_field.max_length
   xml.defaultValue issue_custom_field.default_value
   xml.regexp issue_custom_field.regexp
-  xml.isFilter :val => issue_custom_field.is_filter
-  xml.isRequired :val => issue_custom_field.is_required
+
   if issue_custom_field.field_format=="list"
     xml.possibleValues {
       issue_custom_field.possible_values.each do |value|

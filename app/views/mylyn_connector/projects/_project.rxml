@@ -1,9 +1,11 @@
-xml.project :xmlns => 'http://redmine-mylyn.sf.net/schemas/WS-API-2.6', :id => project.id do
+xml.project(
+  :xmlns => 'http://redmine-mylyn.sf.net/schemas/WS-API-2.6',
+  :id => project.id,
+  :issueEditAllowed => edit_issues_allowed?(project)) do
   #unused: description, homepage, is_public, parent_id, projects_count, status, created_on, updated_on
 
   xml.identifier project.identifier
   xml.name project.name
-  xml.issueEditAllowed :val => edit_issues_allowed?(project)
 
   xml.trackers {
     xml << render(:partial => 'tracker.rxml', :collection => get_trackers(project))
