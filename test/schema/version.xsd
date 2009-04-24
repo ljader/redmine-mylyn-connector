@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="http://redmin-mylyncon.sf.net/schemas/WS-API-2.5/version"
-	xmlns:tns="http://redmin-mylyncon.sf.net/schemas/WS-API-2.5/version"
-	elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	xmlns:tns="http://redmin-mylyncon.sf.net/schemas/WS-API-2.5"
+	targetNamespace="http://redmin-mylyncon.sf.net/schemas/WS-API-2.5"
+	elementFormDefault="qualified" >
 
 	<xsd:element name="version"
 		xmlns="http://redmine-mylyn.sf.net/schemas/WS-API-2.5/version">
