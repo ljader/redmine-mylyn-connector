@@ -1,6 +1,0 @@
-xml.status :id => issue_status.id #  do
-#  xml.id issue_status.id
-#  xml.name issue_status.name
-#  xml.isClosed issue_status.is_closed
-#  xml.isDefault issue_status.is_default
-#end

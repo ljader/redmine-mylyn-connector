@@ -10,7 +10,7 @@ module MylynConnector
     #Code from Redmine::Version
     def self.revision
       revision = nil
-      entries_path = File.dirname(__FILE__) + "/../../.svn/entries"
+      entries_path = File.dirname(__FILE__) + "/.svn/entries"
       if File.readable?(entries_path)
         begin
           f = File.open(entries_path, 'r')

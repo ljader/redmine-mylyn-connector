@@ -1,10 +1,9 @@
 xml.instruct! :xml, :encoding => "UTF-8"
-xml.version :xmlns => 'http://redmine-mylyn.sf.net/schemas/WS-API-2.6' do
-  xml.plugin(
-   :major => @data[0],
+xml.tag! 'rmc:version', 'xmlns:rmc' => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.5/version' do
+  xml.plugin(MylynConnector::Version,
+    :major => @data[0],
     :minor => @data[1],
-    :tiny => @data[2],
-    :string => MylynConnector::Version)
-  xml.redmine :version => Redmine::VERSION
-  xml.rails :version => RAILS_GEM_VERSION
+    :tiny => @data[2])
+  xml.redmine Redmine::VERSION
+  xml.rails RAILS_GEM_VERSION
 end
