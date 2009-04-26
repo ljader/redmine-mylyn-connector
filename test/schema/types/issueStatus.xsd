@@ -9,7 +9,7 @@
 
 	<xsd:complexType name="issueStatus">
 		<xsd:complexContent>
-			<xsd:extension base="tns:property">
+			<xsd:extension base="tns:sortedProperty">
 				<xsd:sequence>
 					<xsd:element name="closed" type="xsd:boolean" />
 					<xsd:element name="default" type="xsd:boolean" />

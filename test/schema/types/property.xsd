@@ -12,4 +12,13 @@
 		<xsd:attribute name="id" type="xsd:integer" use="required" />
 	</xsd:complexType>
 	
+	<xsd:complexType name="sortedProperty">
+		<xsd:complexContent>
+			<xsd:extension base="tns:property">
+				<xsd:sequence>
+					<xsd:element name="position" type="xsd:integer" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
 </xsd:schema>

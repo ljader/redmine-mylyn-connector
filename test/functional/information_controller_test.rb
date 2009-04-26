@@ -1,14 +1,11 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'rubygems'
-require 'xml'
 
-class MylynConnector::InformationControllerTest < ActionController::TestCase
+class MylynConnector::InformationControllerTest < MylynConnector::ControllerTest
 
-  def setup
-    @controller = MylynConnector::InformationController.new
-    @request = ActionController::TestRequest.new
-    @response = ActionController::TestResponse.new
-  end
+    def setup
+      super
+      @controller = MylynConnector::InformationController.new
+    end
 
   def test_version
     get :version
@@ -20,12 +17,7 @@ class MylynConnector::InformationControllerTest < ActionController::TestCase
 
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'version'
+
   end
 
-  protected
-  def read_schema name
-    schemapath = File.dirname(__FILE__) + '/../schema/' + name + '.xsd';
-    schemadoc = XML::Document.file schemapath
-    XML::Schema.document schemadoc
-  end
 end
