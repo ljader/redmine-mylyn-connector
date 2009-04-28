@@ -19,6 +19,18 @@ class MylynConnector::PrioritiesControllerTest < MylynConnector::ControllerTest
     assert valid , 'Ergenis passt nicht zum Schema ' + 'priorities'
 
     assert_tag :tag => 'priorities', :children => {:count => 5}
+  end
 
+  def test_all_empty_is_valid
+    Enumeration.delete_all("opt='IPRI'")
+
+    get :all
+
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'priorities'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'priorities'
+
+    assert_tag :tag => 'priorities', :children => {:count => 0}
   end
 end
