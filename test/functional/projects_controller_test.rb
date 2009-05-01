@@ -1,8 +1,26 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class ProjectsControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
+
+  fixtures :users, :members, :issue_categories, :custom_fields, :trackers, :versions, :queries, :projects, :projects_trackers, :enabled_modules, :custom_fields_trackers
+  
+  def setup
+    super
+    @controller = MylynConnector::ProjectsController.new
   end
+
+  def test_all
+    get :all
+    assert_response :success
+    assert_template 'all.rxml'
+
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'projects'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'projects'
+
+    # only projects 1+3 are public and have issue-tracking enabled
+    assert_tag :tag => 'projects', :children => {:count => 2}
+  end
+
 end

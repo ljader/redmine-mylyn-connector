@@ -1,28 +1,20 @@
-xml.issueCustomField(
-  :id => issue_custom_field.id,
-  :fieldFormat => issue_custom_field.field_format,
-  :minLength => issue_custom_field.min_length,
-  :maxLength => issue_custom_field.max_length,
-  :filter => issue_custom_field.is_filter,
-  :required => issue_custom_field.is_required) do
-
+xml.issueCustomField(:id => issue_custom_field.id) do
   xml.name issue_custom_field.name
-  xml.defaultValue issue_custom_field.default_value
+  xml.fieldFormat issue_custom_field.field_format
+  xml.minLength issue_custom_field.min_length
+  xml.maxLength issue_custom_field.max_length
   xml.regexp issue_custom_field.regexp
-
-  if issue_custom_field.field_format=="list"
+  if issue_custom_field.possible_values
     xml.possibleValues {
-      issue_custom_field.possible_values.each do |value|
-        xml.possibleValue value
-      end
-  }
+      issue_custom_field.possible_values.each {|value|xml.possibleValue value}
+    }
   else
     xml.possibleValues
   end
   xml.trackers {
-    issue_custom_field.trackers.each do |tracker|
-      xml.tracker :id => tracker.id
-    end
+    issue_custom_field.trackers.each {|tracker|xml.tracker tracker.id}
   }
-
+  xml.defaultValue issue_custom_field.default_value
+  xml.required issue_custom_field.is_required
+  xml.filter issue_custom_field.is_filter
 end

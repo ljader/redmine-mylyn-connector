@@ -1,3 +1,4 @@
 xml.version :id => version.id do
   xml.name version.name
+  xml.completed version.completed? ? true : false
 end
