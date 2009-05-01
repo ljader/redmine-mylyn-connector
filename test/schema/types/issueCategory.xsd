@@ -5,6 +5,12 @@
 	targetNamespace="http://redmin-mylyncon.sf.net/schemas/WS-API-2.5"
 	elementFormDefault="qualified" >
 
-	<xsd:include schemaLocation="issueStatus.xsd" />
+	<xsd:include schemaLocation="property.xsd" />
+
+	<xsd:complexType name="issueCategory">
+		<xsd:complexContent>
+			<xsd:extension base="tns:property" />
+		</xsd:complexContent>
+	</xsd:complexType>
 
 </xsd:schema>

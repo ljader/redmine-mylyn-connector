@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://redmin-mylyncon.sf.net/schemas/WS-API-2.5"
+	targetNamespace="http://redmin-mylyncon.sf.net/schemas/WS-API-2.5"
+	elementFormDefault="qualified" >
+
+	<xsd:include schemaLocation="property.xsd" />
+
+	<xsd:complexType name="issueCustomField">
+		<xsd:complexContent>
+			<xsd:extension base="tns:property">
+				<xsd:sequence>
+					<xsd:element name="fieldFormat" >
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="string" />
+								<xsd:enumeration value="text" />
+								<xsd:enumeration value="int" />
+								<xsd:enumeration value="float" />
+								<xsd:enumeration value="list" />
+								<xsd:enumeration value="date" />
+								<xsd:enumeration value="bool" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="minLength" type="xsd:integer" />
+					<xsd:element name="maxLength" type="xsd:integer" />
+					<xsd:element name="regexp" type="xsd:string" />
+					<xsd:element name="possibleValues" >
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="possibleValue" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="trackers">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="tracker" type="xsd:integer"  maxOccurs="unbounded" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="defaultValue" type="xsd:string" />
+					<xsd:element name="required" type="xsd:boolean" />
+					<xsd:element name="filter" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+</xsd:schema>

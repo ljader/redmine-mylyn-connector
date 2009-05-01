@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://redmin-mylyncon.sf.net/schemas/WS-API-2.5"
+	targetNamespace="http://redmin-mylyncon.sf.net/schemas/WS-API-2.5"
+	elementFormDefault="qualified" >
+
+	<xsd:include schemaLocation="issueCategory.xsd" />
+	<xsd:include schemaLocation="issueCustomField.xsd" />
+	<xsd:include schemaLocation="member.xsd" />
+	<xsd:include schemaLocation="property.xsd" />
+	<xsd:include schemaLocation="query.xsd" />
+	<xsd:include schemaLocation="tracker.xsd" />
+	<xsd:include schemaLocation="version.xsd" />
+
+	<xsd:complexType name="project">
+		<xsd:complexContent>
+			<xsd:extension base="tns:property">
+				<xsd:sequence>
+					<xsd:element name="identifier" type="xsd:string" />
+					<xsd:element name="issueEditAllowed" type="xsd:boolean" />
+					
+					<xsd:element name="trackers">
+						<xsd:complexType>
+							<xsd:sequence >
+								<xsd:element name="tracker" type="tns:tracker" maxOccurs="unbounded" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					
+					<xsd:element name="versions" >
+						<xsd:complexType>
+							<xsd:sequence >
+								<xsd:element name="version" type="tns:version" minOccurs="0" maxOccurs="unbounded" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+
+					<xsd:element name="members" >
+						<xsd:complexType>
+							<xsd:sequence >
+								<xsd:element name="member" type="tns:member" minOccurs="0" maxOccurs="unbounded" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					
+					<xsd:element name="issueCategories" >
+						<xsd:complexType>
+							<xsd:sequence >
+								<xsd:element name="issueCategory" type="tns:issueCategory" minOccurs="0" maxOccurs="unbounded" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+
+					<xsd:element name="issueCustomFields" >
+						<xsd:complexType>
+							<xsd:sequence >
+								<xsd:element name="issueCustomField" type="tns:issueCustomField" minOccurs="0" maxOccurs="unbounded" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+
+					<xsd:element name="queries" >
+						<xsd:complexType>
+							<xsd:sequence >
+								<xsd:element name="query" type="tns:query" minOccurs="0" maxOccurs="unbounded" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+</xsd:schema>
