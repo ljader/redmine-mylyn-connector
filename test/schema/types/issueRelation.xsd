@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://redmin-mylyncon.sf.net/schemas/WS-API-2.5"
+	targetNamespace="http://redmin-mylyncon.sf.net/schemas/WS-API-2.5"
+	elementFormDefault="qualified" >
+
+	<xsd:complexType name="issueRelation">
+		<xsd:sequence>
+			<xsd:element name="issueFromId" type="xsd:integer" />
+			<xsd:element name="issueToId" type="xsd:integer" />
+			<xsd:element name="type" >
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="relates" />
+						<xsd:enumeration value="duplicates" />
+						<xsd:enumeration value="blocks" />
+						<xsd:enumeration value="precedes" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="delay" type="xsd:integer" />
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:integer" use="required" />
+	</xsd:complexType>
+	
+</xsd:schema>

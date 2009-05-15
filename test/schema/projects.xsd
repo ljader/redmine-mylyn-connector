@@ -7,7 +7,7 @@
 	<xsd:include schemaLocation="types/project.xsd" />
 
 	<xsd:element name="projects"
-		xmlns="http://redmine-mylyn.sf.net/schemas/WS-API-2.5/issuestatus">
+		xmlns="http://redmine-mylyn.sf.net/schemas/WS-API-2.5/projects">
 		
 		<xsd:complexType>
 			<xsd:sequence >
