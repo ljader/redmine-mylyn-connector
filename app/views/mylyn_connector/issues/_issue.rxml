@@ -1,0 +1,74 @@
+xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.5', :id => issue.id) do
+  #unused: lock-version
+
+  #Ticket
+  xml.subject issue.subject
+  xml.description issue.description
+  xml.author issue.author==nil ? "Anonymous" : issue.author.name
+  xml.createdOn issue.created_on.xmlschema, :unixtime => issue.created_on.to_i
+  xml.updatedOn issue.updated_on.xmlschema, :unixtime => issue.updated_on.to_i
+  #dateTime(issue.created_on)
+
+  #References
+  xml.projectId issue.project_id
+  xml.trackerId issue.tracker_id
+  xml.priorityId issue.priority_id
+  xml.statusId issue.status_id
+  xml.categoryId issue.category_id if issue.category_id
+  xml.fixedVersionId issue.fixed_version_id if issue.fixed_version_id
+
+  #Work/Progress
+  xml.assignedToId issue.assigned_to_id if issue.assigned_to_id
+  xml.doneRatio issue.done_ratio
+  xml.estimatedHours issue.estimated_hours if issue.estimated_hours
+
+  xml.availableStatus {
+    available_status(issue).each {|status| xml.availableStatus status.id }
+  }
+  
+  xml.customValues {
+    issue.custom_values.each {|value|
+      xml.customValue do
+        xml.customFieldId value.custom_field_id
+        xml.value value.value
+      end
+    }
+  }
+ 
+  xml.journals {
+    journals(issue).each {|journal|
+      xml.journal :id => journal.id do
+        xml.author journal.user==nil ? "Anonymous" : journal.user.name
+        xml.createdOn journal.created_on.xmlschema, :unixtime => journal.created_on.to_i
+        xml.notes journal.notes
+        xml.editableByUser journal.editable_by?(User.current)
+      end
+    }
+  }
+
+  xml.attachments {
+    issue.attachments.each {|attachment|
+      xml.attachment :id => attachment.id do
+        xml.author attachment.author==nil ? "Anonymous" : attachment.author.name
+        xml.createdOn attachment.created_on.xmlschema, :unixtime => attachment.created_on.to_i
+        xml.filename attachment.filename
+        xml.filesize attachment.filesize
+        xml.digest attachment.digest
+        xml.contentType attachment.content_type
+        xml.description attachment.description
+      end
+    }
+  }
+
+  xml.issueRelations {
+    issue.relations.each {|relation|
+      xml.issueRelation :id => relation.id do
+        xml.issueFromId relation.issue_from_id
+        xml.issueToId relation.issue_to_id
+        xml.type relation.type
+        xml.delay relation.delay
+      end
+    }
+  }
+
+end

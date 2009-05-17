@@ -34,7 +34,7 @@
 			
 			<xsd:element name="assignedToId" type="xsd:integer" minOccurs="0" />
 			<xsd:element name="doneRatio" type="xsd:integer" />
-			<xsd:element name="estimatedHours" type="xsd:integer" />
+			<xsd:element name="estimatedHours" type="xsd:integer" minOccurs="0" />
 
 			<xsd:element name="availableStatus">
 				<xsd:complexType>

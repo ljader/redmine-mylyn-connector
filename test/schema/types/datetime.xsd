@@ -6,10 +6,11 @@
 	elementFormDefault="qualified" >
 
 	<xsd:complexType name="datetime">
-		<xsd:sequence>
-			<xsd:element name="datetime" type="xsd:dateTime" />
-		</xsd:sequence>
-		<xsd:attribute name="microtime" type="xsd:integer" use="required" />
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:dateTime">
+				<xsd:attribute name="unixtime" type="xsd:integer" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
 	</xsd:complexType>
 	
 </xsd:schema>

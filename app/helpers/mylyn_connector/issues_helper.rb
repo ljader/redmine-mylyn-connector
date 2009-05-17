@@ -8,4 +8,9 @@ module MylynConnector::IssuesHelper
     status.compact!
     return status
   end
+
+  def journals issue
+    issue.journals.find(:all, :conditions => ["notes IS NOT NULL"])
+  end
+
 end
