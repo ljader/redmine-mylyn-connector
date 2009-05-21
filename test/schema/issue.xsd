@@ -7,6 +7,6 @@
 	<xsd:include schemaLocation="types/issue.xsd" />
 
 	<xsd:element name="issue" type="tns:issue"
-		xmlns="http://redmine-mylyn.sf.net/schemas/WS-API-2.5/issues" />
+		xmlns="http://redmine-mylyn.sf.net/schemas/WS-API-2.5/issue" />
 
 </xsd:schema>

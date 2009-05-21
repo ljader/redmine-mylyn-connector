@@ -65,7 +65,7 @@ xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.5', :id => i
       xml.issueRelation :id => relation.id do
         xml.issueFromId relation.issue_from_id
         xml.issueToId relation.issue_to_id
-        xml.type relation.type
+        xml.type relation.relation_type
         xml.delay relation.delay
       end
     }
