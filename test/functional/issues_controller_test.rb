@@ -105,4 +105,20 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     get :query, :project_id => 1, :query_id => 99
     assert_response 404
   end
+
+  def test_updated_since
+    get :updated_since, :project_id => 1, :unixtime => 11.days.ago.to_i
+    assert_response :success
+    assert_template 'updated_since.rxml'
+
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'updatedIssues'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'updatedIssues'
+
+    assert_tag :tag => 'updatedissues', :children => {:count => 2}
+    assert_tag :tag => 'issue', :content => '1'
+    assert_tag :tag => 'issue', :content => '7'
+  end
+
 end

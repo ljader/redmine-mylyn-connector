@@ -38,7 +38,16 @@ class MylynConnector::IssuesController < ApplicationController
     end
   end
 
-  #last update
+  def updated_since
+
+    time = Time.at(params[:unixtime].to_i)
+    cond = ActiveRecord::Base.connection.quoted_date(time)
+
+    @issues = Issue.find(:all, :conditions => ["project_id = ? AND updated_on >= ?", @project.id, cond])
+    respond_to do |format|
+      format.xml {render :xml => @issues, :template => 'mylyn_connector/issues/updated_since.rxml'}
+    end
+  end
 
   private
 
@@ -53,14 +62,14 @@ class MylynConnector::IssuesController < ApplicationController
   end
 
   def find_project
-    if params[:action]=='query'
+    if params[:project_id].blank?
+      @project = @issue.project
+    else
       begin
         @project = Project.find(params[:project_id])
       rescue ActiveRecord::RecordNotFound
         render_404
       end
-    else
-      @project = @issue.project
     end
   end
 
