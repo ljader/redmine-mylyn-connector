@@ -6,10 +6,11 @@
 	elementFormDefault="qualified" >
 
 	<xsd:complexType name="customValue">
-		<xsd:sequence>
-			<xsd:element name="customFieldId" type="xsd:integer" />
-			<xsd:element name="value" type="xsd:string" />
-		</xsd:sequence>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="customFieldId" type="xsd:integer" use="required" />
+			</xsd:extension>
+		</xsd:simpleContent>
 	</xsd:complexType>
 	
 </xsd:schema>

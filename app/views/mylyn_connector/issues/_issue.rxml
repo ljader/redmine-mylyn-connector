@@ -28,10 +28,7 @@ xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.5', :id => i
   
   xml.customValues {
     issue.custom_values.each {|value|
-      xml.customValue do
-        xml.customFieldId value.custom_field_id
-        xml.value value.value
-      end
+      xml.customValue value.value, :customFieldId => value.custom_field_id 
     }
   }
  

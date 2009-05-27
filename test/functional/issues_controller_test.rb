@@ -35,8 +35,7 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'availablestatus', :children  => {:count => 1}
     assert_tag :tag => 'availablestatus', :parent  => {:tag => 'availablestatus'}, :content => '1'
     assert_tag :tag => 'customvalues', :children => {:count => 1}
-    assert_tag :tag => 'customfieldid', :parent  => {:tag => 'customvalue'}, :content => '2'
-    assert_tag :tag => 'value', :parent  => {:tag => 'customvalue'}, :content => '125'
+    assert_tag :tag => 'customvalue', :parent  => {:tag => 'customvalues'}, :attributes => {:customfieldid => '2'}, :content => '125'
     assert_tag :tag => 'journals', :children => {:count => 2}
     assert_tag :tag => 'author', :parent  => {:tag => 'journal'}, :content => 'redMine Admin'
     assert_tag :tag => 'notes', :parent  => {:tag => 'journal'}, :content => 'Journal notes'
