@@ -13,4 +13,10 @@ module MylynConnector::IssuesHelper
     issue.journals.find(:all, :conditions => ["notes IS NOT NULL"])
   end
 
+  def list_status availableStatus
+    availableStatus.collect! { |i| i.id.to_s + " "}
+    availableStatus.to_s.strip
+  end
+
+
 end

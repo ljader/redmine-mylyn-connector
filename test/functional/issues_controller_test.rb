@@ -32,8 +32,7 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_no_tag :tag => 'assignedtoid'
     assert_tag :tag => 'doneratio', :content => '0'
     assert_no_tag :tag=> 'estimatedhours'
-    assert_tag :tag => 'availablestatus', :children  => {:count => 1}
-    assert_tag :tag => 'availablestatus', :parent  => {:tag => 'availablestatus'}, :content => '1'
+    assert_tag :tag => 'availablestatus', :content => '1'
     assert_tag :tag => 'customvalues', :children => {:count => 1}
     assert_tag :tag => 'customvalue', :parent  => {:tag => 'customvalues'}, :attributes => {:customfieldid => '2'}, :content => '125'
     assert_tag :tag => 'journals', :children => {:count => 2}
