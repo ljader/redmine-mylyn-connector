@@ -22,7 +22,7 @@ xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.5', :id => i
   xml.doneRatio issue.done_ratio
   xml.estimatedHours issue.estimated_hours if issue.estimated_hours
 
-  xml.availableStatus list_status(available_status(issue))
+  xml.availableStatus integer_list(available_status(issue))
   
   xml.customValues {
     issue.custom_values.each {|value|

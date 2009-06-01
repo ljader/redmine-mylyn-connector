@@ -37,12 +37,16 @@
 			<xsd:element name="estimatedHours" type="xsd:integer" minOccurs="0" />
 
 			<xsd:element name="availableStatus">
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element name="availableStatus" type="xsd:integer" maxOccurs="unbounded" />
-					</xsd:sequence>
-				</xsd:complexType>
+				<xsd:simpleType>
+					<xsd:restriction>
+						<xsd:simpleType>
+							<xsd:list itemType="xsd:integer" />
+						</xsd:simpleType>
+						<xsd:minLength value="1" fixed="true" />
+					</xsd:restriction>
+				</xsd:simpleType>
 			</xsd:element>
+			
 			<xsd:element name="customValues" >
 				<xsd:complexType>
 					<xsd:sequence >
