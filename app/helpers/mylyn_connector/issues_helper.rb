@@ -10,7 +10,7 @@ module MylynConnector::IssuesHelper
   end
 
   def journals issue
-    issue.journals.find(:all, :conditions => ["notes IS NOT NULL"])
+    issue.journals.find(:all, :conditions => ["notes IS NOT NULL AND notes != ''"])
   end
 
   def list_status availableStatus
