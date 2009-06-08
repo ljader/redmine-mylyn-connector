@@ -43,7 +43,7 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     #issuerelations
   end
 
-  def test_show_alternative
+  def test_show_attachement
     get :show, :id => 3
     assert_response :success
     assert_template 'show.rxml'
@@ -63,6 +63,20 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'filesize', :parent  => {:tag => 'attachment'}, :content => '28'
     assert_tag :tag => 'digest', :parent  => {:tag => 'attachment'}, :content => 'b91e08d0cf966d5c6ff411bd8c4cc3a2'
     #issuerelations
+  end
+
+    def test_show_assigned
+    get :show, :id => 2
+    assert_response :success
+    assert_template 'show.rxml'
+
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'issue'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'issue'
+
+    assert_tag :tag => 'fixedversionid', :content => '2'
+    assert_tag :tag => 'assignedtoid', :content => '3'
   end
 
   def test_show_404
