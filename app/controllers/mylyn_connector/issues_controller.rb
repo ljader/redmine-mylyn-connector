@@ -87,7 +87,7 @@ class MylynConnector::IssuesController < ApplicationController
       end
       query.project = @project
     else
-      querydecoder = QueryStringDecoder.new(query_string)
+      querydecoder = MylynConnector::QueryStringDecoder.new(query_string)
       query = querydecoder.query
     end
     return query

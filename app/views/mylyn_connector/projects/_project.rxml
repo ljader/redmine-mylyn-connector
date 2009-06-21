@@ -4,21 +4,23 @@ xml.project(:id => project.id) do
   xml.issueEditAllowed edit_issues_allowed?(project)
 
   xml.trackers {
-    xml << render(:partial => 'tracker.rxml', :collection => get_trackers(project))
+    xml << render(:partial => 'tracker.rxml', :collection => get_trackers(project)).to_s
   }
-  xml.versions{
-    xml << render(:partial => 'version.rxml', :collection => get_versions(project))
+
+  xml.versions {
+    xml << render(:partial => 'version.rxml', :collection => get_versions(project)).to_s
   }
+
   xml.members {
-    xml << render(:partial => 'member.rxml', :collection => get_members(project))
+    xml << render(:partial => 'member.rxml', :collection => get_members(project)).to_s
   }
   xml.issueCategories {
-    xml << render(:partial => 'issue_category.rxml', :collection => get_issue_categories(project))
+    xml << render(:partial => 'issue_category.rxml', :collection => get_issue_categories(project)).to_s
   }
   xml.issueCustomFields {
-    xml << render(:partial => 'issue_custom_field.rxml', :collection => get_issue_custom_fields(project))
+    xml << render(:partial => 'issue_custom_field.rxml', :collection => get_issue_custom_fields(project)).to_s
   }
   xml.queries {
-    xml << render(:partial => 'query.rxml', :collection => get_queries(project))
+    xml << render(:partial => 'query.rxml', :collection => get_queries(project)).to_s
   }
 end

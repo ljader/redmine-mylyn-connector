@@ -1,7 +1,7 @@
 
 module MylynConnector::ProjectsHelper
   def edit_issues_allowed? project
-    User.current.allowed_to?(:edit_issues, project)
+    User.current.allowed_to?(:edit_issues, project) != false
   end
 
   def get_trackers project
@@ -18,6 +18,13 @@ module MylynConnector::ProjectsHelper
 
   def get_members project
     project.members
+  end
+
+  def member_assignable? member
+    #TODO since 0.9 MemberRole exists
+    return member.roles.detect(false) {|role| role.assignable} != false if Object.const_defined?(:MemberRole)
+
+    member.role.assignable
   end
 
   def get_versions project
