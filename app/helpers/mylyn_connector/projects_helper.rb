@@ -1,7 +1,8 @@
 
 module MylynConnector::ProjectsHelper
   def edit_issues_allowed? project
-    User.current.allowed_to?(:edit_issues, project) != false
+    allowed = User.current.allowed_to?(:edit_issues, project)
+    return allowed != false && !allowed.nil?
   end
 
   def get_trackers project

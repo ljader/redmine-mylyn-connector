@@ -6,7 +6,7 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
 
     def fixtures(*table_names)
       #TODO since 0.9 IssuePriority exists
-      table_names[] = :member_roles if Object.const_defined?(:MemberRole)
+      table_names.push :member_roles if Object.const_defined?(:MemberRole)
 
       super(table_names)
     end
@@ -42,8 +42,12 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'version', :attributes => {:id => 2}, :children => {:only => {:tag => 'name', :content => '1.0', :sibling => {:tag => 'completed', :content => 'false'}}}, :parent => {:tag => 'versions', :parent => p}
     assert_tag :tag => 'member', :attributes => {:id => 2}, :children => {:only => {:tag => 'name', :content => 'John Smith', :sibling => {:tag => 'assignable', :content => 'true'}}}, :parent => {:tag => 'members', :parent => p}
     assert_tag :tag => 'issuecategory', :attributes => {:id => 2}, :children => {:only => {:tag => 'name', :content => 'Recipes'}}, :parent => {:tag => 'issuecategories', :children => {:count => 2}, :parent => p}
-    assert_tag :tag => 'issuecustomfield', :attributes => {:id => 1}, :children => {:only => {:tag => 'name', :content => 'Database', :sibling => {:tag => 'list', :content => 'true', :sibling => {:tag => 'trackers', :content => '1', :sibling => {:tag => 'required', :content => 'false'}, :sibling => {:tag => 'filter', :content => 'true'}}}}}, :parent => {:tag => 'issuecustomfields', :children => {:count => 2}, :parent => p}
-    assert_tag :tag => 'query', :attributes => {:id => 1}, :children => {:only => {:tag => 'name', :content => 'Multiple custom fields query'}}, :parent => {:tag => 'queries', :children => {:count => 2}, :parent => p}
+    #redmine 0.8: 2 customfields
+    #redmine 0.9: 3 customfields
+    assert_tag :tag => 'issuecustomfield', :attributes => {:id => 1}, :children => {:only => {:tag => 'name', :content => 'Database', :sibling => {:tag => 'fieldformat', :content => 'list', :sibling => {:tag => 'trackers', :content => '1', :sibling => {:tag => 'required', :content => 'false'}, :sibling => {:tag => 'filter', :content => 'true'}}}}}, :parent => {:tag => 'issuecustomfields', :children => {:count => 2..3}, :parent =>p}
+    #redmine 0.8: 2 queries
+    #redmine 0.9: 4 queries
+    assert_tag :tag => 'query', :attributes => {:id => 1}, :children => {:only => {:tag => 'name', :content => 'Multiple custom fields query'}}, :parent => {:tag => 'queries', :children => {:count => 2..4}, :parent => p}
   end
 
   def test_all_authenticated
