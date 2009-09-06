@@ -22,9 +22,12 @@ module MylynConnector::ProjectsHelper
 
   def member_assignable? member
     #TODO since 0.9 MemberRole exists
-    return member.roles.detect(false) {|role| role.assignable} != false if Object.const_defined?(:MemberRole)
-
-    member.role.assignable
+    begin
+      #since 0.9 MemberRole exists
+      return member.roles.detect(false) {|role| role.assignable} != false
+    rescue
+      return member.role.assignable
+    end
   end
 
   def get_versions project
