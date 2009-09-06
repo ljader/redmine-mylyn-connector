@@ -133,7 +133,7 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
 
     #redmine 0.8: 1 & 7
     #redmine 0.9: 1,7 & 8
-    assert_tag :tag => 'updatedissues', :content => /1 7(?: 8)/
+    assert_tag :tag => 'updatedissues', :content => /1 7( 8)?/
   end
 
 end
