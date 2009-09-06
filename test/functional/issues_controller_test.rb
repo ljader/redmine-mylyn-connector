@@ -33,7 +33,9 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'doneratio', :content => '0'
     assert_no_tag :tag=> 'estimatedhours'
     assert_tag :tag => 'availablestatus', :content => '1'
-    assert_tag :tag => 'customvalues', :children => {:count => 1}
+    #redmine 0.8: 1
+    #redmine 0.9: 2
+    assert_tag :tag => 'customvalues', :children => {:count => (1..2)}
     assert_tag :tag => 'customvalue', :parent  => {:tag => 'customvalues'}, :attributes => {:customfieldid => '2'}, :content => '125'
     assert_tag :tag => 'journals', :children => {:count => 2}
     assert_tag :tag => 'author', :parent  => {:tag => 'journal'}, :content => 'redMine Admin'
@@ -65,7 +67,7 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     #issuerelations
   end
 
-    def test_show_assigned
+  def test_show_assigned
     get :show, :id => 2
     assert_response :success
     assert_template 'show.rxml'
@@ -120,6 +122,7 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
 
   def test_updated_since
     get :updated_since, :project_id => 1, :unixtime => 11.days.ago.to_i
+
     assert_response :success
     assert_template 'updated_since.rxml'
 
@@ -128,7 +131,9 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'updatedIssues'
 
-    assert_tag :tag => 'updatedissues', :content => '1 7'
+    #redmine 0.8: 1 & 7
+    #redmine 0.9: 1,7 & 8
+    assert_tag :tag => 'updatedissues', :content => /1 7(?: 8)/
   end
 
 end
