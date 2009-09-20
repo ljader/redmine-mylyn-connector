@@ -55,7 +55,7 @@ module MylynConnector
 
     def build_query
       query = Query.new(:name => "_")
-      query.project = @project
+      query.project = project
       if @result['fields'] and @result['fields'].is_a? Array
         @result['fields'].each do |field|
           query.add_filter(field, @result['operators'][field], @result['values'][field])

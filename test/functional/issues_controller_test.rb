@@ -115,6 +115,20 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'issues', :children => {:count => 3}
   end
 
+    def test_query_by_string_project_related
+    post :query, :project_id => 1, :query_string => 'project_id=1&set_filter=1&fields[]=category_id&operators[category_id]=%3D&values[category_id][]=1'
+
+    assert_response :success
+    assert_template 'index.rxml'
+
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'issues'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'issues'
+
+    assert_tag :tag => 'issues', :children => {:count => 1}
+  end
+
   def test_query_non_exists
     get :query, :project_id => 1, :query_id => 99
     assert_response 404
