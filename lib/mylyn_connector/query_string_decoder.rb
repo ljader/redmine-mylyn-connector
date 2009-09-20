@@ -1,8 +1,19 @@
 
 module MylynConnector
-  class QueryStringDecoder < ActionController::UrlEncodedPairParser
+  class QueryStringDecoder
+
+    @result = {}
+
     def initialize(query_string)
-      super(find_pairs(query_string))
+
+      begin
+        parser = ActionController::UrlEncodedPairParser.new(find_pairs(query_string))
+        @result = parser.result;
+      rescue
+        @result = Rack::Utils.parse_nested_query(query_string)
+      end
+
+
   #    @result = to_symbols(@result)
     end
 
