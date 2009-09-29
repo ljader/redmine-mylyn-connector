@@ -2,11 +2,14 @@ require File.dirname(__FILE__) + '/../../../lib/mylyn_connector'
 
 class MylynConnector::IssuesController < ApplicationController
   unloadable
+  include MylynConnector::Rescue::ClassMethods
 
   before_filter :find_issue, :only => [:show]
   before_filter :find_project
   before_filter :authorize
 
+#  helper MylynConnector::WatchersHelper
+  
   def show
     respond_to do |format|
       format.xml {render :xml => @issue, :template => 'mylyn_connector/issues/show.rxml'}

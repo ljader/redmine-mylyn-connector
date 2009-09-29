@@ -2,6 +2,7 @@ require File.dirname(__FILE__) + '/../../../lib/mylyn_connector'
 
 class MylynConnector::ProjectsController < ApplicationController
   unloadable
+  include MylynConnector::Rescue::ClassMethods
 
   before_filter :find_project, :only => [:get]
 

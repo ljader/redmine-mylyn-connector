@@ -2,6 +2,7 @@ require File.dirname(__FILE__) + '/../../../lib/mylyn_connector'
 
 class MylynConnector::PrioritiesController < ApplicationController
   unloadable
+  include MylynConnector::Rescue::ClassMethods
 
   def all
     begin
