@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
 
-  fixtures :users, :roles, :members, :issue_categories, :custom_fields, :trackers, :versions, :queries, :projects, :projects_trackers, :custom_fields_trackers, :issues, :journals, :attachments, :custom_fields, :custom_values
+  fixtures :users, :roles, :members, :issue_categories, :custom_fields, :trackers, :versions, :queries, :projects, :projects_trackers, :custom_fields_trackers, :issues, :journals, :attachments, :custom_fields, :custom_values, :watchers
 
   def setup
     super
@@ -32,7 +32,11 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_no_tag :tag => 'assignedtoid'
     assert_tag :tag => 'doneratio', :content => '0'
     assert_no_tag :tag=> 'estimatedhours'
+    assert_tag :tag=> 'startdate', :content => 1.day.ago.to_date.to_s
+    assert_tag :tag=> 'duedate', :content => 10.day.from_now.to_date.to_s
     assert_tag :tag => 'availablestatus', :content => '1'
+    assert_tag :tag => 'watched', :content => false
+    assert_tag :tag => 'watchers'
     #redmine 0.8: 1
     #redmine 0.9: 2
     assert_tag :tag => 'customvalues', :children => {:count => (1..2)}
@@ -79,7 +83,10 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
 
     assert_tag :tag => 'fixedversionid', :content => '2'
     assert_tag :tag => 'assignedtoid', :content => '3'
-  end
+    #TODO test mit anmeldung als user #1, watched => true
+    assert_tag :tag => 'watched', :content => false
+    assert_tag :tag => 'watchers', :content => "3"
+end
 
   def test_show_404
     get :show, :id => 99

@@ -1,4 +1,4 @@
 xml.instruct! :xml, :encoding => "UTF-8"
-xml.issues :xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.5' do
+xml.issues :xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.6' do
   xml << render(:partial => 'issue.rxml', :collection => @issues)
 end

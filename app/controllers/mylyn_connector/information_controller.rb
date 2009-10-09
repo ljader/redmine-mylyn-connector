@@ -2,6 +2,7 @@ require File.dirname(__FILE__) + '/../../../lib/mylyn_connector'
 
 class MylynConnector::InformationController < ApplicationController
   unloadable
+  include MylynConnector::Rescue::ClassMethods
   
   def version
     @data = MylynConnector::Version.to_a

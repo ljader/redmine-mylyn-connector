@@ -8,7 +8,7 @@ class MylynConnector::IssuesController < ApplicationController
   before_filter :find_project
   before_filter :authorize
 
-#  helper MylynConnector::WatchersHelper
+  helper MylynConnector::WatchersHelper
   
   def show
     respond_to do |format|

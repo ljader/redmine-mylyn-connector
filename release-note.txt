@@ -1,0 +1,15 @@
+Version 2.6
+  Startdate + Duedate
+  Watchers
+  TODO: TimeTracking / Spenttime
+  TODO: CrossProjectQueries
+
+Version 2.5.2
+  Bugfix: Detailed Status-Header for server errors
+
+Version 2.5.1
+  Bugfix: Project related filter (version, category)
+
+Version 2.5.0
+  Support of Redmine 0.8 and upcoming 0.9
+

@@ -1,4 +1,4 @@
-xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.5', :id => issue.id) do
+xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.6', :id => issue.id) do
   #unused: lock-version
 
   #Ticket
@@ -21,9 +21,14 @@ xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.5', :id => i
   xml.assignedToId issue.assigned_to_id if issue.assigned_to_id
   xml.doneRatio issue.done_ratio
   xml.estimatedHours issue.estimated_hours if issue.estimated_hours
+  xml.startDate issue.start_date.to_s if issue.start_date
+  xml.dueDate issue.due_date.to_s if issue.due_date
 
   xml.availableStatus integer_list(available_status(issue))
-  
+
+  xml.watched watched?(issue)
+  xml.watchers watchers(issue)
+
   xml.customValues {
     issue.custom_values.each {|value|
       xml.customValue value.value, :customFieldId => value.custom_field_id 
