@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://redmin-mylyncon.sf.net/schemas/WS-API-2.6"
+	targetNamespace="http://redmin-mylyncon.sf.net/schemas/WS-API-2.6"
+	elementFormDefault="qualified" >
+
+	<xsd:include schemaLocation="types/customField.xsd" />
+
+	<xsd:element name="customFields"
+		xmlns="http://redmine-mylyn.sf.net/schemas/WS-API-2.6/customfields">
+		
+		<xsd:complexType>
+			<xsd:sequence >
+				<xsd:element name="customField" type="tns:customField" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>

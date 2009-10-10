@@ -6,6 +6,8 @@ class MylynConnector::ProjectsController < ApplicationController
 
   before_filter :find_project, :only => [:get]
 
+  helper MylynConnector::MylynHelper
+
   def all
     @projects = Project.find(:all,
       :joins => :enabled_modules,

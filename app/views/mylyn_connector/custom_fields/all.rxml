@@ -1,0 +1,23 @@
+xml.instruct! :xml, :encoding => "UTF-8"
+xml.customFields :xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.6' do
+  @custom_fields.each do |field|
+    xml.customField :id => field.id do
+      xml.name field.name
+      xml.type field.type
+      xml.fieldFormat field.field_format
+      xml.minLength field.min_length
+      xml.maxLength field.max_length
+      xml.regexp field.regexp
+      if field.possible_values
+        xml.possibleValues {
+          field.possible_values.each {|value|xml.possibleValue value}
+        }
+      else
+        xml.possibleValues
+      end
+      xml.defaultValue field.default_value
+      xml.required field.is_required
+      xml.filter field.is_filter
+    end
+  end
+end
