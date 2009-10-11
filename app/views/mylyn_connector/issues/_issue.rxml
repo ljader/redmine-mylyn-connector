@@ -71,4 +71,21 @@ xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.6', :id => i
     }
   }
 
+  showTimeEntries = time_entries_view_allowed?(issue)
+  xml.timeEntries :viewAllowed => showTimeEntries, :newAllowed => time_entries_new_allowed?(issue) do
+    if showTimeEntries
+      xml.sum issue.spent_hours
+      issue.time_entries.each  {|entry|
+        xml.timeEntry :id => entry.id, :editAllowed => entry.editable_by?(User.current) do
+          xml.hours entry.hours
+          xml.activityId entry.activity_id
+          xml.userId entry.user_id
+          xml.spentOn entry.spent_on
+          xml.comments entry.comments
+          xml.customValues
+        end
+      }
+    end
+  end
+
 end

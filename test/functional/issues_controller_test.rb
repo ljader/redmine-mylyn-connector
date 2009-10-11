@@ -46,6 +46,14 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'notes', :parent  => {:tag => 'journal'}, :content => 'Journal notes'
     assert_tag :tag => 'editablebyuser', :parent  => {:tag => 'journal'}, :content => 'false'
     assert_tag :tag => 'attachments', :children => {:count => 0}
+
+    #puts @response.body
+    #TODO timeEntries
+    assert_tag :tag => 'timeentries', :attributes => {:viewallowed => 'true', :newallowed => 'false'}
+    assert_tag :tag => 'sum', :parent => {:tag => 'timeentries'}, :content => '154.25'
+    assert_tag :tag => 'timeentry', :parent => {:tag => 'timeentries'}, :attributes => {:id => 1, :editallowed => 'false'}, :children => {:only => {:tag => 'activityId', :content => '9', :sibling => {:tag => 'userId', :content => '2', :sibling => {:tag => 'spentOn', :content => '2007-03-23', :sibling => {:tag => 'comments', :content => 'My hours', :sibling => {:tag => 'hours', :content => '4.25'}}}}}}
+    #TODO timeEntries.customValues
+
     #issuerelations
   end
 

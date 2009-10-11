@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://redmin-mylyncon.sf.net/schemas/WS-API-2.6"
+	targetNamespace="http://redmin-mylyncon.sf.net/schemas/WS-API-2.6"
+	elementFormDefault="qualified" >
+
+	<xsd:include schemaLocation="customValue.xsd" />
+
+	<xsd:complexType name="timeEntries">
+		<xsd:sequence>
+			<xsd:element name="sum" type="xsd:decimal" minOccurs="0" />
+			<xsd:element name="timeEntry" type="tns:timeEntry" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="viewAllowed" type="xsd:boolean" use="required"/>
+		<xsd:attribute name="newAllowed" type="xsd:boolean" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="timeEntry">
+		<xsd:sequence>
+			<xsd:element name="hours" type="xsd:decimal" />
+			<xsd:element name="activityId" type="xsd:integer" />
+			<xsd:element name="userId" type="xsd:integer" />
+			<xsd:element name="spentOn" type="xsd:date" />
+			<xsd:element name="comments" type="xsd:string" />
+			<xsd:element name="customValues" >
+				<xsd:complexType>
+					<xsd:sequence >
+						<xsd:element name="customValue" type="tns:customValue" minOccurs="0" maxOccurs="unbounded" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:integer" use="required" />
+		<xsd:attribute name="editAllowed" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+</xsd:schema>

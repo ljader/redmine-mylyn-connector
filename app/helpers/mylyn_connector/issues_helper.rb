@@ -23,4 +23,12 @@ module MylynConnector::IssuesHelper
     id_based.to_s.strip
   end
 
+  def time_entries_view_allowed?(issue)
+    return issue.project.module_enabled?(:time_tracking) && User.current.allowed_to?(:view_time_entries, issue.project)
+  end
+
+  def time_entries_new_allowed?(issue)
+    return issue.project.module_enabled?(:time_tracking) && User.current.allowed_to?(:log_time, issue.project)
+  end
+
 end

@@ -10,6 +10,7 @@
 	<xsd:include schemaLocation="attachment.xsd" />
 	<xsd:include schemaLocation="issueRelation.xsd" />
 	<xsd:include schemaLocation="datetime.xsd" />
+	<xsd:include schemaLocation="timeEntries.xsd" />
  
 	<xsd:complexType name="issue">
 		<xsd:sequence>
@@ -90,6 +91,8 @@
 				</xsd:complexType>
 			</xsd:element>
 
+			<xsd:element name="timeEntries" type="tns:timeEntries" />
+			
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:integer" use="required" />
 	</xsd:complexType>
