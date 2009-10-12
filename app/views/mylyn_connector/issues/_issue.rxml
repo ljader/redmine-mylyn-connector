@@ -76,7 +76,7 @@ xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.6', :id => i
     if showTimeEntries
       xml.sum issue.spent_hours
       issue.time_entries.each  {|entry|
-        xml.timeEntry :id => entry.id, :editAllowed => entry.editable_by?(User.current) do
+        xml.timeEntry :id => entry.id, :editAllowed => entry.editable_by?(User.current)?true:false do
           xml.hours entry.hours
           xml.activityId entry.activity_id
           xml.userId entry.user_id

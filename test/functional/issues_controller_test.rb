@@ -93,7 +93,9 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'assignedtoid', :content => '3'
     #TODO test mit anmeldung als user #1, watched => true
     assert_tag :tag => 'watched', :content => false
-    assert_tag :tag => 'watchers', :content => "3"
+    #redmine 0.8: 3
+    #redmine 0.9: 1 & 3
+    assert_tag :tag => 'watchers', :content => /(1 )?3/
 end
 
   def test_show_404
