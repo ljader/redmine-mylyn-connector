@@ -1,5 +1,6 @@
 xml.issueCustomField(:id => issue_custom_field.id) do
   xml.name issue_custom_field.name
+  xml.type issue_custom_field.type
   xml.fieldFormat issue_custom_field.field_format
   xml.minLength issue_custom_field.min_length
   xml.maxLength issue_custom_field.max_length
@@ -11,8 +12,8 @@ xml.issueCustomField(:id => issue_custom_field.id) do
   else
     xml.possibleValues
   end
-  xml.trackers integer_list(issue_custom_field.trackers)
   xml.defaultValue issue_custom_field.default_value
   xml.required issue_custom_field.is_required
   xml.filter issue_custom_field.is_filter
+  xml.trackers integer_list(issue_custom_field.trackers)
 end

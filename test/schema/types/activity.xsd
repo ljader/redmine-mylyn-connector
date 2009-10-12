@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://redmin-mylyncon.sf.net/schemas/WS-API-2.6"
+	targetNamespace="http://redmin-mylyncon.sf.net/schemas/WS-API-2.6"
+	elementFormDefault="qualified" >
+
+	<xsd:include schemaLocation="property.xsd" />
+
+	<xsd:complexType name="activity">
+		<xsd:complexContent>
+			<xsd:extension base="tns:sortedProperty">
+				<xsd:sequence>
+					<xsd:element name="default" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+</xsd:schema>

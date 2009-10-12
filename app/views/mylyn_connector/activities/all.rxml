@@ -1,0 +1,10 @@
+xml.instruct! :xml, :encoding => "UTF-8"
+xml.activities :xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.6' do
+  @activities.each do |activity|
+    xml.activity :id => activity.id do
+      xml.name activity.name
+      xml.position  activity.position
+      xml.default  activity.is_default
+    end
+  end
+end

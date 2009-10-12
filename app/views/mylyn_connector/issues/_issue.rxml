@@ -82,7 +82,11 @@ xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.6', :id => i
           xml.userId entry.user_id
           xml.spentOn entry.spent_on
           xml.comments entry.comments
-          xml.customValues
+          xml.customValues {
+            entry.custom_values.each {|value|
+              xml.customValue value.value, :customFieldId => value.custom_field_id
+            }
+          }
         end
       }
     end

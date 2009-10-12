@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://redmin-mylyncon.sf.net/schemas/WS-API-2.6"
+	targetNamespace="http://redmin-mylyncon.sf.net/schemas/WS-API-2.6"
+	elementFormDefault="qualified" >
+
+	<xsd:include schemaLocation="types/activity.xsd" />
+
+	<xsd:element name="activities"
+		xmlns="http://redmine-mylyn.sf.net/schemas/WS-API-2.6/activities">
+		
+		<xsd:complexType>
+			<xsd:sequence >
+				<xsd:element name="activity" type="tns:activity" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
