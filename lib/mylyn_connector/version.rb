@@ -1,7 +1,7 @@
 module MylynConnector
   module Version
     MAJOR = 2
-    MINOR = 5
+    MINOR = 6
     TINY  = 0
 
     # stable/trunk
