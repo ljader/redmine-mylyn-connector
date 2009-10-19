@@ -2,7 +2,7 @@ Version 2.6
   Startdate + Duedate
   Watchers
   TimeTracking / Spenttime
-  TODO: CrossProjectQueries
+  CrossProjectQueries
 
 Version 2.5.2
   Bugfix: Detailed Status-Header for server errors

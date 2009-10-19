@@ -130,6 +130,46 @@ end
     assert valid , 'Ergenis passt nicht zum Schema ' + 'issues'
 
     assert_tag :tag => 'issues', :children => {:count => 2}
+    assert_tag :tag => 'issue', :attributes => {:id => 3}
+    assert_tag :tag => 'issue', :attributes => {:id => 7}
+  end
+
+  def test_cross_query_by_string
+    post :query, :query_string => 'set_filter=1&fields[]=tracker_id&operators[tracker_id]=%3D&values[tracker_id][]=1&fields[]=priority_id&operators[priority_id]=%3D&values[priority_id][]=4'
+
+    assert_response :success
+    assert_template 'index.rxml'
+
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'issues'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'issues'
+
+    #redmine 0.8: 
+    #redmine 0.9: 1,3,5
+    assert_tag :tag => 'issues', :children => {:count => 3}
+    assert_tag :tag => 'issue', :attributes => {:id => 1}
+    assert_tag :tag => 'issue', :attributes => {:id => 3}
+    assert_tag :tag => 'issue', :attributes => {:id => 5}
+  end
+
+  def test_cross_query_by_string_authenticated
+    @request.session[:user_id] = 2
+    post :query, :query_string => 'set_filter=1&fields[]=tracker_id&operators[tracker_id]=%3D&values[tracker_id][]=1&fields[]=priority_id&operators[priority_id]=%3D&values[priority_id][]=4'
+
+    assert_response :success
+    assert_template 'index.rxml'
+
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'issues'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'issues'
+
+    assert_tag :tag => 'issue', :attributes => {:id => 1}
+    assert_tag :tag => 'issue', :attributes => {:id => 3}
+    assert_tag :tag => 'issue', :attributes => {:id => 5}
+    assert_tag :tag => 'issue', :attributes => {:id => 4}
+    assert_tag :tag => 'issue', :attributes => {:id => 6}
   end
 
   def test_query_non_exists

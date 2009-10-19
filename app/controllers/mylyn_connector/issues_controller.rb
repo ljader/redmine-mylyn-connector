@@ -6,7 +6,7 @@ class MylynConnector::IssuesController < ApplicationController
 
   before_filter :find_issue, :only => [:show]
   before_filter :find_project
-  before_filter :authorize
+  before_filter :authorize, :except => [:query]
 
   helper MylynConnector::WatchersHelper
   
@@ -22,8 +22,8 @@ class MylynConnector::IssuesController < ApplicationController
     if !query.blank? && query.valid?
       begin
 
-        #workaround: sometimes (why ?!), query dosn't contains the correct project
-        condition = ARCondition.new(["issues.project_id = ?", @project.id])
+        condition = ARCondition.new
+        condition << ["issues.project_id = ?", @project.id] if @project
         condition << query.statement
 
         @issues = Issue.find :all,
@@ -65,9 +65,9 @@ class MylynConnector::IssuesController < ApplicationController
   end
 
   def find_project
-    if params[:project_id].blank?
+    if @issue
       @project = @issue.project
-    else
+    elsif !params[:project_id].blank?
       begin
         @project = Project.find(params[:project_id])
       rescue ActiveRecord::RecordNotFound
@@ -82,13 +82,13 @@ class MylynConnector::IssuesController < ApplicationController
       begin
         # Code form Issue_helper
         visible = ARCondition.new(["is_public = ? OR user_id = ?", true, User.current.id])
-        visible << (["project_id IS NULL OR project_id = ?", @project.id])
+        visible << (["project_id IS NULL OR project_id = ?", @project.id]) if @project
 
         query = Query.find(query_id, :conditions => visible.conditions)
       rescue
         query = Query.new
       end
-      query.project = @project
+      query.project = @project if @project
     else
       querydecoder = MylynConnector::QueryStringDecoder.new(query_string)
       query = querydecoder.query

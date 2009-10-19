@@ -19,7 +19,7 @@
 					</xsd:restriction>
 				</xsd:simpleType>
 			</xsd:element>
-			<xsd:element name="delay" type="xsd:integer" />
+			<xsd:element name="delay" type="xsd:integer" minOccurs="0" />
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:integer" use="required" />
 	</xsd:complexType>

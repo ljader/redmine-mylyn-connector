@@ -5,7 +5,7 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
   class << self
 
     def fixtures(*table_names)
-      #TODO since 0.9 IssuePriority exists
+      #TODO since 0.9 MemberRole exists
       table_names.push(:member_roles) if Object.const_defined?(:MemberRole)
 
       super(table_names)
