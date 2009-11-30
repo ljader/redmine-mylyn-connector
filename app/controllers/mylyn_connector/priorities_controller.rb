@@ -4,6 +4,8 @@ class MylynConnector::PrioritiesController < ApplicationController
   unloadable
   include MylynConnector::Rescue::ClassMethods
 
+  skip_before_filter :verify_authenticity_token
+
   def all
     begin
       #since 0.9 IssuePriority exists

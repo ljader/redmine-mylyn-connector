@@ -4,6 +4,8 @@ class MylynConnector::IssueStatusController < ApplicationController
   unloadable
   include MylynConnector::Rescue::ClassMethods
 
+  skip_before_filter :verify_authenticity_token
+
   def all
     @issue_status = IssueStatus.find(:all)
 

@@ -4,6 +4,8 @@ class MylynConnector::ProjectsController < ApplicationController
   unloadable
   include MylynConnector::Rescue::ClassMethods
 
+  skip_before_filter :verify_authenticity_token
+
   before_filter :find_project, :only => [:get]
 
   helper MylynConnector::MylynHelper

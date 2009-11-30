@@ -4,6 +4,8 @@ class MylynConnector::IssuesController < ApplicationController
   unloadable
   include MylynConnector::Rescue::ClassMethods
 
+  skip_before_filter :verify_authenticity_token
+
   before_filter :find_issue, :only => [:show]
   before_filter :find_project
   before_filter :authorize, :except => [:query]

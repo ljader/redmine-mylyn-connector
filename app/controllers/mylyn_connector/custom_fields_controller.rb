@@ -2,7 +2,9 @@ require File.dirname(__FILE__) + '/../../../lib/mylyn_connector'
 
 class MylynConnector::CustomFieldsController < ApplicationController
   unloadable
-#  include MylynConnector::Rescue::ClassMethods
+  include MylynConnector::Rescue::ClassMethods
+
+  skip_before_filter :verify_authenticity_token
 
   def all
     @custom_fields = CustomField.all
