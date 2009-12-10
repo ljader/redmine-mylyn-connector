@@ -1,3 +1,6 @@
+Version 2.6.1
+  bugfix: Compatibility with Redmine 0.8.7
+
 Version 2.6
   Startdate + Duedate
   Watchers
