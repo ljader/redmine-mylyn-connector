@@ -25,7 +25,7 @@ module MylynConnector::ProjectsHelper
     #TODO since 0.9 MemberRole exists
     begin
       #since 0.9 MemberRole exists
-      return member.roles.detect(false) {|role| role.assignable} != false
+      return member.roles.detect() {|role| role.assignable} !=true
     rescue
       return member.role.assignable
     end
