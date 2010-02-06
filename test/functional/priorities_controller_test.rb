@@ -22,8 +22,13 @@ class MylynConnector::PrioritiesControllerTest < MylynConnector::ControllerTest
   end
 
   def test_all_empty_is_valid
-    Enumeration.delete_all("opt='IPRI'")
-
+    #since 0.9 IssuePriority exists
+    if is09?
+      IssuePriority.delete_all
+    else
+      Enumeration.delete_all("opt='IPRI'")
+    end
+ 
     get :all
 
     xmldoc = XML::Document.string @response.body

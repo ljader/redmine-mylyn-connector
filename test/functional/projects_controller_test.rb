@@ -5,6 +5,9 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
   class << self
 
     def fixtures(*table_names)
+      dir = File.join(File.dirname(__FILE__), "../../test/fixtures/" + self.rr)
+      Fixtures.create_fixtures(dir, "custom_fields")
+
       #TODO since 0.9 MemberRole exists
       table_names.push(:member_roles) if Object.const_defined?(:MemberRole)
 
@@ -46,8 +49,8 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
     #redmine 0.9: 3 customfields
     assert_tag :tag => 'issuecustomfield', :attributes => {:id => 1}, :children => {:only => {:tag => 'name', :content => 'Database', :sibling => {:tag => 'fieldformat', :content => 'list', :sibling => {:tag => 'trackers', :content => '1', :sibling => {:tag => 'required', :content => 'false'}, :sibling => {:tag => 'filter', :content => 'true'}}}}}, :parent => {:tag => 'issuecustomfields', :children => {:count => 2..3}, :parent =>p}
     #redmine 0.8: 2 queries
-    #redmine 0.9: 4 queries
-    assert_tag :tag => 'query', :attributes => {:id => 1}, :children => {:only => {:tag => 'name', :content => 'Multiple custom fields query'}}, :parent => {:tag => 'queries', :children => {:count => 2..4}, :parent => p}
+    #redmine 0.9: 5 queries
+    assert_tag :tag => 'query', :attributes => {:id => 1}, :children => {:only => {:tag => 'name', :content => 'Multiple custom fields query'}}, :parent => {:tag => 'queries', :children => {:count => 2..5}, :parent => p}
   end
 
   def test_all_authenticated

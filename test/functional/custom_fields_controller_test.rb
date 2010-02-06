@@ -20,8 +20,8 @@ class MylynConnector::CustomFieldsControllerTest < MylynConnector::ControllerTes
     assert valid , 'Ergenis passt nicht zum Schema ' + 'customFields'
 
     #Redmine0.8 5
-    #Redmine0.8 6
-    assert_tag :tag => 'customfields', :children => {:count => 5..6}
+    #Redmine0.9 9
+    assert_tag :tag => 'customfields', :children => {:count => 5..9}
     assert_tag :tag => 'customfield', :attributes => {:id => 1}, :children => {:only => {:tag => 'name', :content => 'Database', :sibling => {:tag => 'fieldformat', :content => 'list', :sibling => {:tag => 'trackers', :content => '1', :sibling => {:tag => 'required', :content => 'false'}, :sibling => {:tag => 'filter', :content => 'true'}}}}}
   end
 

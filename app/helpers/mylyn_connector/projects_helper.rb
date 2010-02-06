@@ -1,5 +1,8 @@
 
 module MylynConnector::ProjectsHelper
+
+  include MylynConnector::Version::ClassMethods
+  
   def edit_issues_allowed? project
     res = User.current.allowed_to?(:edit_issues, project)
     return res !=nil && res !=false
@@ -10,7 +13,9 @@ module MylynConnector::ProjectsHelper
   end
 
   def get_issue_custom_fields project
-    project.methods.include?('all_issue_custom_fields') ? project.all_issue_custom_fields : project.all_custom_fields;
+    icf = project.all_issue_custom_fields;
+    icf.delete_if {|x| x.trackers.empty? } #only icf with assigned tracker are valid
+    icf.compact
   end
 
   def get_issue_categories project
@@ -22,11 +27,10 @@ module MylynConnector::ProjectsHelper
   end
 
   def member_assignable? member
-    #TODO since 0.9 MemberRole exists
-    begin
+    if is09?
       #since 0.9 MemberRole exists
       return member.roles.detect() {|role| role.assignable} !=true
-    rescue
+    else
       return member.role.assignable
     end
   end

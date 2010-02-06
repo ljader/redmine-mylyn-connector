@@ -10,6 +10,7 @@ module MylynConnector
         parser = ActionController::UrlEncodedPairParser.new(find_pairs(query_string))
         @result = parser.result;
       rescue
+        #Redmine 0.9
         @result = Rack::Utils.parse_nested_query(query_string)
       end
 

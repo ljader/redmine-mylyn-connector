@@ -18,6 +18,8 @@ class MylynConnector::ActivitiesControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'activities'
 
-    assert_tag :tag => 'activities', :children => {:count => 3}
+    #0.8 3
+    #0.9 4
+    assert_tag :tag => 'activities', :children => {:count => 3..4}
   end
 end

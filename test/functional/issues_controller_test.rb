@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
 
-  fixtures :users, :roles, :members, :issue_categories, :custom_fields, :trackers, :versions, :queries, :projects, :projects_trackers, :custom_fields_trackers, :issues, :journals, :attachments, :custom_fields, :custom_values, :watchers
+  fixtures :users, :roles, :members, :issue_categories, :custom_fields, :trackers, :versions, :queries, :projects, :projects_trackers, :custom_fields_trackers, :issues, :journals, :attachments, :custom_fields, :custom_values, :watchers, :time_entries
 
   def setup
     super
@@ -38,8 +38,8 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'watched', :content => false
     assert_tag :tag => 'watchers'
     #redmine 0.8: 1
-    #redmine 0.9: 2
-    assert_tag :tag => 'customvalues', :children => {:count => (1..2)}
+    #redmine 0.9: 3
+    assert_tag :tag => 'customvalues', :children => {:count => (1..3)}
     assert_tag :tag => 'customvalue', :parent  => {:tag => 'customvalues'}, :attributes => {:customfieldid => '2'}, :content => '125'
     assert_tag :tag => 'journals', :children => {:count => 2}
     assert_tag :tag => 'author', :parent  => {:tag => 'journal'}, :content => 'redMine Admin'
@@ -146,11 +146,14 @@ end
     assert valid , 'Ergenis passt nicht zum Schema ' + 'issues'
 
     #redmine 0.8: 
-    #redmine 0.9: 1,3,5
-    assert_tag :tag => 'issues', :children => {:count => 3}
+    #redmine 0.9: 1,3,5,13
+    assert_tag :tag => 'issues', :children => {:count => 3..4}
     assert_tag :tag => 'issue', :attributes => {:id => 1}
     assert_tag :tag => 'issue', :attributes => {:id => 3}
     assert_tag :tag => 'issue', :attributes => {:id => 5}
+    if is09?
+      assert_tag :tag => 'issue', :attributes => {:id => 13}
+    end
   end
 
   def test_cross_query_by_string_authenticated

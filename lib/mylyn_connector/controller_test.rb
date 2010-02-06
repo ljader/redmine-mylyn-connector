@@ -4,6 +4,8 @@ require 'xml'
 module MylynConnector
   class ControllerTest < ActionController::TestCase
 
+    include MylynConnector::Version::ClassMethods
+
     def setup
       @request = ActionController::TestRequest.new
       @response = ActionController::TestResponse.new
@@ -16,5 +18,8 @@ module MylynConnector
       XML::Schema.document schemadoc
     end
 
+    def self.rr
+      MylynConnector::Version.redmine_release
+    end
   end
 end
