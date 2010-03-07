@@ -2,7 +2,7 @@ module MylynConnector
   module Version
     MAJOR = 2
     MINOR = 6
-    TINY  = 2
+    TINY  = 3
 
     # stable/trunk
     BRANCH = 'trunk'

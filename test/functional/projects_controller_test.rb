@@ -47,7 +47,7 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'issuecategory', :attributes => {:id => 2}, :children => {:only => {:tag => 'name', :content => 'Recipes'}}, :parent => {:tag => 'issuecategories', :children => {:count => 2}, :parent => p}
     #redmine 0.8: 2 customfields
     #redmine 0.9: 3 customfields
-    assert_tag :tag => 'issuecustomfield', :attributes => {:id => 1}, :children => {:only => {:tag => 'name', :content => 'Database', :sibling => {:tag => 'fieldformat', :content => 'list', :sibling => {:tag => 'trackers', :content => '1', :sibling => {:tag => 'required', :content => 'false'}, :sibling => {:tag => 'filter', :content => 'true'}}}}}, :parent => {:tag => 'issuecustomfields', :children => {:count => 2..3}, :parent =>p}
+    assert_tag :tag => 'issuecustomfield', :attributes => {:id => 1}, :children => {:only => {:tag => 'name', :content => 'Database', :sibling => {:tag => 'fieldformat', :content => 'list', :sibling => {:tag => 'trackers', :content => '1', :sibling => {:tag => 'required', :content => 'false', :sibling => {:tag => 'filter', :content => 'true', :sibling => {:tag => 'forAll', :content => 'true'}}}}}}}, :parent => {:tag => 'issuecustomfields', :children => {:count => 2..3}, :parent =>p}
     #redmine 0.8: 2 queries
     #redmine 0.9: 5 queries
     assert_tag :tag => 'query', :attributes => {:id => 1}, :children => {:only => {:tag => 'name', :content => 'Multiple custom fields query'}}, :parent => {:tag => 'queries', :children => {:count => 2..5}, :parent => p}

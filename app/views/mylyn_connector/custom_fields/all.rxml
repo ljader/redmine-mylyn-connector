@@ -18,6 +18,7 @@ xml.customFields :xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.6' do
       xml.defaultValue field.default_value
       xml.required field.is_required
       xml.filter field.is_filter
+      xml.forAll field.is_for_all
     end
   end
 end

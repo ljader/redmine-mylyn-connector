@@ -15,5 +15,6 @@ xml.issueCustomField(:id => issue_custom_field.id) do
   xml.defaultValue issue_custom_field.default_value
   xml.required issue_custom_field.is_required
   xml.filter issue_custom_field.is_filter
+  xml.forAll issue_custom_field.is_for_all
   xml.trackers integer_list(issue_custom_field.trackers)
 end

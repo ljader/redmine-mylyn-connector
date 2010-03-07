@@ -1,3 +1,10 @@
+Version 2.6.3
+  bugfix: Missing CustomField-Attribute forAll
+
+Version 2.6.2
+  bugfix: IssueCustomFields without assigned Tracker(s)
+  bugfix: Changes for Redmine 0.9
+
 Version 2.6.1
   bugfix: Compatibility with Redmine 0.8.7
 

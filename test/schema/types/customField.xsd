@@ -38,6 +38,9 @@
 					<xsd:element name="defaultValue" type="xsd:string" />
 					<xsd:element name="required" type="xsd:boolean" />
 					<xsd:element name="filter" type="xsd:boolean" />
+                                        <!-- TODO in required 2.7  -->
+					<xsd:element name="forAll" type="xsd:boolean" minOccurs="1" />
+
                 </xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
