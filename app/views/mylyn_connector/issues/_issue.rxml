@@ -1,4 +1,4 @@
-xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.6', :id => issue.id) do
+xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.6', :id => issue.id, :useDoneratioField => useDoneratioField?(issue)) do
   #unused: lock-version
 
   #Ticket
