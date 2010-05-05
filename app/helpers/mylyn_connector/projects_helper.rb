@@ -1,6 +1,5 @@
 
 module MylynConnector::ProjectsHelper
-
   include MylynConnector::Version::ClassMethods
   
   def edit_issues_allowed? project
@@ -36,7 +35,13 @@ module MylynConnector::ProjectsHelper
   end
 
   def get_versions project
-    project.versions
+    if is09?
+      #since 09 sub(shared)versions exists
+      return project.shared_versions.each { |v| v.name += " ("  + v.project.name + ")" if project!=v.project}
+    else
+      return project.versions
+    end
+
   end
 
   def get_queries project

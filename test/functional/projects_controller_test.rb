@@ -41,8 +41,26 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
     p = {:tag => 'project', :attributes => { :id => '1'}}
     assert_tag :tag => 'identifier', :content => 'ecookbook', :parent => p
     assert_tag :tag => 'tracker', :attributes => {:id => 2}, :children => {:only => {:tag => 'name', :content => 'Feature request'}}, :parent => {:tag => 'trackers', :children => {:count => 3}, :parent => p}
-    assert_tag :tag => 'version', :attributes => {:id => 3}, :children => {:only => {:tag => 'name', :content => '2.0', :sibling => {:tag => 'completed', :content => 'true'}}}, :parent => {:tag => 'versions', :children => {:count => 3}, :parent => p}
-    assert_tag :tag => 'version', :attributes => {:id => 2}, :children => {:only => {:tag => 'name', :content => '1.0', :sibling => {:tag => 'completed', :content => 'false'}}}, :parent => {:tag => 'versions', :parent => p}
+
+
+    if is09?
+#      1  0.1  closed
+#      2  1.0  locked
+#      3  2.0  open
+#      4  2.0  open
+#      6  Private Version of public subproject  open # shared version don't respects the provacy of projects
+#      7  Systemwide visible version  open
+
+      v = {:tag=> 'versions', :children => {:count => 6}, :parent => p}
+      assert_tag v
+      assert_tag :tag => 'version', :attributes => {:id => 1}, :child => {:tag => 'name', :content => '0.1', :sibling => {:tag => 'completed', :content => 'true'}}, :parent =>v
+      assert_tag :tag => 'version', :attributes => {:id => 7}, :child => {:tag => 'name', :content => 'Systemwide visible version (OnlineStore)', :sibling => {:tag => 'completed', :content => 'false'}}, :parent =>v
+    else
+      assert_tag :tag => 'version', :attributes => {:id => 3}, :children => {:only => {:tag => 'name', :content => '2.0', :sibling => {:tag => 'completed', :content => 'true'}}}, :parent => {:tag => 'versions', :children => {:count => 3}, :parent => p}
+      assert_tag :tag => 'version', :attributes => {:id => 2}, :children => {:only => {:tag => 'name', :content => '1.0', :sibling => {:tag => 'completed', :content => 'false'}}}, :parent => {:tag => 'versions', :parent => p}
+    end
+
+
     assert_tag :tag => 'member', :attributes => {:id => 2}, :children => {:only => {:tag => 'name', :content => 'John Smith', :sibling => {:tag => 'assignable', :content => 'true'}}}, :parent => {:tag => 'members', :parent => p}
     assert_tag :tag => 'issuecategory', :attributes => {:id => 2}, :children => {:only => {:tag => 'name', :content => 'Recipes'}}, :parent => {:tag => 'issuecategories', :children => {:count => 2}, :parent => p}
     #redmine 0.8: 2 customfields
