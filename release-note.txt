@@ -1,3 +1,8 @@
+Version 2.6.4 (in progress...)
+  bugfix: shared versions
+  bugfix: ignored Settings.issue_done_ratio
+  bugfix: use version.open instead of version.completed
+
 Version 2.6.3
   bugfix: Missing CustomField-Attribute forAll
 

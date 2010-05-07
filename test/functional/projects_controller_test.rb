@@ -53,8 +53,8 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
 
       v = {:tag=> 'versions', :children => {:count => 6}, :parent => p}
       assert_tag v
-      assert_tag :tag => 'version', :attributes => {:id => 1}, :child => {:tag => 'name', :content => '0.1', :sibling => {:tag => 'completed', :content => 'true'}}, :parent =>v
-      assert_tag :tag => 'version', :attributes => {:id => 7}, :child => {:tag => 'name', :content => 'Systemwide visible version (OnlineStore)', :sibling => {:tag => 'completed', :content => 'false'}}, :parent =>v
+      assert_tag :tag => 'version', :attributes => {:id => 1}, :child => {:tag => 'name', :content => '0.1', :sibling => {:tag => 'open', :content => 'false'}}, :parent =>v
+      assert_tag :tag => 'version', :attributes => {:id => 7}, :child => {:tag => 'name', :content => 'Systemwide visible version (OnlineStore)', :sibling => {:tag => 'open', :content => 'true'}}, :parent =>v
     else
       assert_tag :tag => 'version', :attributes => {:id => 3}, :children => {:only => {:tag => 'name', :content => '2.0', :sibling => {:tag => 'completed', :content => 'true'}}}, :parent => {:tag => 'versions', :children => {:count => 3}, :parent => p}
       assert_tag :tag => 'version', :attributes => {:id => 2}, :children => {:only => {:tag => 'name', :content => '1.0', :sibling => {:tag => 'completed', :content => 'false'}}}, :parent => {:tag => 'versions', :parent => p}
