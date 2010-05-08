@@ -9,7 +9,8 @@ class MylynConnector::ActivitiesController < ApplicationController
 
   def all
     #since 0.9 IssuePriority exists
-    @activities = is09? ? TimeEntryActivity.all : Enumeration::get_values('ACTI');
+    #TODO Is this perhabs project specific???
+    @activities = is09? ? TimeEntryActivity.shared.active : Enumeration::get_values('ACTI');
 
     respond_to do |format|
       format.xml {render :xml => @activities, :template => 'mylyn_connector/activities/all.rxml'}
