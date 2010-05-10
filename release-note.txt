@@ -1,4 +1,4 @@
-Version 2.6.4 (in progress...)
+Version 2.6.
   bugfix: shared versions
   bugfix: ignored Settings.issue_done_ratio
   bugfix: use version.open instead of version.completed
