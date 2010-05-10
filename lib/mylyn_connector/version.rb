@@ -5,7 +5,7 @@ module MylynConnector
     TINY  = 4
 
     # stable/trunk
-    BRANCH = 'trunk'
+    BRANCH = 'stable'
 
     #Code from Redmine::Version
     def self.revision
