@@ -12,14 +12,19 @@ class MylynConnector::IssueStatusControllerTest < MylynConnector::ControllerTest
   def test_all
     get :all
     assert_response :success
-    assert_template 'all.rxml'
+    assert_template 'all.xml.builder'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'issueStatus'
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'issueStatus'
 
-    assert_tag :tag => 'issuestatuses', :children => {:count => 6}
+    stats =  {:tag => 'issuestatuses', :children => {:count => 6}, :attributes => {:api => /^2.7.0/}}
+    stat = {:tag => 'issuestatus', :attributes => {:id => 5}, :parent => stats}
+    assert_tag :tag => 'name', :content => 'Closed', :parent => stat
+    assert_tag :tag => 'closed', :content => 'true', :parent => stat
+    assert_tag :tag => 'default', :content => 'false', :parent => stat
+
   end
 
   def test_all_empty_is_valid
@@ -27,13 +32,13 @@ class MylynConnector::IssueStatusControllerTest < MylynConnector::ControllerTest
 
     get :all
     assert_response :success
-    assert_template 'all.rxml'
+    assert_template 'all.xml.builder'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'issueStatus'
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'issueStatus'
 
-    assert_tag :tag => 'issuestatuses', :children => {:count => 0}
+    assert_tag :tag => 'issuestatuses', :children => {:count => 0}, :attributes => {:api => /^2.7.0/}
   end
 end

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns:tns="http://redmin-mylyncon.sf.net/schemas/WS-API-2.6"
-	targetNamespace="http://redmin-mylyncon.sf.net/schemas/WS-API-2.6"
+	xmlns:tns="http://redmin-mylyncon.sf.net/api"
+	targetNamespace="http://redmin-mylyncon.sf.net/api"
 	elementFormDefault="qualified" >
 
 	<xsd:include schemaLocation="property.xsd" />
@@ -38,9 +38,7 @@
 					<xsd:element name="defaultValue" type="xsd:string" />
 					<xsd:element name="required" type="xsd:boolean" />
 					<xsd:element name="filter" type="xsd:boolean" />
-                                        <!-- TODO in required 2.7  -->
-					<xsd:element name="forAll" type="xsd:boolean" minOccurs="1" />
-
+					<xsd:element name="forAll" type="xsd:boolean"/>
                 </xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>

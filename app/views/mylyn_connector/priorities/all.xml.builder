@@ -1,5 +1,5 @@
 xml.instruct! :xml, :encoding => "UTF-8"
-xml.priorities :xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.6' do
+xml.priorities :xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version do
   @priorities.each do |priority|
     xml.priority :id => priority.id do
       xml.name priority.name

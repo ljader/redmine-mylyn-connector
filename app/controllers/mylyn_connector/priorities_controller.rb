@@ -7,12 +7,13 @@ class MylynConnector::PrioritiesController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
 
+  helper MylynConnector::MylynHelper
+
   def all
-    #since 0.9 IssuePriority exists
-    @priorities  = is09? ? IssuePriority.all : Enumeration::get_values('IPRI');
+    @priorities  = IssuePriority.shared.active;
 
     respond_to do |format|
-      format.xml {render :xml => @priorities, :template => 'mylyn_connector/priorities/all.rxml'}
+      format.xml {render :layout => false}
     end
   end
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://redmin-mylyncon.sf.net/api"
+	targetNamespace="http://redmin-mylyncon.sf.net/api"
+	elementFormDefault="qualified" >
+
+	<xsd:simpleType name="versionstring">
+		<xsd:restriction base="xsd:string">
+			<!-- Version-String example: 2.5.1.trunk.255 -->
+			<xsd:pattern value="\d+\.\d+\.\d+(\.(stable|trunk|branch|devel))?(\.\d+)?" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>

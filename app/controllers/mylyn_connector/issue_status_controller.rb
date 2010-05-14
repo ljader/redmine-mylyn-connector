@@ -6,11 +6,13 @@ class MylynConnector::IssueStatusController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
 
+  helper MylynConnector::MylynHelper
+
   def all
     @issue_status = IssueStatus.find(:all)
 
     respond_to do |format|
-      format.xml {render :xml => @issue_status, :template => 'mylyn_connector/issue_status/all.rxml'}
+      format.xml {render :layout => false}
     end
   end
 end

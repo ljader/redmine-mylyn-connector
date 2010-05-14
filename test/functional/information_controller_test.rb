@@ -10,10 +10,10 @@ class MylynConnector::InformationControllerTest < MylynConnector::ControllerTest
   def test_version
     get :version
     assert_response :success
-    assert_template 'version.rxml'
+    assert_template 'version.xml.builder'
 
     xmldoc = XML::Document.string @response.body
-    schema = read_schema 'version'
+    schema = read_schema 'information'
 
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'version'

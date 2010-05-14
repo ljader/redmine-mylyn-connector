@@ -6,4 +6,8 @@ module MylynConnector::MylynHelper
     id_based.to_s.strip
   end
 
+  def api_version
+    MylynConnector::Version
+  end
+
 end

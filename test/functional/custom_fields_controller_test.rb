@@ -12,17 +12,21 @@ class MylynConnector::CustomFieldsControllerTest < MylynConnector::ControllerTes
   def test_all
     get :all
     assert_response :success
-    assert_template 'all.rxml'
+    assert_template 'all.xml.builder'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'customFields'
     valid = xmldoc.validate_schema schema
-    assert valid , 'Ergenis passt nicht zum Schema ' + 'customFields'
+    assert valid , 'Ergebnis passt nicht zum Schema ' + 'customFields'
 
-    #Redmine0.8 5
-    #Redmine0.9 9
-    assert_tag :tag => 'customfields', :children => {:count => 5..9}
-    assert_tag :tag => 'customfield', :attributes => {:id => 1}, :children => {:only => {:tag => 'name', :content => 'Database', :sibling => {:tag => 'fieldformat', :content => 'list', :sibling => {:tag => 'trackers', :content => '1', :sibling => {:tag => 'required', :content => 'false'}, :sibling => {:tag => 'filter', :content => 'true'}}}}}
+    cfl = {:tag => 'customfields', :children => {:count => 9}, :attributes => {:api => /^2.7.0/}}
+    cf = {:tag => 'customfield', :attributes => {:id => 1}, :parent => cfl}
+    assert_tag :tag => 'name', :content => 'Database', :parent => cf
+    assert_tag :tag => 'type', :content => 'IssueCustomField', :parent => cf
+    assert_tag :tag => 'fieldformat', :content => 'list', :parent => cf
+    assert_tag :tag => 'required', :content => 'false', :parent => cf
+    assert_tag :tag => 'filter', :content => 'true', :parent => cf
+
   end
 
   def test_all_empty_is_valid
@@ -30,13 +34,13 @@ class MylynConnector::CustomFieldsControllerTest < MylynConnector::ControllerTes
 
     get :all
     assert_response :success
-    assert_template 'all.rxml'
+    assert_template 'all.xml.builder'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'customFields'
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'customFields'
 
-    assert_tag :tag => 'customfields', :children => {:count => 0}
+    assert_tag :tag => 'customfields', :children => {:count => 0},  :attributes => {:api => /^2.7.0/}
   end
 end

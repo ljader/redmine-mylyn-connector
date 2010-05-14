@@ -1,5 +1,5 @@
 xml.instruct! :xml, :encoding => "UTF-8"
-xml.activities :xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.6' do
+xml.activities :xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version do
   @activities.each do |activity|
     xml.activity :id => activity.id do
       xml.name activity.name

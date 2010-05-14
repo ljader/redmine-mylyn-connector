@@ -1,11 +1,11 @@
 module MylynConnector
   module Version
     MAJOR = 2
-    MINOR = 6
-    TINY  = 4
+    MINOR = 7
+    TINY  = 0
 
     # stable/trunk
-    BRANCH = 'stable'
+    BRANCH = 'trunk'
 
     #Code from Redmine::Version
     def self.revision

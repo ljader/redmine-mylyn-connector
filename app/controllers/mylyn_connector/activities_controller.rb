@@ -7,13 +7,13 @@ class MylynConnector::ActivitiesController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
 
+  helper MylynConnector::MylynHelper
+
   def all
-    #since 0.9 IssuePriority exists
-    #TODO Is this perhabs project specific???
-    @activities = is09? ? TimeEntryActivity.shared.active : Enumeration::get_values('ACTI');
+    @activities = TimeEntryActivity.shared.active
 
     respond_to do |format|
-      format.xml {render :xml => @activities, :template => 'mylyn_connector/activities/all.rxml'}
+      format.xml {render :layout => false}
     end
   end
 

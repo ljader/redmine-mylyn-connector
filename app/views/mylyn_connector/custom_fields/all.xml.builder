@@ -1,5 +1,5 @@
 xml.instruct! :xml, :encoding => "UTF-8"
-xml.customFields :xmlns => 'http://redmin-mylyncon.sf.net/schemas/WS-API-2.6' do
+xml.customFields:xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version do
   @custom_fields.each do |field|
     xml.customField :id => field.id do
       xml.name field.name
