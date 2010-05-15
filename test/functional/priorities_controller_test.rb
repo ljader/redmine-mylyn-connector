@@ -16,7 +16,7 @@ class MylynConnector::PrioritiesControllerTest < MylynConnector::ControllerTest
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'issuePriorities'
     valid = xmldoc.validate_schema schema
-    assert valid , 'Ergenis passt nicht zum Schema ' + 'priorities'
+    assert valid , 'Ergebnis passt nicht zum Schema ' + 'priorities'
 
     pris =  {:tag => 'priorities', :children => {:count => 5}, :attributes => {:api => /^2.7.0/}}
     pri = {:tag => 'priority', :attributes => {:id => 7}, :parent => pris}
@@ -34,7 +34,7 @@ class MylynConnector::PrioritiesControllerTest < MylynConnector::ControllerTest
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'issuePriorities'
     valid = xmldoc.validate_schema schema
-    assert valid , 'Ergenis passt nicht zum Schema ' + 'priorities'
+    assert valid , 'Ergebnis passt nicht zum Schema ' + 'priorities'
 
     assert_tag :tag => 'priorities', :children => {:count => 0}, :attributes => {:api => /^2.7.0/}
   end
