@@ -16,7 +16,7 @@ class MylynConnector::TrackersControllerTest < MylynConnector::ControllerTest
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'trackers'
     valid = xmldoc.validate_schema schema
-    assert valid , 'Ergebnis passt nicht zum Schema ' + 'priorities'
+    assert valid , 'Ergebnis passt nicht zum Schema ' + 'trackers'
 
     trs =  {:tag => 'trackers', :children => {:count => 3}, :attributes => {:api => /^2.7.0/}}
     tr = {:tag => 'tracker', :attributes => {:id => 3}, :parent => trs}
