@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.connect "mylyn/settings", :controller => "MylynConnector::Settings", :action => "all", :conditions => {:method => :get}
   map.connect "mylyn/issue/:id", :controller => "MylynConnector::Issues", :action => "show", :conditions => {:method => :get}
   map.connect "mylyn/projects", :controller => "MylynConnector::Projects", :action => "all", :conditions => {:method => :get}
   map.connect "mylyn/priorities", :controller => "MylynConnector::Priorities", :action => "all", :conditions => {:method => :get}
