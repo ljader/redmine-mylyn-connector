@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://redmin-mylyncon.sf.net/api"
+	targetNamespace="http://redmin-mylyncon.sf.net/api"
+	elementFormDefault="qualified" >
+
+	<xsd:include schemaLocation="property.xsd" />
+
+	<xsd:complexType name="user">
+		<xsd:complexContent>
+			<xsd:extension base="tns:property">
+				<xsd:sequence>
+					<xsd:element name="login" type="xsd:string" />
+					<xsd:element name="firstname" type="xsd:string" />
+					<xsd:element name="lastname" type="xsd:string" />
+					<!-- TODO add type email -->
+					<xsd:element name="mail" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+</xsd:schema>
