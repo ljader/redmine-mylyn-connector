@@ -6,8 +6,6 @@ class MylynConnector::ProjectsController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
 
-  before_filter :find_project, :only => [:get]
-
   helper MylynConnector::MylynHelper
 
   def all
@@ -16,15 +14,8 @@ class MylynConnector::ProjectsController < ApplicationController
       :conditions => [ "enabled_modules.name = 'issue_tracking' AND #{Project.visible_by}"])
 
     respond_to do |format|
-      format.xml {render :xml => @projects, :template => 'mylyn_connector/projects/all.rxml'}
+      format.xml {render :layout => false}
     end
-  end
-
-  private
-  def find_project
-    @project = Project.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render_404
   end
   
 end

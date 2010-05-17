@@ -1,4 +1,0 @@
-xml.version :id => version.id do
-  xml.name version.name
-  xml.open version.open? ? true : false
-end

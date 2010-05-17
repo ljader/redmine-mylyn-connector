@@ -1,26 +1,23 @@
 xml.project(:id => project.id) do
   xml.name project.name
   xml.identifier project.identifier
-  xml.issueEditAllowed edit_issues_allowed?(project)
 
-  xml.trackers {
-    xml << render(:partial => 'tracker.rxml', :collection => get_trackers(project)).to_s
-  }
+  xml.trackers integer_list(get_trackers(project))
+  xml.versions integer_list(get_versions(project))
 
-  xml.versions {
-    xml << render(:partial => 'version.rxml', :collection => get_versions(project)).to_s
-  }
+  xml.members do
+    get_members(project).each do |member|
+      xml.member(:user => member.user.id, :assignable => member_assignable?(member) )
+    end
+  end
 
-  xml.members {
-    xml << render(:partial => 'member.rxml', :collection => get_members(project)).to_s
-  }
-  xml.issueCategories {
-    xml << render(:partial => 'issue_category.rxml', :collection => get_issue_categories(project)).to_s
-  }
-  xml.issueCustomFields {
-    xml << render(:partial => 'issue_custom_field.rxml', :collection => get_issue_custom_fields(project)).to_s
-  }
-  xml.queries {
-    xml << render(:partial => 'query.rxml', :collection => get_queries(project)).to_s
-  }
+  xml.issueCategories integer_list(get_issue_categories(project))
+
+  xml.issueCustomFields do
+    get_trackers(project).each do |tracker|
+      cf_list = get_issue_custom_fields(project, tracker)
+      xml.issueCustomFieldsByTracker({:tracker => tracker.id}, integer_list(cf_list)) unless cf_list.empty?
+    end
+  end
+  
 end

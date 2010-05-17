@@ -1,6 +1,0 @@
-xml.member(:id => member.user.id) do
-  xml.name member.user.name
-  xml.assignable member_assignable?(member)
-  xml.emailAddress member.user.mail
-  xml.emailNotification member.mail_notification
-end

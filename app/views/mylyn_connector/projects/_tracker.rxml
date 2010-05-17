@@ -1,4 +1,0 @@
-xml.tracker :id => tracker.id do
-  xml.name tracker.name
-  xml.position tracker.position
-end

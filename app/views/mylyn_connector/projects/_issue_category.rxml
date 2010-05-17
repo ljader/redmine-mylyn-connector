@@ -1,3 +1,0 @@
-xml.issueCategory :id => issue_category.id do
-  xml.name issue_category.name
-end

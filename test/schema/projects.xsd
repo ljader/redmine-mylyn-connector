@@ -6,13 +6,12 @@
 
 	<xsd:include schemaLocation="types/project.xsd" />
 
-	<xsd:element name="projects"
-		xmlns="http://redmine-mylyn.sf.net/schemas/WS-API-2.6/projects">
-		
+	<xsd:element name="projects" xmlns="http://redmin-mylyncon.sf.net/api">
 		<xsd:complexType>
 			<xsd:sequence >
 				<xsd:element name="project" type="tns:project" minOccurs="0" maxOccurs="unbounded" />
 			</xsd:sequence>
+			<xsd:attribute name="api" type="tns:versionstring" use="required" />
 		</xsd:complexType>
 	</xsd:element>
 
