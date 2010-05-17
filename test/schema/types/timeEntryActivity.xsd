@@ -7,7 +7,7 @@
 
 	<xsd:include schemaLocation="property.xsd" />
 
-	<xsd:complexType name="activity">
+	<xsd:complexType name="timeEntryActivity">
 		<xsd:complexContent>
 			<xsd:extension base="tns:sortedProperty">
 				<xsd:sequence>

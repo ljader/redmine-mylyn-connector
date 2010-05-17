@@ -5,7 +5,7 @@ class MylynConnector::ActivitiesControllerTest < MylynConnector::ControllerTest
 
   def setup
     super
-    @controller = MylynConnector::ActivitiesController.new
+    @controller = MylynConnector::TimeEntryActivitiesController.new
   end
 
   def test_all
@@ -16,10 +16,10 @@ class MylynConnector::ActivitiesControllerTest < MylynConnector::ControllerTest
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'timeEntryActivities'
     valid = xmldoc.validate_schema schema
-    assert valid , 'Ergebnis passt nicht zum Schema ' + 'activities'
+    assert valid , 'Ergebnis passt nicht zum Schema ' + 'timeEntryActivities'
 
-    acts =  {:tag => 'activities', :children => {:count => 3}, :attributes => {:api => /^2.7.0/}}
-    act = {:tag => 'activity', :attributes => {:id => 10}, :parent => acts}
+    acts =  {:tag => 'timeentryactivities', :children => {:count => 3}, :attributes => {:api => /^2.7.0/}}
+    act = {:tag => 'timeentryactivity', :attributes => {:id => 10}, :parent => acts}
     assert_tag :tag => 'name', :content => 'Development', :parent => act
     assert_tag :tag => 'position', :content => '2', :parent => act
     assert_tag :tag => 'default', :content => 'true', :parent => act

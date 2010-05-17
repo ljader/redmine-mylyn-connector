@@ -7,7 +7,7 @@
 
 	<xsd:include schemaLocation="property.xsd" />
 
-	<xsd:complexType name="priority">
+	<xsd:complexType name="issuePriority">
 		<xsd:complexContent>
 			<xsd:extension base="tns:sortedProperty">
 				<xsd:sequence>

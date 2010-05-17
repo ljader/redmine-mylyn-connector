@@ -5,7 +5,7 @@ class MylynConnector::PrioritiesControllerTest < MylynConnector::ControllerTest
 
   def setup
     super
-    @controller = MylynConnector::PrioritiesController.new
+    @controller = MylynConnector::IssuePrioritiesController.new
   end
 
   def test_all
@@ -16,10 +16,11 @@ class MylynConnector::PrioritiesControllerTest < MylynConnector::ControllerTest
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'issuePriorities'
     valid = xmldoc.validate_schema schema
-    assert valid , 'Ergebnis passt nicht zum Schema ' + 'priorities'
+    assert valid , 'Ergebnis passt nicht zum Schema ' + 'issuePriorities'
 
-    pris =  {:tag => 'priorities', :children => {:count => 5}, :attributes => {:api => /^2.7.0/}}
-    pri = {:tag => 'priority', :attributes => {:id => 7}, :parent => pris}
+    pris =  {:tag => 'issuepriorities', :children => {:count => 5}, :attributes => {:api => /^2.7.0/}}
+    pri = {:tag => 'issuepriority', :attributes => {:id => 7}, :parent => pris}
+    assert_tag pris
     assert_tag :tag => 'name', :content => 'Urgent', :parent => pri
     assert_tag :tag => 'position', :content => '4', :parent => pri
     assert_tag :tag => 'default', :content => 'false', :parent => pri
@@ -36,6 +37,6 @@ class MylynConnector::PrioritiesControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'priorities'
 
-    assert_tag :tag => 'priorities', :children => {:count => 0}, :attributes => {:api => /^2.7.0/}
+    assert_tag :tag => 'issuepriorities', :children => {:count => 0}, :attributes => {:api => /^2.7.0/}
   end
 end

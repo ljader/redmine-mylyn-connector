@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../../lib/mylyn_connector'
 
-class MylynConnector::ActivitiesController < ApplicationController
+class MylynConnector::TimeEntryActivitiesController < ApplicationController
   unloadable
   include MylynConnector::Rescue::ClassMethods
   include MylynConnector::Version::ClassMethods
