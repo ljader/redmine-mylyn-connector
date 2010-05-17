@@ -35,13 +35,4 @@ module MylynConnector::ProjectsHelper
     return project.shared_versions.each { |v| v.name += " ("  + v.project.name + ")" if project!=v.project}
   end
 
-  def get_queries project
-    # Code form Issue_helper
-    visible = ARCondition.new(["is_public = ? OR user_id = ?", true, User.current.id])
-    visible << ["project_id IS NULL OR project_id = ?", project.id]
-    Query.find(:all,
-      :order => "name ASC",
-      :conditions => visible.conditions)
-  end
-
 end

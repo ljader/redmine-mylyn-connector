@@ -8,7 +8,7 @@ class MylynConnector::QueriesControllerTest < MylynConnector::ControllerTest
     @controller = MylynConnector::QueriesController.new
   end
 
-  def test_all
+  def test_all_unauthenticated
     get :all
     assert_response :success
     assert_template 'all.xml.builder'
@@ -18,9 +18,37 @@ class MylynConnector::QueriesControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'queries'
 
-    qs =  {:tag => 'queries', :children => {:count => 9}, :attributes => {:api => /^2.7.0/}}
+    qs =  {:tag => 'queries', :children => {:count => 5}, :attributes => {:api => /^2.7.0/}}
     q = {:tag => 'query', :attributes => {:id => 6}, :parent => qs}
+    assert_tag qs
+    assert_tag q
+
     assert_tag :tag => 'name', :content => 'Open issues grouped by tracker', :parent => q
+
+  end
+
+    def test_all_authenticated
+    @request.session[:user_id] = 2
+
+      get :all
+    assert_response :success
+    assert_template 'all.xml.builder'
+
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'queries'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergebnis passt nicht zum Schema ' + 'queries'
+
+    qs =  {:tag => 'queries', :children => {:count => 7}, :attributes => {:api => /^2.7.0/}}
+    assert_tag qs
+
+    assert_tag :tag => 'query', :attributes => {:id => 1}, :parent => qs
+    assert_tag :tag => 'query', :attributes => {:id => 4}, :parent => qs
+    assert_tag :tag => 'query', :attributes => {:id => 5}, :parent => qs
+    assert_tag :tag => 'query', :attributes => {:id => 6}, :parent => qs
+    assert_tag :tag => 'query', :attributes => {:id => 7}, :parent => qs
+    assert_tag :tag => 'query', :attributes => {:id => 8}, :parent => qs
+    assert_tag :tag => 'query', :attributes => {:id => 9}, :parent => qs
 
   end
 
