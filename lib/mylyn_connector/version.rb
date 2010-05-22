@@ -47,6 +47,10 @@ module MylynConnector
         MylynConnector::Version.redmine_release.to_f >=0.9
       end
 
+      def is10?
+        MylynConnector::Version.redmine_release.to_f >=1.0 || is09? && Redmine::VERSION.to_s.include?('devel')
+      end
+
     end
 
   end

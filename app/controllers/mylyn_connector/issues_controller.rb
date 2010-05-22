@@ -10,12 +10,11 @@ class MylynConnector::IssuesController < ApplicationController
   before_filter :find_project
   before_filter :authorize, :except => [:query]
 
-  helper MylynConnector::WatchersHelper
+  helper MylynConnector::MylynHelper
   
   def show
     respond_to do |format|
-      format.xml {render :xml => @issue, :template => 'mylyn_connector/issues/show.rxml'}
-      #      format.html {render :xml => @issue, :template => 'mylyn_connector/issues/show.rxml', :content_type => 'application/xml'}
+      format.xml {render :layout => false}
     end
   end
 

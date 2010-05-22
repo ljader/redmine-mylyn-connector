@@ -1,11 +1,6 @@
 
 module MylynConnector::ProjectsHelper
   include MylynConnector::Version::ClassMethods
-  
-  def edit_issues_allowed? project
-    res = User.current.allowed_to?(:edit_issues, project)
-    return res !=nil && res !=false
-  end
 
   def get_trackers project
     project.trackers.find(:all);

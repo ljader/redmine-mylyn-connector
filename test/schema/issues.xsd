@@ -4,13 +4,14 @@
 	targetNamespace="http://redmin-mylyncon.sf.net/api"
 	elementFormDefault="qualified" >
 
-	<xsd:include schemaLocation="types/issue.xsd" xmlns="http://redmine-mylyn.sf.net/schemas/WS-API-2.6/issues" />
+	<xsd:include schemaLocation="types/issue.xsd" />
 
-	<xsd:element name="issues">
+	<xsd:element name="issues" xmlns="http://redmin-mylyncon.sf.net/api">
 		<xsd:complexType>
 			<xsd:sequence >
 				<xsd:element name="issue" type="tns:issue" minOccurs="0" maxOccurs="unbounded" />
 			</xsd:sequence>
+			<xsd:attribute name="newAllowed" type="xsd:boolean" use="required"/>
 		</xsd:complexType>
 	</xsd:element>
 

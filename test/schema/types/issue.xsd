@@ -5,15 +5,18 @@
 	targetNamespace="http://redmin-mylyncon.sf.net/api"
 	elementFormDefault="qualified" >
 
-	<xsd:include schemaLocation="customValue.xsd" />
-	<xsd:include schemaLocation="journal.xsd" />
-	<xsd:include schemaLocation="attachment.xsd" />
-	<xsd:include schemaLocation="issueRelation.xsd" />
-	<xsd:include schemaLocation="datetime.xsd" />
+	<xsd:include schemaLocation="customValues.xsd" />
+	<xsd:include schemaLocation="journals.xsd" />
+	<xsd:include schemaLocation="attachments.xsd" />
+	<xsd:include schemaLocation="issueRelations.xsd" />
 	<xsd:include schemaLocation="timeEntries.xsd" />
- 
+	<xsd:include schemaLocation="datetime.xsd" />
+ 	<xsd:include schemaLocation="idList.xsd" />
+ 	
 	<xsd:complexType name="issue">
 		<xsd:sequence>
+
+			<!-- REQUIRED -->
 			<xsd:element name="subject" >
 				<xsd:simpleType>
 					<xsd:restriction base="xsd:string">
@@ -22,80 +25,41 @@
 				</xsd:simpleType>
 			</xsd:element>
 			<xsd:element name="description" type="xsd:string" />
-			<xsd:element name="author" type="xsd:string" />
 			<xsd:element name="createdOn" type="tns:datetime" />
 			<xsd:element name="updatedOn" type="tns:datetime" />
-			
-			<xsd:element name="projectId" type="xsd:integer" />
-			<xsd:element name="trackerId" type="xsd:integer" />
- 			<xsd:element name="priorityId" type="xsd:integer" />
-			<xsd:element name="statusId" type="xsd:integer" />
-			<xsd:element name="categoryId" type="xsd:integer" minOccurs="0"/>
-			<xsd:element name="fixedVersionId" type="xsd:integer" minOccurs="0"/>
-			
-			<xsd:element name="assignedToId" type="xsd:integer" minOccurs="0" />
-			<xsd:element name="doneRatio" type="xsd:integer" />
-			<xsd:element name="estimatedHours" type="xsd:integer" minOccurs="0" />
 
+			<xsd:element name="tracker" type="xsd:integer" />
+			<xsd:element name="project" type="xsd:integer" />
+			<xsd:element name="status" type="xsd:integer" />
+ 			<xsd:element name="priority" type="xsd:integer" />
+			<xsd:element name="watched" type="xsd:boolean"/><!-- watched by current user-->
+			<xsd:element name="watchers"  type="tns:idList"/>
+
+			<!-- OPTIONAL -->
 			<xsd:element name="startDate" type="xsd:date" minOccurs="0" />
 			<xsd:element name="dueDate" type="xsd:date" minOccurs="0" />
+			<xsd:element name="doneRatio" type="xsd:integer"  minOccurs="0"/>
+			<xsd:element name="estimatedHours" type="xsd:integer" minOccurs="0" />
 
-			<xsd:element name="availableStatus">
-				<xsd:simpleType>
-					<xsd:restriction>
-						<xsd:simpleType>
-							<xsd:list itemType="xsd:integer" />
-						</xsd:simpleType>
-						<xsd:minLength value="1" fixed="true" />
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
+			<xsd:element name="author" type="xsd:integer" minOccurs="0"/><!-- missing, when anonymous -->
+			<xsd:element name="category" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="assignedTo" type="xsd:integer" minOccurs="0" />
+			<xsd:element name="fixedVersion" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="parent" type="xsd:integer" minOccurs="0"/>
 
-			<xsd:element name="watched" type="xsd:boolean"/><!-- watched by current user-->
-			<xsd:element name="watchers">
-				<xsd:simpleType>
-					<xsd:restriction>
-						<xsd:simpleType>
-							<xsd:list itemType="xsd:integer" />
-						</xsd:simpleType>
-					</xsd:restriction>
-				</xsd:simpleType>
-			</xsd:element>
+			<!-- AVAILABLE VALUES -->
+			<xsd:element name="availableStatus"  type="tns:idList"/>
 
-			<xsd:element name="customValues" >
-				<xsd:complexType>
-					<xsd:sequence >
-						<xsd:element name="customValue" type="tns:customValue" minOccurs="0" maxOccurs="unbounded" />
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-			<xsd:element name="journals" >
-				<xsd:complexType>
-					<xsd:sequence >
-						<xsd:element name="journal" type="tns:journal" minOccurs="0" maxOccurs="unbounded" />
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-			<xsd:element name="attachments" >
-				<xsd:complexType>
-					<xsd:sequence >
-						<xsd:element name="attachment" type="tns:attachment" minOccurs="0" maxOccurs="unbounded" />
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-			<xsd:element name="issueRelations" >
-				<xsd:complexType>
-					<xsd:sequence >
-						<xsd:element name="issueRelation" type="tns:issueRelation" minOccurs="0" maxOccurs="unbounded" />
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-
+			<!-- EMBEDED -->
+			<xsd:element name="customValues" type="tns:customValues" />
+			<xsd:element name="journals" type="tns:journals" />
+			<xsd:element name="attachments" type="tns:attachments" />
+			<xsd:element name="issueRelations" type="tns:issueRelations" />
 			<xsd:element name="timeEntries" type="tns:timeEntries" />
 			
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:integer" use="required" />
-		<xsd:attribute name="useDoneratioField" type="xsd:boolean" use="optional" />
+		<xsd:attribute name="editAllowed" type="xsd:boolean" use="required" />
 	</xsd:complexType>
 
 </xsd:schema>
