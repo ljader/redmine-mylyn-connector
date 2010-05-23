@@ -36,9 +36,9 @@
 						</xsd:complexType>
 					</xsd:element>
 					<xsd:element name="defaultValue" type="xsd:string" />
-					<xsd:element name="required" type="xsd:boolean" />
-					<xsd:element name="filter" type="xsd:boolean" />
-					<xsd:element name="forAll" type="xsd:boolean"/>
+					<xsd:element name="isRequired" type="xsd:boolean" />
+					<xsd:element name="isFilter" type="xsd:boolean" />
+					<xsd:element name="isForAll" type="xsd:boolean"/>
                 </xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>

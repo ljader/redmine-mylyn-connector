@@ -11,7 +11,7 @@
 		<xsd:complexContent>
 			<xsd:extension base="tns:sortedProperty">
 				<xsd:sequence>
-					<xsd:element name="default" type="xsd:boolean" />
+					<xsd:element name="isDefault" type="xsd:boolean" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>

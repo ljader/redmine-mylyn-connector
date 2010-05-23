@@ -28,10 +28,10 @@
 			<xsd:element name="createdOn" type="tns:datetime" />
 			<xsd:element name="updatedOn" type="tns:datetime" />
 
-			<xsd:element name="tracker" type="xsd:integer" />
-			<xsd:element name="project" type="xsd:integer" />
-			<xsd:element name="status" type="xsd:integer" />
- 			<xsd:element name="priority" type="xsd:integer" />
+			<xsd:element name="trackerId" type="xsd:integer" />
+			<xsd:element name="projectId" type="xsd:integer" />
+			<xsd:element name="statusId" type="xsd:integer" />
+ 			<xsd:element name="priorityId" type="xsd:integer" />
 			<xsd:element name="watched" type="xsd:boolean"/><!-- watched by current user-->
 			<xsd:element name="watchers"  type="tns:idList"/>
 
@@ -41,11 +41,11 @@
 			<xsd:element name="doneRatio" type="xsd:integer"  minOccurs="0"/>
 			<xsd:element name="estimatedHours" type="xsd:integer" minOccurs="0" />
 
-			<xsd:element name="author" type="xsd:integer" minOccurs="0"/><!-- missing, when anonymous -->
-			<xsd:element name="category" type="xsd:integer" minOccurs="0"/>
-			<xsd:element name="assignedTo" type="xsd:integer" minOccurs="0" />
-			<xsd:element name="fixedVersion" type="xsd:integer" minOccurs="0"/>
-			<xsd:element name="parent" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="authorId" type="xsd:integer" minOccurs="0"/><!-- missing, when anonymous -->
+			<xsd:element name="categoryId" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="assignedToId" type="xsd:integer" minOccurs="0" />
+			<xsd:element name="fixedVersionId" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="parentId" type="xsd:integer" minOccurs="0"/>
 
 			<!-- AVAILABLE VALUES -->
 			<xsd:element name="availableStatus"  type="tns:idList"/>

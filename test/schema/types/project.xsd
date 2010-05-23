@@ -23,7 +23,7 @@
 							<xsd:sequence>
 								<xsd:element name="member"  minOccurs="0" maxOccurs="unbounded">
 									<xsd:complexType>
-										<xsd:attribute name="user" type="xsd:integer"  use="required"/>
+										<xsd:attribute name="userId" type="xsd:integer"  use="required"/>
 										<xsd:attribute name="assignable" type="xsd:boolean"  use="optional"/>
 									</xsd:complexType>
 								</xsd:element>
@@ -40,7 +40,7 @@
 									<xsd:complexType>
 										<xsd:simpleContent>
 											<xsd:extension base="tns:idList">
-												<xsd:attribute name="tracker" type="xsd:integer" />
+												<xsd:attribute name="trackerId" type="xsd:integer" />
 											</xsd:extension>
 										</xsd:simpleContent>
 									</xsd:complexType>

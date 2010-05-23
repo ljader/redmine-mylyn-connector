@@ -15,7 +15,7 @@
 
 	<xsd:complexType name="attachment">
 		<xsd:sequence>
-			<xsd:element name="author" type="xsd:integer" minOccurs="0"/><!-- missing, when anonymous -->
+			<xsd:element name="authorId" type="xsd:integer" minOccurs="0"/><!-- missing, when anonymous -->
 			<xsd:element name="createdOn" type="tns:datetime" />
 			<xsd:element name="filename" type="xsd:string" />
 			<xsd:element name="filesize" type="xsd:integer" />

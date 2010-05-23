@@ -4,7 +4,7 @@ xml.issuePriorities :xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_ver
     xml.issuePriority :id => priority.id do
       xml.name priority.name
       xml.position  priority.position
-      xml.default  priority.is_default
+      xml.isDefault  priority.is_default
     end
   end
 end

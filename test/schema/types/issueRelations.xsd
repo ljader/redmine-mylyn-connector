@@ -15,7 +15,7 @@
 		<xsd:sequence>
 			<xsd:element name="issueFromId" type="xsd:integer" />
 			<xsd:element name="issueToId" type="xsd:integer" />
-			<xsd:element name="type" >
+			<xsd:element name="relationType" >
 				<xsd:simpleType>
 					<xsd:restriction base="xsd:string">
 						<xsd:enumeration value="relates" />

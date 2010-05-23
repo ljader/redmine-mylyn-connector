@@ -16,9 +16,9 @@ xml.customFields:xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version
         xml.possibleValues
       end
       xml.defaultValue field.default_value
-      xml.required field.is_required
-      xml.filter field.is_filter
-      xml.forAll field.is_for_all
+      xml.isRequired field.is_required
+      xml.isFilter field.is_filter
+      xml.isForAll field.is_for_all
     end
   end
 end

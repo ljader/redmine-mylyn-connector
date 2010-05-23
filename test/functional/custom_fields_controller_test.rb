@@ -24,8 +24,9 @@ class MylynConnector::CustomFieldsControllerTest < MylynConnector::ControllerTes
     assert_tag :tag => 'name', :content => 'Database', :parent => cf
     assert_tag :tag => 'type', :content => 'IssueCustomField', :parent => cf
     assert_tag :tag => 'fieldformat', :content => 'list', :parent => cf
-    assert_tag :tag => 'required', :content => 'false', :parent => cf
-    assert_tag :tag => 'filter', :content => 'true', :parent => cf
+    assert_tag :tag => 'isrequired', :content => 'false', :parent => cf
+    assert_tag :tag => 'isfilter', :content => 'true', :parent => cf
+    assert_tag :tag => 'isforall', :content => 'true', :parent => cf
 
   end
 

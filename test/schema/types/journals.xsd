@@ -15,12 +15,12 @@
 
 	<xsd:complexType name="journal">
 		<xsd:sequence>
-			<xsd:element name="author" type="xsd:integer" minOccurs="0"/><!-- missing, when anonymous -->
+			<xsd:element name="userId" type="xsd:integer" minOccurs="0"/><!-- missing, when anonymous -->
 			<xsd:element name="createdOn" type="tns:datetime" />
 			<xsd:element name="notes" type="xsd:string" />
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:integer" use="required" />
-		<xsd:attribute name="editableByUser" type="xsd:boolean" use="required" />
+		<xsd:attribute name="editAllowed" type="xsd:boolean" use="required" />
 	</xsd:complexType>
 	
 </xsd:schema>

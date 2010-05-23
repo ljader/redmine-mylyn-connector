@@ -23,7 +23,7 @@ class MylynConnector::PrioritiesControllerTest < MylynConnector::ControllerTest
     assert_tag pris
     assert_tag :tag => 'name', :content => 'Urgent', :parent => pri
     assert_tag :tag => 'position', :content => '4', :parent => pri
-    assert_tag :tag => 'default', :content => 'false', :parent => pri
+    assert_tag :tag => 'isdefault', :content => 'false', :parent => pri
 
   end
 

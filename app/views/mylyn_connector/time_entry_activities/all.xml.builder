@@ -4,7 +4,7 @@ xml.timeEntryActivities :xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api
     xml.timeEntryActivity :id => activity.id do
       xml.name activity.name
       xml.position  activity.position
-      xml.default  activity.is_default
+      xml.isDefault  activity.is_default
     end
   end
 end

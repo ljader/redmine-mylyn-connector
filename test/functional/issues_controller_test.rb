@@ -28,10 +28,10 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'createdon', :content => 3.days.ago.to_date.xmlschema, :parent => i
     assert_tag :tag => 'updatedon', :content => 1.days.ago.to_date.xmlschema, :parent => i
 
-    assert_tag :tag => 'tracker', :content => '1', :parent => i
-    assert_tag :tag => 'project', :content => '1', :parent => i
-    assert_tag :tag => 'status', :content => '1', :parent => i
-    assert_tag :tag => 'priority', :content => '4', :parent => i
+    assert_tag :tag => 'trackerid', :content => '1', :parent => i
+    assert_tag :tag => 'projectid', :content => '1', :parent => i
+    assert_tag :tag => 'statusid', :content => '1', :parent => i
+    assert_tag :tag => 'priorityid', :content => '4', :parent => i
 
     assert_tag :tag => 'watched', :content => 'false', :parent => i
     assert_tag :tag => 'watchers', :content => '', :parent => i
@@ -41,11 +41,11 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'doneratio', :content => '0', :parent => i
     assert_no_tag :tag=> 'estimatedhours', :parent => i
 
-    assert_tag :tag => 'author', :content => '2', :parent => i
-    assert_tag :tag => 'category', :content => '1', :parent => i
-    assert_no_tag :tag => 'assignedto', :parent => i
-    assert_no_tag :tag => 'fixedversion', :parent => i
-    assert_no_tag :tag => 'parent', :parent => i
+    assert_tag :tag => 'authorid', :content => '2', :parent => i
+    assert_tag :tag => 'categoryid', :content => '1', :parent => i
+    assert_no_tag :tag => 'assignedtoid', :parent => i
+    assert_no_tag :tag => 'fixedversionid', :parent => i
+    assert_no_tag :tag => 'parentid', :parent => i
 
     assert_tag :tag => 'availablestatus', :content => '1', :parent => i
 
@@ -55,12 +55,12 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'customvalue', :attributes => {:customfieldid => 8}, :content => '2009-12-01', :parent => cfs
 
     jrns = {:tag => 'journals', :children => {:count => 2},:parent => i}
-    jrn1 = {:tag => 'journal', :attributes => {:id => 1, :editablebyuser => 'false'}, :parent => jrns}
-    assert_tag :tag => 'author', :content => '1', :parent => jrn1
+    jrn1 = {:tag => 'journal', :attributes => {:id => 1, :editallowed => 'false'}, :parent => jrns}
+    assert_tag :tag => 'userid', :content => '1', :parent => jrn1
     assert_tag :tag => 'notes', :content => 'Journal notes', :parent => jrn1
     assert_tag :tag => 'createdon', :content => 2.days.ago.to_date.xmlschema, :parent => jrn1
-    jrn2 = {:tag => 'journal', :attributes => {:id => 2, :editablebyuser => 'false'}, :parent => jrns}
-    assert_tag :tag => 'author', :content => '2', :parent => jrn2
+    jrn2 = {:tag => 'journal', :attributes => {:id => 2, :editallowed => 'false'}, :parent => jrns}
+    assert_tag :tag => 'userid', :content => '2', :parent => jrn2
     assert_tag :tag => 'notes', :content => 'Some notes with Redmine links: #2, r2.', :parent => jrn2
     assert_tag :tag => 'createdon', :content => 1.days.ago.to_date.xmlschema, :parent => jrn2
 
@@ -72,15 +72,15 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'sum', :content => '154.25', :parent => tes
     te1 = {:tag => 'timeentry', :attributes => {:id => 1, :editallowed => 'false'}, :parent => tes }
     assert_tag :tag => 'hours', :content => '4.25', :parent => te1
-    assert_tag :tag => 'activity', :content => '9', :parent => te1
-    assert_tag :tag => 'user', :content => '2', :parent => te1
+    assert_tag :tag => 'activityid', :content => '9', :parent => te1
+    assert_tag :tag => 'userid', :content => '2', :parent => te1
     assert_tag :tag => 'spenton', :content => '2007-03-23', :parent => te1
     assert_tag :tag => 'comments', :content => 'My hours', :parent => te1
     assert_tag :tag => 'customvalues', :children => {:count => 0}, :parent => te1
     te2 = {:tag => 'timeentry', :attributes => {:id => 2, :editallowed => 'false'}, :parent => tes }
     assert_tag :tag => 'hours', :content => '150.0', :parent => te2
-    assert_tag :tag => 'activity', :content => '9', :parent => te2
-    assert_tag :tag => 'user', :content => '1', :parent => te2
+    assert_tag :tag => 'activityid', :content => '9', :parent => te2
+    assert_tag :tag => 'userid', :content => '1', :parent => te2
     assert_tag :tag => 'spenton', :content => '2007-03-12', :parent => te2
     assert_tag :tag => 'comments', :content => '', :parent => te2
     assert_tag :tag => 'customvalue', :attributes => {:customfieldid => 8}, :content => '2009-12-01', :parent => {:tag => 'customvalues', :children => {:count => 1}, :parent => te2}

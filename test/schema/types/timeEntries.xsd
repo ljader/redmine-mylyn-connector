@@ -19,8 +19,8 @@
 	<xsd:complexType name="timeEntry">
 		<xsd:sequence>
 			<xsd:element name="hours" type="xsd:decimal" />
-			<xsd:element name="activity" type="xsd:integer" />
-			<xsd:element name="user" type="xsd:integer" />
+			<xsd:element name="activityId" type="xsd:integer" />
+			<xsd:element name="userId" type="xsd:integer" />
 			<xsd:element name="spentOn" type="xsd:date" />
 			<xsd:element name="comments" type="xsd:string" />
 			<xsd:element name="customValues" type="tns:customValues" />

@@ -53,19 +53,19 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'versions', :content => '4 6 7', :parent => p3
 
     m1 = {:tag => 'members', :children => {:count => 2}, :parent => p1}
-    assert_tag :tag => 'member', :attributes => {:user => 2, :assignable => 'true'}, :parent => m1
-    assert_tag :tag => 'member', :attributes => {:user => 3, :assignable => 'true'}, :parent => m1
+    assert_tag :tag => 'member', :attributes => {:userid => 2, :assignable => 'true'}, :parent => m1
+    assert_tag :tag => 'member', :attributes => {:userid => 3, :assignable => 'true'}, :parent => m1
     assert_tag :tag => 'members', :children => {:count => 0}, :parent => p3
 
     assert_tag :tag => 'issuecategories', :content => '1 2', :parent => p1
     assert_tag :tag => 'issuecategories', :content => '', :parent => p3
 
-    assert_tag :tag => 'issuecustomfieldsbytracker', :content => '1 2 6', :attributes => {:tracker => 1}, :parent => {:tag => 'issuecustomfields', :children => {:count => 3}, :parent => p1}
-    assert_tag :tag => 'issuecustomfieldsbytracker', :content => '6', :attributes => {:tracker => 2}, :parent => {:tag => 'issuecustomfields', :children => {:count => 3}, :parent => p1}
-    assert_tag :tag => 'issuecustomfieldsbytracker', :content => '2 6', :attributes => {:tracker => 3}, :parent => {:tag => 'issuecustomfields', :children => {:count => 3}, :parent => p1}
+    assert_tag :tag => 'issuecustomfieldsbytracker', :content => '1 2 6', :attributes => {:trackerid => 1}, :parent => {:tag => 'issuecustomfields', :children => {:count => 3}, :parent => p1}
+    assert_tag :tag => 'issuecustomfieldsbytracker', :content => '6', :attributes => {:trackerid => 2}, :parent => {:tag => 'issuecustomfields', :children => {:count => 3}, :parent => p1}
+    assert_tag :tag => 'issuecustomfieldsbytracker', :content => '2 6', :attributes => {:trackerid => 3}, :parent => {:tag => 'issuecustomfields', :children => {:count => 3}, :parent => p1}
 
-    assert_tag :tag => 'issuecustomfieldsbytracker', :content => '6', :attributes => {:tracker => 2}, :parent => {:tag => 'issuecustomfields', :children => {:count => 2}, :parent => p3}
-    assert_tag :tag => 'issuecustomfieldsbytracker', :content => '2 6', :attributes => {:tracker => 3}, :parent => {:tag => 'issuecustomfields', :children => {:count => 2}, :parent => p3}
+    assert_tag :tag => 'issuecustomfieldsbytracker', :content => '6', :attributes => {:trackerid => 2}, :parent => {:tag => 'issuecustomfields', :children => {:count => 2}, :parent => p3}
+    assert_tag :tag => 'issuecustomfieldsbytracker', :content => '2 6', :attributes => {:trackerid => 3}, :parent => {:tag => 'issuecustomfields', :children => {:count => 2}, :parent => p3}
 
   end
 

@@ -7,10 +7,10 @@ xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version, :id 
   xml.updatedOn issue.updated_on.xmlschema, :unixtime => issue.updated_on.to_i
 
   #References
-  xml.tracker issue.tracker_id
-  xml.project issue.project_id
-  xml.status issue.status_id
-  xml.priority issue.priority_id
+  xml.trackerId issue.tracker_id
+  xml.projectId issue.project_id
+  xml.statusId issue.status_id
+  xml.priorityId issue.priority_id
 
   #Watchers
   xml.watched watched?(issue)
@@ -23,11 +23,11 @@ xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version, :id 
   xml.estimatedHours issue.estimated_hours if issue.estimated_hours
 
   #Optional References
-  xml.author issue.author_id if issue.author_id
-  xml.category issue.category_id if issue.category_id
-  xml.assignedTo issue.assigned_to_id if issue.assigned_to_id
-  xml.fixedVersion issue.fixed_version_id if issue.fixed_version_id
-  xml.parent issue.parent_id if is10? && issue.parent_id
+  xml.authorId issue.author_id if issue.author_id
+  xml.categoryId issue.category_id if issue.category_id
+  xml.assignedToId issue.assigned_to_id if issue.assigned_to_id
+  xml.fixedVersionId issue.fixed_version_id if issue.fixed_version_id
+  xml.parentId issue.parent_id if is10? && issue.parent_id
 
   xml.availableStatus integer_list(available_status(issue))
 
@@ -40,8 +40,8 @@ xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version, :id 
  
   xml.journals {
     journals(issue).each {|journal|
-      xml.journal(:id => journal.id, :editableByUser => (journal.editable_by?(User.current) ? true : false)) do
-        xml.author journal.user_id if journal.user_id
+      xml.journal(:id => journal.id, :editAllowed => (journal.editable_by?(User.current) ? true : false)) do
+        xml.userId journal.user_id if journal.user_id
         xml.createdOn journal.created_on.xmlschema, :unixtime => journal.created_on.to_i
         xml.notes journal.notes
       end
@@ -51,7 +51,7 @@ xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version, :id 
   xml.attachments {
     issue.attachments.each {|attachment|
       xml.attachment :id => attachment.id do
-        xml.author attachment.author_id if attachment.author_id
+        xml.authorId attachment.author_id if attachment.author_id
         xml.createdOn attachment.created_on.xmlschema, :unixtime => attachment.created_on.to_i
         xml.filename attachment.filename
         xml.filesize attachment.filesize
@@ -80,8 +80,8 @@ xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version, :id 
       issue.time_entries.each  {|entry|
         xml.timeEntry :id => entry.id, :editAllowed => entry.editable_by?(User.current)?true:false do
           xml.hours entry.hours
-          xml.activity entry.activity_id
-          xml.user entry.user_id
+          xml.activityId entry.activity_id
+          xml.userId entry.user_id
           xml.spentOn entry.spent_on
           xml.comments entry.comments
           xml.customValues {

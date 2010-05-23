@@ -4,8 +4,8 @@ xml.issueStatuses :xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_versi
     xml.issueStatus :id => status.id do
       xml.name status.name
       xml.position status.position
-      xml.closed status.is_closed
-      xml.default status.is_default
+      xml.isClosed status.is_closed
+      xml.isDefault status.is_default
     end
   end
 end

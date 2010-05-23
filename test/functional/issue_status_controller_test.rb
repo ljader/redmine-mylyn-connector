@@ -22,8 +22,8 @@ class MylynConnector::IssueStatusControllerTest < MylynConnector::ControllerTest
     stats =  {:tag => 'issuestatuses', :children => {:count => 6}, :attributes => {:api => /^2.7.0/}}
     stat = {:tag => 'issuestatus', :attributes => {:id => 5}, :parent => stats}
     assert_tag :tag => 'name', :content => 'Closed', :parent => stat
-    assert_tag :tag => 'closed', :content => 'true', :parent => stat
-    assert_tag :tag => 'default', :content => 'false', :parent => stat
+    assert_tag :tag => 'isclosed', :content => 'true', :parent => stat
+    assert_tag :tag => 'isdefault', :content => 'false', :parent => stat
 
   end
 

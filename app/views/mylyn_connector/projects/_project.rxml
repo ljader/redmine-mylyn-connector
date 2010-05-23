@@ -7,7 +7,7 @@ xml.project(:id => project.id) do
 
   xml.members do
     get_members(project).each do |member|
-      xml.member(:user => member.user.id, :assignable => member_assignable?(member) )
+      xml.member(:userId => member.user.id, :assignable => member_assignable?(member) )
     end
   end
 
@@ -16,7 +16,7 @@ xml.project(:id => project.id) do
   xml.issueCustomFields do
     get_trackers(project).each do |tracker|
       cf_list = get_issue_custom_fields(project, tracker)
-      xml.issueCustomFieldsByTracker({:tracker => tracker.id}, integer_list(cf_list)) unless cf_list.empty?
+      xml.issueCustomFieldsByTracker({:trackerId => tracker.id}, integer_list(cf_list)) unless cf_list.empty?
     end
   end
   

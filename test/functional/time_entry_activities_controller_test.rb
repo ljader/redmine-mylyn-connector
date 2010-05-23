@@ -22,7 +22,7 @@ class MylynConnector::ActivitiesControllerTest < MylynConnector::ControllerTest
     act = {:tag => 'timeentryactivity', :attributes => {:id => 10}, :parent => acts}
     assert_tag :tag => 'name', :content => 'Development', :parent => act
     assert_tag :tag => 'position', :content => '2', :parent => act
-    assert_tag :tag => 'default', :content => 'true', :parent => act
+    assert_tag :tag => 'isdefault', :content => 'true', :parent => act
     
   end
 end
