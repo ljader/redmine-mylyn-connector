@@ -19,10 +19,9 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'issue'
 
-    i = {:tag => 'issue', :attributes => {:id => 1, :editAllowed => false, :api => /^2.7.0/}}
+    i = {:tag => 'issue', :attributes => {:id => 1, :editallowed => 'false', :api => /^2.7.0/}}
     assert_tag i
 
-#puts @response.body
     assert_tag :tag => 'subject', :content => 'Can\'t print recipes', :parent => i
     assert_tag :tag => 'description',:content => 'Unable to print recipes', :parent => i
     assert_tag :tag => 'createdon', :content => 3.days.ago.to_date.xmlschema, :parent => i
@@ -87,28 +86,32 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
 
   end
 
-#  def test_show_attachement
-#    get :show, :id => 3
-#    assert_response :success
-#    assert_template 'show.rxml'
-#
-#    xmldoc = XML::Document.string @response.body
-#    schema = read_schema 'issue'
-#    valid = xmldoc.validate_schema schema
-#    assert valid , 'Ergenis passt nicht zum Schema ' + 'issue'
-#
-#    assert_no_tag :tag => 'categoryid', :content => '1'
-#    assert_no_tag :tag => 'fixedversionid'
-#    assert_tag :tag => 'assignedtoid', :content => '3'
-#    assert_tag :tag => 'attachments', :children => {:count => 4}
-#    assert_tag :tag => 'author', :parent  => {:tag => 'attachment'}, :content => 'John Smith'
-#    assert_tag :tag => 'contenttype', :parent  => {:tag => 'attachment'}, :content => 'text/plain'
-#    assert_tag :tag => 'filename', :parent  => {:tag => 'attachment'}, :content => 'error281.txt'
-#    assert_tag :tag => 'filesize', :parent  => {:tag => 'attachment'}, :content => '28'
-#    assert_tag :tag => 'digest', :parent  => {:tag => 'attachment'}, :content => 'b91e08d0cf966d5c6ff411bd8c4cc3a2'
-#    #issuerelations
-#  end
-#
+  def test_authenticated_attachments
+    @request.session[:user_id] = 3
+
+    get :show, :id => 3
+    assert_response :success
+    assert_template 'show.xml.builder'
+
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'issue'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'issue'
+
+    i = {:tag => 'issue', :attributes => {:id => '3', :editallowed => 'true', :api => /^2.7.0/}}
+    assert_tag i
+
+    assert_tag :tag => 'assignedtoid', :content => '3', :parent => i
+
+    atts = {:tag => 'attachments', :children => {:count => 4},:parent => i}
+    att = {:tag => 'attachment', :attributes => {:id => 1}, :parent => atts}
+    assert_tag :tag => 'authorid', :content => '2', :parent => att
+    assert_tag :tag => 'contenttype', :content => 'text/plain', :parent => att
+    assert_tag :tag => 'filename', :content => 'error281.txt', :parent => att
+    assert_tag :tag => 'filesize', :content => '28', :parent => att
+    assert_tag :tag => 'digest', :content => 'b91e08d0cf966d5c6ff411bd8c4cc3a2', :parent => att
+  end
+
 #  def test_show_assigned
 #    get :show, :id => 2
 #    assert_response :success
