@@ -7,8 +7,8 @@ class MylynConnector::IssuesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   before_filter :find_issue, :only => [:show]
-  before_filter :find_project
-  before_filter :authorize, :except => [:query]
+  before_filter :find_project, :only => [:show]
+  before_filter :authorize
 
   helper MylynConnector::MylynHelper
   
@@ -45,18 +45,32 @@ class MylynConnector::IssuesController < ApplicationController
   def updated_since
 
     time = Time.at(params[:unixtime].to_i)
+
+    issues = params[:issues].split(',')
+    issues.collect! { |x| x.to_i }
+    issues.uniq!
+    issues.compact!
+
     cond = ActiveRecord::Base.connection.quoted_date(time)
 
-    @issues = Issue.find(:all, :conditions => ["project_id = ? AND updated_on >= ?", @project.id, cond])
+    @issues = Issue.find(
+      :all,
+      :joins => ["join #{Project.table_name} on project_id=#{Project.table_name}.id"],
+      :conditions => ["#{Issue.table_name}.id in (?) and #{Issue.table_name}.updated_on >= ? and " << Project.visible_by, issues, cond]
+    )
     respond_to do |format|
-      format.xml {render :xml => @issues, :template => 'mylyn_connector/issues/updated_since.rxml'}
+      format.xml {render :layout => false}
     end
   end
 
   private
 
   def authorize
-    super :issues, params[:action]=='query' ? :index : :show;
+    if @project
+      super :issues, :show;
+    else
+      super :issues, :show, true
+    end
   end
 
   def find_issue

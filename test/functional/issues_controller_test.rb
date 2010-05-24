@@ -130,12 +130,26 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
 #    #redmine 0.9: 1 & 3
 #    assert_tag :tag => 'watchers', :content => /(1 )?3/
 #end
-#
-#  def test_show_404
-#    get :show, :id => 99
-#    assert_response 404
-#  end
-#
+
+  def test_updated_since
+    get :updated_since, :issues => '1, 6 ,  8 , 17,20', :unixtime => 11.days.ago.to_i
+
+    assert_response :success
+    assert_template 'updated_since.xml.builder'
+
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'updatedIssues'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'updatedIssues'
+
+    assert_tag :tag => 'updatedissues', :content => '1 8', :attributes => {:api => /^2.7.0/}
+  end
+
+  def test_show_404
+    get :show, :id => 99
+    assert_response 404
+  end
+
 #  def test_query_by_id
 #    get :query, :project_id => 1, :query_id => 1
 #
@@ -211,22 +225,6 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
 #  def test_query_non_exists
 #    get :query, :project_id => 1, :query_id => 99
 #    assert_response 404
-#  end
-#
-#  def test_updated_since
-#    get :updated_since, :project_id => 1, :unixtime => 11.days.ago.to_i
-#
-#    assert_response :success
-#    assert_template 'updated_since.rxml'
-#
-#    xmldoc = XML::Document.string @response.body
-#    schema = read_schema 'updatedIssues'
-#    valid = xmldoc.validate_schema schema
-#    assert valid , 'Ergenis passt nicht zum Schema ' + 'updatedIssues'
-#
-#    #redmine 0.8: 1 & 7
-#    #redmine 0.9: 1,7 & 8
-#    assert_tag :tag => 'updatedissues', :content => /1 7( 8)?/
 #  end
 
 end
