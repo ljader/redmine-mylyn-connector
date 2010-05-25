@@ -19,6 +19,7 @@ ActionController::Routing::Routes.draw do |map|
 
 #  map.connect "mylyn/:project_id/search", :controller => "MylynConnector::Issues", :action => "query"
 #  map.connect "mylyn/search", :controller => "MylynConnector::Issues", :action => "query"
-  map.connect "mylyn/:project_id/updatedsince", :controller => "MylynConnector::Issues", :action => "updated_since"
   map.connect "mylyn/issue/:id", :controller => "MylynConnector::Issues", :action => "show", :conditions => {:method => :get}
+  map.connect "mylyn/issues/updatedsince", :controller => "MylynConnector::Issues", :action => "updated_since", :conditions => {:method => :get}
+  map.connect "mylyn/issues/list", :controller => "MylynConnector::Issues", :action => "list", :conditions => {:method => :get}
 end

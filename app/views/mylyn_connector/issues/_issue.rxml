@@ -1,4 +1,4 @@
-xml.issue(:xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version, :id => issue.id, :editAllowed => edit_allowed?(issue) ) do
+xml.issue({:id => issue.id, :editAllowed => edit_allowed?(issue)}.merge(attr||={}) ) do
 
   #Ticket
   xml.subject issue.subject

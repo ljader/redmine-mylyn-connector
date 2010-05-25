@@ -145,6 +145,25 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'updatedissues', :content => '1 8', :attributes => {:api => /^2.7.0/}
   end
 
+  def test_list
+    get :list, :issues => '1, 6 ,  8 , 17,20'
+
+    assert_response :success
+    assert_template 'list.xml.builder'
+
+    #puts @response.body
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'issues'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'issues'
+
+    lst = {:tag => 'issues', :children => {:count => 2}, :attributes => {:api => /^2.7.0/}}
+    assert_tag lst
+    assert_tag :tag => 'issue', :attributes => {:id => 1, :editallowed => 'false'}, :parent => lst
+    assert_tag :tag => 'issue', :attributes => {:id => 8, :editallowed => 'false'}, :parent => lst
+
+  end
+
   def test_show_404
     get :show, :id => 99
     assert_response 404
@@ -220,11 +239,6 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
 #    assert_tag :tag => 'issue', :attributes => {:id => 5}
 #    assert_tag :tag => 'issue', :attributes => {:id => 4}
 #    assert_tag :tag => 'issue', :attributes => {:id => 6}
-#  end
-#
-#  def test_query_non_exists
-#    get :query, :project_id => 1, :query_id => 99
-#    assert_response 404
 #  end
 
 end

@@ -5,6 +5,7 @@
 	elementFormDefault="qualified" >
 
 	<xsd:include schemaLocation="types/project.xsd" />
+	<xsd:include schemaLocation="types/versionstring.xsd" />
 
 	<xsd:element name="projects" xmlns="http://redmin-mylyncon.sf.net/api">
 		<xsd:complexType>

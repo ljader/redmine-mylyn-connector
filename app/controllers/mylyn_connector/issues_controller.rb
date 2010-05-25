@@ -43,7 +43,6 @@ class MylynConnector::IssuesController < ApplicationController
   end
 
   def updated_since
-
     time = Time.at(params[:unixtime].to_i)
 
     issues = params[:issues].split(',')
@@ -57,6 +56,22 @@ class MylynConnector::IssuesController < ApplicationController
       :all,
       :joins => ["join #{Project.table_name} on project_id=#{Project.table_name}.id"],
       :conditions => ["#{Issue.table_name}.id in (?) and #{Issue.table_name}.updated_on >= ? and " << Project.visible_by, issues, cond]
+    )
+    respond_to do |format|
+      format.xml {render :layout => false}
+    end
+  end
+
+  def list
+    issues = params[:issues].split(',')
+    issues.collect! { |x| x.to_i }
+    issues.uniq!
+    issues.compact!
+
+    @issues = Issue.find(
+      :all,
+      :joins => ["join #{Project.table_name} on project_id=#{Project.table_name}.id"],
+      :conditions => ["#{Issue.table_name}.id in (?) and " << Project.visible_by, issues]
     )
     respond_to do |format|
       format.xml {render :layout => false}
