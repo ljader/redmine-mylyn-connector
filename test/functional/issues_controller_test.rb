@@ -151,7 +151,6 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_response :success
     assert_template 'list.xml.builder'
 
-    #puts @response.body
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'issues'
     valid = xmldoc.validate_schema schema

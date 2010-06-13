@@ -34,7 +34,7 @@ xml.issue({:id => issue.id, :editAllowed => edit_allowed?(issue)}.merge(attr||={
 
   xml.customValues {
     issue.custom_values.each {|value|
-      xml.customValue value.value, :customFieldId => value.custom_field_id 
+      xml.customValue value.value, {:id=> value.id, :customFieldId => value.custom_field_id}
     }
   }
  
@@ -86,7 +86,7 @@ xml.issue({:id => issue.id, :editAllowed => edit_allowed?(issue)}.merge(attr||={
           xml.comments entry.comments
           xml.customValues {
             entry.custom_values.each {|value|
-              xml.customValue value.value, :customFieldId => value.custom_field_id
+              xml.customValue value.value, { :id => value.id, :customFieldId => value.custom_field_id }
             }
           }
         end

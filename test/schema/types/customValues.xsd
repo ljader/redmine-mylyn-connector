@@ -14,6 +14,7 @@
 	<xsd:complexType name="customValue">
 		<xsd:simpleContent>
 			<xsd:extension base="xsd:string">
+				<xsd:attribute name="id" type="xsd:integer" use="required" />
 				<xsd:attribute name="customFieldId" type="xsd:integer" use="required" />
 			</xsd:extension>
 		</xsd:simpleContent>
