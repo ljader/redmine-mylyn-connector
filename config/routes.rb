@@ -22,4 +22,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "mylyn/issue/:id", :controller => "MylynConnector::Issues", :action => "show", :conditions => {:method => :get}
   map.connect "mylyn/issues/updatedsince", :controller => "MylynConnector::Issues", :action => "updated_since", :conditions => {:method => :get}
   map.connect "mylyn/issues/list", :controller => "MylynConnector::Issues", :action => "list", :conditions => {:method => :get}
+
+  #Filter/Query
+  map.connect "issues.:format", :controller => 'issues', :action => 'index', :conditions => {:method => :post}
 end
