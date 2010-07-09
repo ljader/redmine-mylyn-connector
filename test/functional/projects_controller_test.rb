@@ -36,8 +36,8 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
     assert valid , 'Ergenis passt nicht zum Schema ' + 'projects'
 
     prjs =  {:tag => 'projects', :children => {:count => 2}, :attributes => {:api => /^2.7.0/}}
-    p1 = {:tag => 'project', :attributes => {:id => 1}, :parent => prjs}
-    p3 = {:tag => 'project', :attributes => {:id => 3}, :parent => prjs}
+    p1 = {:tag => 'project', :attributes => {:id => 1, :newissueallowed => "false", :moveissueallowed => "false"}, :parent => prjs}
+    p3 = {:tag => 'project', :attributes => {:id => 3, :newissueallowed => "false", :moveissueallowed => "false"}, :parent => prjs}
 
     assert_tag prjs
     assert_tag p1
@@ -84,7 +84,7 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
     prjs =  {:tag => 'projects', :children => {:count => 4}, :attributes => {:api => /^2.7.0/}}
     assert_tag prjs
 
-    assert_tag :tag => 'project', :attributes => {:id => 1}, :parent => prjs
+    assert_tag :tag => 'project', :attributes => {:id => 1, :newissueallowed => "true", :moveissueallowed => "true"}, :parent => prjs
     assert_tag :tag => 'project', :attributes => {:id => 2}, :parent => prjs
     assert_tag :tag => 'project', :attributes => {:id => 3}, :parent => prjs
     assert_tag :tag => 'project', :attributes => {:id => 5}, :parent => prjs

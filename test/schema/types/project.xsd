@@ -51,6 +51,8 @@
 
 
 				</xsd:sequence>
+				<xsd:attribute name="newIssueAllowed" type="xsd:boolean" use="required"/>
+				<xsd:attribute name="moveIssueAllowed" type="xsd:boolean" use="required"/>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>

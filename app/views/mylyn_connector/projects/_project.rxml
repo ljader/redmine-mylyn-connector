@@ -1,4 +1,4 @@
-xml.project(:id => project.id) do
+xml.project(:id => project.id, :newIssueAllowed => new_issue_allowed?(project), :moveIssueAllowed => move_issue_allowed?(project)) do
   xml.name project.name
   xml.identifier project.identifier
 

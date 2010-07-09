@@ -30,4 +30,14 @@ module MylynConnector::ProjectsHelper
     return project.shared_versions.each { |v| v.name += " ("  + v.project.name + ")" if project!=v.project}
   end
 
+  def new_issue_allowed? project
+    return true if User.current.allowed_to?({:controller => :issues, :action => :create}, project)
+    false
+  end
+
+  def move_issue_allowed? project
+    projects = Issue.allowed_target_projects_on_move
+    return projects.include? project
+  end
+
 end
