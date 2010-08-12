@@ -24,6 +24,7 @@ ActionController::Routing::Routes.draw do |map|
     rmc.connect "mylyn/issue/:id", :controller => "MylynConnector::Issues", :action => "show"
     rmc.connect "mylyn/issues/updatedsince", :controller => "MylynConnector::Issues", :action => "updated_since"
     rmc.connect "mylyn/issues/list", :controller => "MylynConnector::Issues", :action => "list"
+    rmc.connect "mylyn/issues", :controller => "MylynConnector::Issues", :action => "index"
   end
 
 end

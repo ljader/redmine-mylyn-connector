@@ -6,16 +6,41 @@ class MylynConnector::IssuesController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
 
+  before_filter :find_optional_project, :only => [:index]
   before_filter :find_issue, :only => [:show]
   before_filter :find_project, :only => [:show]
   before_filter :authorize
 
   helper MylynConnector::MylynHelper
+  helper :queries
+  include QueriesHelper
+
   
   def show
     respond_to do |format|
       format.xml {render :layout => false}
     end
+  end
+
+  #TODO not tested
+  def index
+    retrieve_query
+
+    if @query.valid?
+      @issues = @query.issues
+
+      respond_to do |format|
+        format.xml {render :layout => false}
+      end
+
+    else
+      respond_to do |format|
+        format.xml { head 422 }
+      end
+    end
+
+  rescue ActiveRecord::RecordNotFound
+    render_404
   end
 
   def query
@@ -106,23 +131,10 @@ class MylynConnector::IssuesController < ApplicationController
     end
   end
 
-  def retrieve_query query_id, query_string
-    query = nil
-    if query_id!=nil && query_id.to_i>0 then
-      begin
-        # Code form Issue_helper
-        visible = ARCondition.new(["is_public = ? OR user_id = ?", true, User.current.id])
-        visible << (["project_id IS NULL OR project_id = ?", @project.id]) if @project
-
-        query = Query.find(query_id, :conditions => visible.conditions)
-      rescue
-        query = Query.new
-      end
-      query.project = @project if @project
-    else
-      querydecoder = MylynConnector::QueryStringDecoder.new(query_string)
-      query = querydecoder.query
-    end
-    return query
+  def find_optional_project
+    @project = Project.find(params[:project_id]) unless params[:project_id].blank?
+  rescue ActiveRecord::RecordNotFound
+    render_404
   end
+
 end
