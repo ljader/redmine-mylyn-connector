@@ -19,6 +19,7 @@ class MylynConnector::SettingsControllerTest < MylynConnector::ControllerTest
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'settings'
 
     assert_tag :tag => 'useissuedoneratio', :content => 'true', :parent => {:tag => 'settings', :attributes => {:api => /^2.7.0/}}
+    assert_tag :tag => 'maxperpage', :content => '100', :parent => {:tag => 'settings', :attributes => {:api => /^2.7.0/}}
 
   end
 
