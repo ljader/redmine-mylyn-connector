@@ -7,28 +7,7 @@ module MylynConnector
     # stable/trunk
     BRANCH = 'stable'
 
-    #Code from Redmine::Version
     def self.revision
-      revision = nil
-
-      Dir.glob(File.dirname(__FILE__) + '/../../**/.svn/entries').each {|entries_path|
-        if File.readable?(entries_path)
-          begin
-            f = File.open(entries_path, 'r')
-            entries = f.read
-            f.close
-          if entries.match(%r{^\d+})
-            entries.scan(%r{(?:dir|file)\s+(\d+)\s}).each {|m|
-              revision = m[0] if !revision || m[0] > revision
-            }
-          end
-          rescue
-            # Could not find the current revision
-          end
-        end
-      }
-      revision
-      #TODO Git implementation
       return RC1
     end
 
