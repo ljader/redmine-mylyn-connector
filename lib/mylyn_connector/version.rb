@@ -5,7 +5,7 @@ module MylynConnector
     TINY  = 0
 
     # stable/trunk
-    BRANCH = 'trunk'
+    BRANCH = 'stable'
 
     #Code from Redmine::Version
     def self.revision
@@ -28,6 +28,8 @@ module MylynConnector
         end
       }
       revision
+      #TODO Git implementation
+      return RC1
     end
 
     REVISION = self.revision
