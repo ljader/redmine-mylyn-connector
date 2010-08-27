@@ -4,6 +4,7 @@ ActionController::Routing::Routes.draw do |map|
     #meta / settings
     rmc.connect "mylyn/settings", :controller => "MylynConnector::Settings", :action => "all"
     rmc.connect "mylyn/version", :controller => "MylynConnector::Information", :action => "version"
+    rmc.connect "mylyn/token", :controller => "MylynConnector::Information", :action => "token"
 
     #attributes
     rmc.connect "mylyn/customfields", :controller => "MylynConnector::CustomFields", :action => "all"
@@ -25,6 +26,9 @@ ActionController::Routing::Routes.draw do |map|
     rmc.connect "mylyn/issues/updatedsince", :controller => "MylynConnector::Issues", :action => "updated_since"
     rmc.connect "mylyn/issues/list", :controller => "MylynConnector::Issues", :action => "list"
     rmc.connect "mylyn/issues", :controller => "MylynConnector::Issues", :action => "index"
+
+    #very dirty workaround: enables REST-Api-Auth for attachments
+    rmc.connect 'mylyn/attachment/:id/:filename', :controller => 'attachments', :action => 'download', :format=> 'xml', :id => /\d+/, :filename => /.*/
   end
 
 end

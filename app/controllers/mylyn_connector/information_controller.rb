@@ -15,4 +15,8 @@ class MylynConnector::InformationController < ApplicationController
       format.xml {render :layout => false}
     end
   end
+
+  def token
+    render :text => form_authenticity_token
+  end
 end
