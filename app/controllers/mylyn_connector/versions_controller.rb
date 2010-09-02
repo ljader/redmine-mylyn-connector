@@ -4,6 +4,8 @@ class MylynConnector::VersionsController < ApplicationController
   unloadable
   include MylynConnector::Rescue::ClassMethods
 
+  accept_key_auth :all
+
   skip_before_filter :verify_authenticity_token
 
   helper MylynConnector::MylynHelper

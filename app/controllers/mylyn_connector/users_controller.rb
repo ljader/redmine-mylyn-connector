@@ -5,6 +5,8 @@ class MylynConnector::UsersController < ApplicationController
   include MylynConnector::Rescue::ClassMethods
   include MylynConnector::Version::ClassMethods
 
+  accept_key_auth :all
+  
   skip_before_filter :verify_authenticity_token
 
   helper MylynConnector::MylynHelper

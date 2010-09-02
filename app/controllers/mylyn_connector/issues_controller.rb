@@ -4,6 +4,8 @@ class MylynConnector::IssuesController < ApplicationController
   unloadable
   include MylynConnector::Rescue::ClassMethods
 
+  accept_key_auth :show, :index, :list, :updated_since
+
   skip_before_filter :verify_authenticity_token
 
   before_filter :find_optional_project, :only => [:index]
@@ -41,30 +43,6 @@ class MylynConnector::IssuesController < ApplicationController
 
   rescue ActiveRecord::RecordNotFound
     render_404
-  end
-
-  def query
-    query = retrieve_query params[:query_id], params[:query_string]
-    if !query.blank? && query.valid?
-      begin
-
-        condition = ARCondition.new
-        condition << ["issues.project_id = ?", @project.id] if @project
-        condition << query.statement
-
-        @issues = Issue.find :all,
-          :include => [ :assigned_to, :status, :tracker, :project, :priority, :category, :fixed_version ],
-          :conditions => condition.conditions
-
-        respond_to do |format|
-          format.xml {render :xml => @issues, :template => 'mylyn_connector/issues/index.rxml'}
-        end
-      rescue ActiveRecord::StatementInvalid
-        render_404
-      end
-    else
-      render_404
-    end
   end
 
   def updated_since

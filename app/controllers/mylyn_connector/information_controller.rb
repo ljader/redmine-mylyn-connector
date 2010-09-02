@@ -4,6 +4,8 @@ class MylynConnector::InformationController < ApplicationController
   unloadable
   include MylynConnector::Rescue::ClassMethods
 
+  accept_key_auth :version, :token
+
   skip_before_filter :verify_authenticity_token
 
   helper MylynConnector::MylynHelper
@@ -17,6 +19,9 @@ class MylynConnector::InformationController < ApplicationController
   end
 
   def token
+    #Workaround: we need a session, some operations does'nt support key-auth
+    self.logged_user = User.current
+    
     render :text => form_authenticity_token
   end
 end
