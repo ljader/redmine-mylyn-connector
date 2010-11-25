@@ -101,3 +101,9 @@ custom_values_017:
   customized_id: 1
   id: 17
   value: '2009-12-01'
+custom_values_018:
+  customized_type: TimeEntry
+  custom_field_id: 10
+  customized_id: 2
+  id: 18
+  value: '2009-12-01'

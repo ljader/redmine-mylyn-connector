@@ -19,7 +19,7 @@ class MylynConnector::CustomFieldsControllerTest < MylynConnector::ControllerTes
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'customFields'
 
-    cfl = {:tag => 'customfields', :children => {:count => 9}, :attributes => {:api => /^2.7.0/}}
+    cfl = {:tag => 'customfields', :children => {:count => 10}, :attributes => {:api => /^2.7.0/}}
     cf = {:tag => 'customfield', :attributes => {:id => 1}, :parent => cfl}
     assert_tag :tag => 'name', :content => 'Database', :parent => cf
     assert_tag :tag => 'type', :content => 'IssueCustomField', :parent => cf

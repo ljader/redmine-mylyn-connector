@@ -6,6 +6,16 @@ module MylynConnector
 
     include MylynConnector::Version::ClassMethods
 
+    def self.fixtures(*table_names)
+      dir = File.join(File.dirname(__FILE__), "../../test/fixtures/" + self.rr )
+
+      table_names.each{|x|
+        Fixtures.create_fixtures(dir, x) if File.exist?(dir + "/" + x.to_s + ".yml")
+      }
+
+      super(table_names)
+    end
+
     def setup
       @request = ActionController::TestRequest.new
       @response = ActionController::TestResponse.new

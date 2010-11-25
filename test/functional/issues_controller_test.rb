@@ -82,7 +82,7 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'userid', :content => '1', :parent => te2
     assert_tag :tag => 'spenton', :content => '2007-03-12', :parent => te2
     assert_tag :tag => 'comments', :content => '', :parent => te2
-    assert_tag :tag => 'customvalue', :attributes => {:customfieldid => 8}, :content => '2009-12-01', :parent => {:tag => 'customvalues', :children => {:count => 1}, :parent => te2}
+    assert_tag :tag => 'customvalue', :attributes => {:customfieldid => 10}, :content => '2009-12-01', :parent => {:tag => 'customvalues', :children => {:count => 1}, :parent => te2}
 
   end
 
