@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class MylynConnector::TrackersControllerTest < MylynConnector::ControllerTest
-  fixtures :trackers
+  fixtures :trackers, :custom_fields, :custom_fields_trackers
 
   def setup
     super
@@ -22,6 +22,7 @@ class MylynConnector::TrackersControllerTest < MylynConnector::ControllerTest
     tr = {:tag => 'tracker', :attributes => {:id => 3}, :parent => trs}
     assert_tag :tag => 'name', :content => 'Support request', :parent => tr
     assert_tag :tag => 'position', :content => '3', :parent => tr
+    assert_tag :tag => 'issuecustomfields', :content=> '2 6', :parent => tr
 
   end
 

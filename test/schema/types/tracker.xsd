@@ -6,10 +6,15 @@
 	elementFormDefault="qualified" >
 
 	<xsd:include schemaLocation="property.xsd" />
+	<xsd:include schemaLocation="idList.xsd" />
 
 	<xsd:complexType name="tracker">
 		<xsd:complexContent>
-			<xsd:extension base="tns:sortedProperty" />
+			<xsd:extension base="tns:sortedProperty">
+				<xsd:sequence>
+					<xsd:element name="issueCustomFields" type="tns:idList"/>
+				</xsd:sequence>
+			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
 

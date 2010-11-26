@@ -4,6 +4,7 @@ xml.trackers :xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version do
     xml.tracker :id => tracker.id do
       xml.name tracker.name
       xml.position tracker.position
+      xml.issueCustomFields integer_list(tracker.custom_fields)
     end
   end
 end
