@@ -19,5 +19,16 @@ xml.project(:id => project.id, :newIssueAllowed => new_issue_allowed?(project), 
       xml.issueCustomFieldsByTracker({:trackerId => tracker.id}, integer_list(cf_list)) unless cf_list.empty?
     end
   end
+
+  xml.timeEntryActivities do
+    project.activities.each do |activity|
+      xml.timeEntryActivity :id => activity.id do
+        xml.name activity.name
+        xml.position  activity.position
+        xml.isDefault  activity.is_default
+      end
+    end
+  end
+
   
 end

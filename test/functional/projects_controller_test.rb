@@ -2,22 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
 
-  class << self
-
-#    def fixtures(*table_names)
-#      dir = File.join(File.dirname(__FILE__), "../../test/fixtures/" + self.rr)
-#      Fixtures.create_fixtures(dir, "custom_fields")
-#
-#      #TODO since 0.9 MemberRole exists
-#      table_names.push(:member_roles) if Object.const_defined?(:MemberRole)
-#
-#      super(table_names)
-#    end
-
-  end
-
-  fixtures :users, :roles, :members, :member_roles, :issue_categories, :custom_fields, :trackers, :versions, :queries, :projects, :projects_trackers, :enabled_modules, :custom_fields_trackers
-
+  fixtures :users, :roles, :members, :member_roles, :issue_categories, :custom_fields, :trackers, :versions, :queries, :projects, :projects_trackers, :enabled_modules, :custom_fields_trackers, :enumerations
 
 
   def setup
@@ -66,6 +51,18 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
 
     assert_tag :tag => 'issuecustomfieldsbytracker', :content => '6', :attributes => {:trackerid => 2}, :parent => {:tag => 'issuecustomfields', :children => {:count => 2}, :parent => p3}
     assert_tag :tag => 'issuecustomfieldsbytracker', :content => '2 6', :attributes => {:trackerid => 3}, :parent => {:tag => 'issuecustomfields', :children => {:count => 2}, :parent => p3}
+
+    acts =  {:tag => 'timeentryactivities', :children => {:count => 2}, :parent=>p1}
+    act = {:tag => 'timeentryactivity', :attributes => {:id => 15}, :parent => acts}
+    assert_tag :tag => 'name', :content => 'Development', :parent => act
+    assert_tag :tag => 'position', :content => '5', :parent => act
+    assert_tag :tag => 'isdefault', :content => 'false', :parent => act
+
+    acts =  {:tag => 'timeentryactivities', :children => {:count => 3}, :parent=>p3}
+    act = {:tag => 'timeentryactivity', :attributes => {:id => 10}, :parent => acts}
+    assert_tag :tag => 'name', :content => 'Development', :parent => act
+    assert_tag :tag => 'position', :content => '2', :parent => act
+    assert_tag :tag => 'isdefault', :content => 'true', :parent => act
 
   end
 

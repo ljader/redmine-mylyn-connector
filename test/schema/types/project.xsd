@@ -8,6 +8,7 @@
 	<xsd:include schemaLocation="property.xsd" />
 	<xsd:include schemaLocation="versionstring.xsd" />
 	<xsd:include schemaLocation="idList.xsd" />
+	<xsd:include schemaLocation="timeEntryActivity.xsd" />
 
 
 	<xsd:complexType name="project">
@@ -49,7 +50,8 @@
 						</xsd:complexType>
 					</xsd:element>
 
-
+					<xsd:element name="timeEntryActivities" type="tns:timeEntryActivities" />
+					
 				</xsd:sequence>
 				<xsd:attribute name="newIssueAllowed" type="xsd:boolean" use="required"/>
 				<xsd:attribute name="moveIssueAllowed" type="xsd:boolean" use="required"/>
