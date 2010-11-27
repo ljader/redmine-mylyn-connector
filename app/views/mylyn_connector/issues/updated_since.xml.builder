@@ -1,2 +1,2 @@
 xml.instruct! :xml, :encoding => "UTF-8"
-xml.updatedIssues(integer_list(@issues), :xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version)
+xml.updatedIssues(integer_list(@issues), root_attribs)

@@ -12,6 +12,8 @@
 			<xsd:complexContent >
 				<xsd:extension base="tns:issue">
 					<xsd:attribute name="api" type="tns:versionstring" use="required" />
+					<xsd:attribute name="authenticated" type="xsd:boolean" use="required" />
+					<xsd:attribute name="authenticatedAs" type="xsd:string" />
 				</xsd:extension>
 			</xsd:complexContent>
 		</xsd:complexType>

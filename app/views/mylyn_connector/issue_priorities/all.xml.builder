@@ -1,5 +1,5 @@
 xml.instruct! :xml, :encoding => "UTF-8"
-xml.issuePriorities :xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version do
+xml.issuePriorities root_attribs do
   @priorities.each do |priority|
     xml.issuePriority :id => priority.id do
       xml.name priority.name

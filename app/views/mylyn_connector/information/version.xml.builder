@@ -1,5 +1,5 @@
 xml.instruct! :xml, :encoding => "UTF-8"
-xml.version :xmlns => 'http://redmin-mylyncon.sf.net/api', :api=>api_version do
+xml.version root_attribs do
   xml.plugin(MylynConnector::Version,
     :major => @data[0],
     :minor => @data[1],
