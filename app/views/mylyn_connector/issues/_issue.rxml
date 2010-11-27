@@ -67,7 +67,7 @@ xml.issue({:id => issue.id, :editAllowed => edit_allowed?(issue)}.merge(attr||={
       xml.issueRelation :id => relation.id do
         xml.issueFromId relation.issue_from_id
         xml.issueToId relation.issue_to_id
-        xml.type relation.relation_type
+        xml.relationType relation.relation_type
         xml.delay relation.delay if relation.delay && relation.delay >0
       end
     }
