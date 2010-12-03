@@ -20,7 +20,7 @@ class MylynConnector::InformationController < ApplicationController
 
   def token
     #Workaround: we need a session, some operations does'nt support key-auth
-    self.logged_user = User.current
+    self.logged_user = User.current unless User.current.anonymous?
     
     render :text => form_authenticity_token
   end
