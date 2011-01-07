@@ -42,13 +42,13 @@ class MylynConnector::QueriesControllerTest < MylynConnector::ControllerTest
     qs =  {:tag => 'queries', :children => {:count => 7}, :attributes => {:api => /^2.7.0/}}
     assert_tag qs
 
-    assert_tag :tag => 'query', :attributes => {:id => 1}, :parent => qs
-    assert_tag :tag => 'query', :attributes => {:id => 4}, :parent => qs
-    assert_tag :tag => 'query', :attributes => {:id => 5}, :parent => qs
-    assert_tag :tag => 'query', :attributes => {:id => 6}, :parent => qs
-    assert_tag :tag => 'query', :attributes => {:id => 7}, :parent => qs
-    assert_tag :tag => 'query', :attributes => {:id => 8}, :parent => qs
-    assert_tag :tag => 'query', :attributes => {:id => 9}, :parent => qs
+    assert_tag :tag => 'query', :attributes => {:id => 1}, :child=> {:tag => 'projectid', :content => '1'}, :parent => qs
+    assert_tag :tag => 'query', :attributes => {:id => 4}, :children => {:count=> 1}, :parent => qs
+    assert_tag :tag => 'query', :attributes => {:id => 5}, :children => {:count=> 1}, :parent => qs
+    assert_tag :tag => 'query', :attributes => {:id => 6}, :children => {:count=> 1}, :parent => qs
+    assert_tag :tag => 'query', :attributes => {:id => 7}, :child=> {:tag => 'projectid', :content => '2'}, :parent => qs
+    assert_tag :tag => 'query', :attributes => {:id => 8}, :child=> {:tag => 'projectid', :content => '2'}, :parent => qs
+    assert_tag :tag => 'query', :attributes => {:id => 9}, :children => {:count=> 1}, :parent => qs
 
   end
 

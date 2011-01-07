@@ -9,7 +9,11 @@
 
 	<xsd:complexType name="query">
 		<xsd:complexContent>
-			<xsd:extension base="tns:property" />
+			<xsd:extension base="tns:property">
+				<xsd:sequence>
+					<xsd:element name="projectId" type="xsd:int" maxOccurs="1" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
 
