@@ -16,6 +16,8 @@ class MylynConnector::IssuesController < ApplicationController
   helper MylynConnector::MylynHelper
   helper :queries
   include QueriesHelper
+  helper :sort
+  include SortHelper
 
   
   def show
