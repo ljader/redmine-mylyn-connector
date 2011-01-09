@@ -8,7 +8,7 @@ module MylynConnector
     BRANCH = 'stable'
 
     def self.revision
-      return :RC4
+      return :RC5
     end
 
     REVISION = self.revision
