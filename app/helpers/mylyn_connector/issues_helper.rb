@@ -33,6 +33,18 @@ module MylynConnector::IssuesHelper
     return (issue.project.module_enabled?(:time_tracking) && User.current.allowed_to?(:log_time, issue.project)) ? true : false
   end
 
+  def watchers_view_allowed?(issue)
+    return User.current.allowed_to?(:view_issue_watchers, issue.project) ? true : false
+  end
+
+  def watchers_add_allowed?(issue)
+    return User.current.allowed_to?(:add_issue_watchers, issue.project) ? true : false
+  end
+
+  def watchers_delete_allowed?(issue)
+    return User.current.allowed_to?(:delete_issue_watchers, issue.project) ? true : false
+  end
+
   def watched?(issue)
     return false unless User.current.logged?
     return issue.watched_by?(User.current)

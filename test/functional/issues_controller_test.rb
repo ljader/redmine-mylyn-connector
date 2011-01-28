@@ -33,7 +33,7 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'priorityid', :content => '4', :parent => i
 
     assert_tag :tag => 'watched', :content => 'false', :parent => i
-    assert_tag :tag => 'watchers', :content => '', :parent => i
+    assert_tag :tag => 'watchers', :attributes => {:viewallowed=>'false', :addallowed=>'false', :deleteallowed=>'false'}, :content => '', :parent => i
 
     assert_tag :tag=> 'startdate', :content => 1.day.ago.to_date.to_s, :parent => i
     assert_tag :tag=> 'duedate', :content => 10.day.from_now.to_date.to_s, :parent => i
@@ -102,6 +102,8 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag i
 
     assert_tag :tag => 'assignedtoid', :content => '3', :parent => i
+
+    assert_tag :tag => 'watchers', :attributes => {:viewallowed=>'true', :addallowed=>'false', :deleteallowed=>'false'}, :content => '2', :parent => i
 
     atts = {:tag => 'attachments', :children => {:count => 4},:parent => i}
     att = {:tag => 'attachment', :attributes => {:id => 1}, :parent => atts}

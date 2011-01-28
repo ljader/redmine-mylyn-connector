@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:tns="http://redmin-mylyncon.sf.net/api"
 	targetNamespace="http://redmin-mylyncon.sf.net/api"
@@ -33,13 +32,25 @@
 			<xsd:element name="statusId" type="xsd:integer" />
  			<xsd:element name="priorityId" type="xsd:integer" />
 			<xsd:element name="watched" type="xsd:boolean"/><!-- watched by current user-->
-			<xsd:element name="watchers"  type="tns:idList"/>
+			<xsd:element name="watchers">
+				<xsd:complexType>
+					<xsd:simpleContent >
+						<xsd:extension base="tns:idList" >
+							<xsd:attribute name="viewAllowed" type="xsd:boolean" use="required"/>
+							<xsd:attribute name="addAllowed" type="xsd:boolean" use="required"/>
+							<xsd:attribute name="deleteAllowed" type="xsd:boolean" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+					
+				</xsd:complexType>
+			</xsd:element>
+
 
 			<!-- OPTIONAL -->
 			<xsd:element name="startDate" type="xsd:date" minOccurs="0" />
 			<xsd:element name="dueDate" type="xsd:date" minOccurs="0" />
 			<xsd:element name="doneRatio" type="xsd:integer"  minOccurs="0"/>
-			<xsd:element name="estimatedHours" type="xsd:integer" minOccurs="0" />
+			<xsd:element name="estimatedHours" type="xsd:float" minOccurs="0" />
 
 			<xsd:element name="authorId" type="xsd:integer" minOccurs="0"/><!-- missing, when anonymous -->
 			<xsd:element name="categoryId" type="xsd:integer" minOccurs="0"/>

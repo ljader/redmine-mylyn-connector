@@ -14,7 +14,12 @@ xml.issue({:id => issue.id, :editAllowed => edit_allowed?(issue)}.merge(attr||={
 
   #Watchers
   xml.watched watched?(issue)
-  xml.watchers integer_list(issue.watcher_users)
+  showWatchers = watchers_view_allowed?(issue)
+  if (showWatchers && issue.watcher_users)
+    xml.watchers integer_list(issue.watcher_users), :viewAllowed => showWatchers, :addAllowed => watchers_add_allowed?(issue), :deleteAllowed => watchers_delete_allowed?(issue)
+  else
+    xml.watchers :viewAllowed => showWatchers, :addAllowed => watchers_add_allowed?(issue), :deleteAllowed => watchers_delete_allowed?(issue)
+  end
 
   #Work/Progress(optional)
   xml.startDate issue.start_date.to_s if issue.start_date
