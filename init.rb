@@ -8,3 +8,5 @@ Redmine::Plugin.register :redmine_mylyn_connector do
   description 'This plugin provides a webservice API for Eclipse Mylyn (RESTful)'
   version MylynConnector::Version
 end
+
+Redmine::Plugin.find(:redmine_mylyn_connector).requires_redmine(:version_or_higher=>'1.0.0')
