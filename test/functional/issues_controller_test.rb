@@ -170,21 +170,43 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_response 404
   end
 
-#  def test_query_by_id
-#    get :query, :project_id => 1, :query_id => 1
-#
-#    assert_response :success
-#    assert_template 'index.rxml'
-#
+  def test_query_by_id
+    get :index, :project_id => 1, :query_id => 1
+
+    assert_response :success
+    assert_template 'index.xml.builder'
+
+    #TODO create a schema
 #    xmldoc = XML::Document.string @response.body
 #    schema = read_schema 'issues'
 #    valid = xmldoc.validate_schema schema
 #    assert valid , 'Ergenis passt nicht zum Schema ' + 'issues'
-#
-#    assert_tag :tag => 'issues', :children => {:count => 1}
-#    assert_tag :tag => 'issue', :attributes => {:id => 3}
-#  end
-#
+
+    assert_tag :tag => 'issues', :children => {:count => 1}
+    assert_tag :tag => 'issue', :attributes => {:id => 3}
+  end
+
+  def test_grouped_query_by_id
+    get :index, :query_id => 6
+
+    assert_response :success
+    assert_template 'index.xml.builder'
+
+    #TODO create a schema
+#    xmldoc = XML::Document.string @response.body
+#    schema = read_schema 'issues'
+#    valid = xmldoc.validate_schema schema
+#    assert valid , 'Ergenis passt nicht zum Schema ' + 'issues'
+
+    assert_tag :tag => 'issues', :children => {:count => 6}
+    assert_tag :tag => 'issue', :attributes => {:id => 1}
+    assert_tag :tag => 'issue', :attributes => {:id => 2}
+    assert_tag :tag => 'issue', :attributes => {:id => 3}
+    assert_tag :tag => 'issue', :attributes => {:id => 5}
+    assert_tag :tag => 'issue', :attributes => {:id => 7}
+    assert_tag :tag => 'issue', :attributes => {:id => 13}
+  end
+
 #  def test_query_by_string
 #    post :query, :project_id => 1, :query_string => 'project_id=1&set_filter=1&fields[]=tracker_id&operators[tracker_id]=%3D&values[tracker_id][]=1&fields[]=category_id&operators[category_id]=!*&values[category_id][]=1'
 #

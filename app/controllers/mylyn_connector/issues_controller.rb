@@ -31,7 +31,7 @@ class MylynConnector::IssuesController < ApplicationController
     retrieve_query
 
     if @query.valid?
-      @issues = @query.issues
+      @issues = @query.issues(:include=>[:assigned_to, :tracker, :priority, :category, :fixed_version])
 
       respond_to do |format|
         format.xml {render :layout => false}
