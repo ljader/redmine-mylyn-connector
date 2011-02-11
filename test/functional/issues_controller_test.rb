@@ -19,7 +19,7 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'issue'
 
-    i = {:tag => 'issue', :attributes => {:id => 1, :editallowed => 'false', :api => /^2.7.0/}}
+    i = {:tag => 'issue', :attributes => {:id => 1, :editallowed => 'false', :api => /^2.7.1/}}
     assert_tag i
 
     assert_tag :tag => 'subject', :content => 'Can\'t print recipes', :parent => i
@@ -98,7 +98,7 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'issue'
 
-    i = {:tag => 'issue', :attributes => {:id => '3', :editallowed => 'true', :api => /^2.7.0/}}
+    i = {:tag => 'issue', :attributes => {:id => '3', :editallowed => 'true', :api => /^2.7.1/}}
     assert_tag i
 
     assert_tag :tag => 'assignedtoid', :content => '3', :parent => i
@@ -144,7 +144,7 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'updatedIssues'
 
-    assert_tag :tag => 'updatedissues', :content => '1 8', :attributes => {:api => /^2.7.0/}
+    assert_tag :tag => 'updatedissues', :content => '1 8', :attributes => {:api => /^2.7.1/}
   end
 
   def test_list
@@ -158,7 +158,7 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'issues'
 
-    lst = {:tag => 'issues', :children => {:count => 2}, :attributes => {:api => /^2.7.0/}}
+    lst = {:tag => 'issues', :children => {:count => 2}, :attributes => {:api => /^2.7.1/}}
     assert_tag lst
     assert_tag :tag => 'issue', :attributes => {:id => 1, :editallowed => 'false'}, :parent => lst
     assert_tag :tag => 'issue', :attributes => {:id => 8, :editallowed => 'false'}, :parent => lst

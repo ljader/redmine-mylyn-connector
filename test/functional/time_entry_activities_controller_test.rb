@@ -18,7 +18,7 @@ class MylynConnector::ActivitiesControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'timeEntryActivities'
 
-    acts =  {:tag => 'timeentryactivities', :children => {:count => 3}, :attributes => {:api => /^2.7.0/}}
+    acts =  {:tag => 'timeentryactivities', :children => {:count => 3}, :attributes => {:api => /^2.7.1/}}
     act = {:tag => 'timeentryactivity', :attributes => {:id => 10}, :parent => acts}
     assert_tag :tag => 'name', :content => 'Development', :parent => act
     assert_tag :tag => 'position', :content => '2', :parent => act

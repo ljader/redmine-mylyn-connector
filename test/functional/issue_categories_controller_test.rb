@@ -19,7 +19,7 @@ class MylynConnector::IssueCategoriesControllerTest < MylynConnector::Controller
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'issueCategories'
 
-    cats =  {:tag => 'issuecategories', :children => {:count => 4}, :attributes => {:api => /^2.7.0/}}
+    cats =  {:tag => 'issuecategories', :children => {:count => 4}, :attributes => {:api => /^2.7.1/}}
     cat = {:tag => 'issuecategory', :attributes => {:id => 3}, :parent => cats}
     assert_tag :tag => 'name', :content => 'Stock management', :parent => cat
 
@@ -37,6 +37,6 @@ class MylynConnector::IssueCategoriesControllerTest < MylynConnector::Controller
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'issueCategories'
 
-    assert_tag :tag => 'issuecategories', :children => {:count => 0}, :attributes => {:api => /^2.7.0/}
+    assert_tag :tag => 'issuecategories', :children => {:count => 0}, :attributes => {:api => /^2.7.1/}
   end
 end

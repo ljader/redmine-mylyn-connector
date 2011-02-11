@@ -19,7 +19,7 @@ class MylynConnector::IssueStatusControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'issueStatus'
 
-    stats =  {:tag => 'issuestatuses', :children => {:count => 6}, :attributes => {:api => /^2.7.0/}}
+    stats =  {:tag => 'issuestatuses', :children => {:count => 6}, :attributes => {:api => /^2.7.1/}}
     stat = {:tag => 'issuestatus', :attributes => {:id => 5}, :parent => stats}
     assert_tag :tag => 'name', :content => 'Closed', :parent => stat
     assert_tag :tag => 'isclosed', :content => 'true', :parent => stat
@@ -39,6 +39,6 @@ class MylynConnector::IssueStatusControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'issueStatus'
 
-    assert_tag :tag => 'issuestatuses', :children => {:count => 0}, :attributes => {:api => /^2.7.0/}
+    assert_tag :tag => 'issuestatuses', :children => {:count => 0}, :attributes => {:api => /^2.7.1/}
   end
 end

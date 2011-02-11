@@ -18,7 +18,7 @@ class MylynConnector::VersionsControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'versions'
 
-    vers =  {:tag => 'versions', :children => {:count => 7}, :attributes => {:api => /^2.7.0/}}
+    vers =  {:tag => 'versions', :children => {:count => 7}, :attributes => {:api => /^2.7.1/}}
     ver = {:tag => 'version', :attributes => {:id => 4}, :parent => vers}
     assert_tag :tag => 'name', :content => '2.0', :parent => ver
     assert_tag :tag => 'status', :content => 'open', :parent => ver
@@ -35,6 +35,6 @@ class MylynConnector::VersionsControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'versions'
 
-    assert_tag :tag => 'versions', :children => {:count => 0}, :attributes => {:api => /^2.7.0/}
+    assert_tag :tag => 'versions', :children => {:count => 0}, :attributes => {:api => /^2.7.1/}
   end
 end
