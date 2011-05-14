@@ -10,3 +10,5 @@ Redmine::Plugin.register :redmine_mylyn_connector do
 end
 
 Redmine::Plugin.find(:redmine_mylyn_connector).requires_redmine(:version_or_higher=>'1.0.0')
+
+require_dependency 'mylyn_connector/hooks/controller_issues_edit_after_save'
