@@ -24,4 +24,20 @@ class MylynConnector::InformationController < ApplicationController
     
     render :text => form_authenticity_token
   end
+
+  def authtest
+
+    authenticate_with_http_basic do |username, password|
+      if user = User.try_to_login(username, password)
+        txt =  'Hello ' + user.name + ' - your HTTP-Basic-Authentication does work properly.'
+        txt += ' <b>But you have to enable the Rest-API!</b>' unless Setting.rest_api_enabled?;
+
+        render :text =>  txt
+        return
+      end
+    end
+
+    head :unauthorized, 'WWW-Authenticate' => 'Basic realm="Redmine API"'
+
+  end
 end
