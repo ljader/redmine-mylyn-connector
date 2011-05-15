@@ -1,3 +1,7 @@
+Version 2.7.2
+  bugfix: Missing support for manipulation of issue watchers
+  add   : Testpage for HTTP-Basic-Auth
+
 Version 2.7.1
   bugfix: execution of queries with grouped columns
 
