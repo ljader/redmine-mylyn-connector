@@ -18,7 +18,7 @@ class MylynConnector::QueriesControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'queries'
 
-    qs =  {:tag => 'queries', :children => {:count => 5}, :attributes => {:api => /^2.7.1/}}
+    qs =  {:tag => 'queries', :children => {:count => 5}, :attributes => {:api => cr}}
     q = {:tag => 'query', :attributes => {:id => 6}, :parent => qs}
     assert_tag qs
     assert_tag q
@@ -39,7 +39,7 @@ class MylynConnector::QueriesControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'queries'
 
-    qs =  {:tag => 'queries', :children => {:count => 7}, :attributes => {:api => /^2.7.1/}}
+    qs =  {:tag => 'queries', :children => {:count => 7}, :attributes => {:api => cr}}
     assert_tag qs
 
     assert_tag :tag => 'query', :attributes => {:id => 1}, :child=> {:tag => 'projectid', :content => '1'}, :parent => qs
@@ -62,6 +62,6 @@ class MylynConnector::QueriesControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'queries'
 
-    assert_tag :tag => 'queries', :children => {:count => 0}, :attributes => {:api => /^2.7.1/}
+    assert_tag :tag => 'queries', :children => {:count => 0}, :attributes => {:api => cr}
   end
 end

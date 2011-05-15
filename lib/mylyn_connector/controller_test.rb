@@ -31,5 +31,10 @@ module MylynConnector
     def self.rr
       MylynConnector::Version.redmine_release
     end
+
+    def cr
+      MylynConnector::Version.to_s
+    end
+
   end
 end

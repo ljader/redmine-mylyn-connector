@@ -18,7 +18,7 @@ class MylynConnector::TrackersControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'trackers'
 
-    trs =  {:tag => 'trackers', :children => {:count => 3}, :attributes => {:api => /^2.7.1/}}
+    trs =  {:tag => 'trackers', :children => {:count => 3}, :attributes => {:api => cr}}
     tr = {:tag => 'tracker', :attributes => {:id => 3}, :parent => trs}
     assert_tag :tag => 'name', :content => 'Support request', :parent => tr
     assert_tag :tag => 'position', :content => '3', :parent => tr
@@ -36,6 +36,6 @@ class MylynConnector::TrackersControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'trackers'
 
-    assert_tag :tag => 'trackers', :children => {:count => 0}, :attributes => {:api => /^2.7.1/}
+    assert_tag :tag => 'trackers', :children => {:count => 0}, :attributes => {:api => cr}
   end
 end

@@ -20,7 +20,7 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'projects'
 
-    prjs =  {:tag => 'projects', :children => {:count => 2}, :attributes => {:api => /^2.7.1/}}
+    prjs =  {:tag => 'projects', :children => {:count => 2}, :attributes => {:api => cr}}
     p1 = {:tag => 'project', :attributes => {:id => 1, :newissueallowed => "false", :moveissueallowed => "false"}, :parent => prjs}
     p3 = {:tag => 'project', :attributes => {:id => 3, :newissueallowed => "false", :moveissueallowed => "false"}, :parent => prjs}
 
@@ -78,7 +78,7 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergenis passt nicht zum Schema ' + 'projects'
 
-    prjs =  {:tag => 'projects', :children => {:count => 4}, :attributes => {:api => /^2.7.1/}}
+    prjs =  {:tag => 'projects', :children => {:count => 4}, :attributes => {:api => cr}}
     assert_tag prjs
 
     assert_tag :tag => 'project', :attributes => {:id => 1, :newissueallowed => "true", :moveissueallowed => "true"}, :parent => prjs

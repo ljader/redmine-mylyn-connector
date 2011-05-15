@@ -18,7 +18,7 @@ class MylynConnector::UsersControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'users'
 
-    users =  {:tag => 'users', :children => {:count => 9}, :attributes => {:api => /^2.7.1/}}
+    users =  {:tag => 'users', :children => {:count => 9}, :attributes => {:api => cr}}
     user = {:tag => 'user', :attributes => {:id => 5}, :parent => users}
 #    assert_tag :tag => 'name', :content => 'Dave2 Lopper2', :parent => user
     assert_tag :tag => 'login', :content => 'dlopper2', :parent => user
