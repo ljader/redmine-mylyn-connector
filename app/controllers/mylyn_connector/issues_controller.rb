@@ -4,7 +4,8 @@ class MylynConnector::IssuesController < ApplicationController
   unloadable
   include MylynConnector::Rescue::ClassMethods
 
-  accept_key_auth :show, :index, :list, :updated_since
+  accept_key_auth :show, :index, :list, :updated_since #Redmine<1.2
+  accept_api_auth :show, :index, :list, :updated_since #Redmine>=1.2
 
   skip_before_filter :verify_authenticity_token
 

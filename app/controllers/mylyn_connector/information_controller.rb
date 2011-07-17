@@ -4,7 +4,8 @@ class MylynConnector::InformationController < ApplicationController
   unloadable
   include MylynConnector::Rescue::ClassMethods
 
-  accept_key_auth :version, :token
+  accept_key_auth :version, :token #Redmine<1.2
+  accept_api_auth :version, :token, :authtest #Redmine>=1.2
 
   skip_before_filter :verify_authenticity_token
 

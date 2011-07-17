@@ -5,7 +5,8 @@ class MylynConnector::IssuePrioritiesController < ApplicationController
   include MylynConnector::Rescue::ClassMethods
   include MylynConnector::Version::ClassMethods
 
-  accept_key_auth :all
+  accept_key_auth :all #Redmine<1.2
+  accept_api_auth :all #Redmine>=1.2
   
   skip_before_filter :verify_authenticity_token
 

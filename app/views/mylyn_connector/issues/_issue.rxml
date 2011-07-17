@@ -32,7 +32,7 @@ xml.issue({:id => issue.id, :editAllowed => edit_allowed?(issue)}.merge(attr||={
   xml.categoryId issue.category_id if issue.category_id
   xml.assignedToId issue.assigned_to_id if issue.assigned_to_id
   xml.fixedVersionId issue.fixed_version_id if issue.fixed_version_id
-  xml.parentId issue.parent_id if is1dot0? && issue.parent_id
+  xml.parentId issue.parent_id if issue.parent_id
 
   xml.availableStatus integer_list(available_status(issue))
 
