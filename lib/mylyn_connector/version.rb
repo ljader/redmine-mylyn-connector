@@ -2,7 +2,7 @@ module MylynConnector
   module Version
     MAJOR = 2
     MINOR = 7
-    TINY  = 2
+    TINY  = 3
 
     # stable/trunk
     BRANCH = 'stable'
@@ -24,14 +24,17 @@ module MylynConnector
 
     module ClassMethods
 
-      def is09?
-        MylynConnector::Version.redmine_release.to_f >=0.9
+      def is1dot0?
+        MylynConnector::Version.redmine_release.to_f == 1.0 || MylynConnector::Version.redmine_release.to_f == 0.9 && Redmine::VERSION.to_s.include?('devel')
       end
 
-      def is10?
-        MylynConnector::Version.redmine_release.to_f >=1.0 || is09? && Redmine::VERSION.to_s.include?('devel')
+      def is1dot1?
+        MylynConnector::Version.redmine_release.to_f == 1.1 || MylynConnector::Version.redmine_release.to_f == 1.0 && Redmine::VERSION.to_s.include?('devel')
       end
 
+      def is1dot2?
+        MylynConnector::Version.redmine_release.to_f == 1.2 || MylynConnector::Version.redmine_release.to_f == 1.1 && Redmine::VERSION.to_s.include?('devel')
+      end
     end
 
   end

@@ -35,7 +35,6 @@ class MylynConnector::VersionsControllerTest < MylynConnector::ControllerTest
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'versions'
 
-    puts @response.body
     assert_tag :tag => 'versions', :children => {:count => 0}, :attributes => {:api => cr}
   end
 end
