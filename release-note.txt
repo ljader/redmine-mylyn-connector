@@ -1,6 +1,7 @@
 Version 2.7.3
   chg   : Fixtures adapted for Redmine 1.2
   add   : Support for accept_api_auth (new in Redmine 1.2)
+  fix   : Workaround for custom fields with type 'Date'
 
 Version 2.7.2
   bugfix: Missing support for manipulation of issue watchers

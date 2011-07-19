@@ -12,3 +12,9 @@ end
 Redmine::Plugin.find(:redmine_mylyn_connector).requires_redmine(:version_or_higher=>'1.0.0')
 
 require_dependency 'mylyn_connector/hooks/controller_issues_edit_after_save'
+
+require 'dispatcher'
+require 'mylyn_connector/patches/custom_value_patch'
+Dispatcher.to_prepare do
+  CustomValue.send(:include, MylynConnector::Patches::CustomValuePatch) unless CustomValue.included_modules.include?(MylynConnector::Patches::CustomValuePatch)
+end
