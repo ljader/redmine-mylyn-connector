@@ -1,11 +1,11 @@
 require File.dirname(__FILE__) + '/../../../lib/mylyn_connector'
 
-class MylynConnector::InformationController < ApplicationController
+class MylynConnector::InformationController < MylynConnector::ApplicationController
   unloadable
   include MylynConnector::Rescue::ClassMethods
+  include MylynConnector::Version::ClassMethods
 
-  accept_key_auth :version, :token #Redmine<1.2
-  accept_api_auth :version, :token, :authtest #Redmine>=1.2
+  accept_api_auth :version, :token, :authtest
 
   skip_before_filter :verify_authenticity_token
 

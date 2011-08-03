@@ -1,3 +1,6 @@
+Version 2.7.4
+  chg   : Wrapper for accept_api_auth in Redmine < 1.2
+
 Version 2.7.3
   chg   : Fixtures adapted for Redmine 1.2
   add   : Support for accept_api_auth (new in Redmine 1.2)
