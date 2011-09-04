@@ -22,6 +22,8 @@
 								<xsd:enumeration value="list" />
 								<xsd:enumeration value="date" />
 								<xsd:enumeration value="bool" />
+								<xsd:enumeration value="user" />
+								<xsd:enumeration value="version" />
 							</xsd:restriction>
 						</xsd:simpleType>
 					</xsd:element>

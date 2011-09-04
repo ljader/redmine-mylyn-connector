@@ -57,6 +57,7 @@
 			<xsd:element name="assignedToId" type="xsd:integer" minOccurs="0" />
 			<xsd:element name="fixedVersionId" type="xsd:integer" minOccurs="0"/>
 			<xsd:element name="parentId" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="subtasks" type="tns:idList" minOccurs="0"/>
 
 			<!-- AVAILABLE VALUES -->
 			<xsd:element name="availableStatus"  type="tns:idList"/>

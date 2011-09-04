@@ -114,6 +114,24 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'digest', :content => 'b91e08d0cf966d5c6ff411bd8c4cc3a2', :parent => att
   end
 
+  def test_authenticated_subtasks
+    @request.session[:user_id] = 3
+
+    get :show, :id => 999
+    assert_response :success
+    assert_template 'show.xml.builder'
+
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'issue'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'issue'
+
+    i = {:tag => 'issue', :attributes => {:id => '999', :editallowed => 'true', :api => cr}}
+    assert_tag i
+
+    assert_tag :tag => 'subtasks', :content => '1000 1001'
+  end
+  
 #  def test_show_assigned
 #    get :show, :id => 2
 #    assert_response :success
@@ -198,7 +216,7 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
 #    valid = xmldoc.validate_schema schema
 #    assert valid , 'Ergenis passt nicht zum Schema ' + 'issues'
 
-    assert_tag :tag => 'issues', :children => {:count => 6}
+    assert_tag :tag => 'issues', :children => {:count => 9}
     assert_tag :tag => 'issue', :attributes => {:id => 1}
     assert_tag :tag => 'issue', :attributes => {:id => 2}
     assert_tag :tag => 'issue', :attributes => {:id => 3}

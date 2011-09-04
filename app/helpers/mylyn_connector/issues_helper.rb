@@ -50,4 +50,14 @@ module MylynConnector::IssuesHelper
     return issue.watched_by?(User.current)
   end
 
+  def subtasks(issue)
+    begin
+        Issue.find(:all, :joins => :project, :conditions => ["#{Issue.table_name}.parent_id=? AND (" + Issue.visible_condition(User.current) + ")", issue])
+      rescue
+        issue.children.to_a.reject!{|i|
+          !User.current.allowed_to?({:controller => :issues, :action => :show}, i.project || @projects)
+        }
+      end unless (issue.leaf?)
+  end
+
 end
