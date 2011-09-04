@@ -1,3 +1,6 @@
+Version 2.7.5
+  fix   : Added missing property subtasks
+
 Version 2.7.4
   chg   : Wrapper for accept_api_auth in Redmine < 1.2
 
