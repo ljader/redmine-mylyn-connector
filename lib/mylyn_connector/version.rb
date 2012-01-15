@@ -35,6 +35,10 @@ module MylynConnector
       def is1dot2?
         MylynConnector::Version.redmine_release.to_f == 1.2 || MylynConnector::Version.redmine_release.to_f == 1.1 && Redmine::VERSION.to_s.include?('devel')
       end
+
+      def isMin1dot2?
+        MylynConnector::Version.redmine_release.to_f >= 1.2 || MylynConnector::Version.redmine_release.to_f == 1.1 && Redmine::VERSION.to_s.include?('devel')
+      end
     end
 
   end
