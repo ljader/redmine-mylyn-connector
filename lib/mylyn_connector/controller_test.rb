@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'xml'
 
 module MylynConnector
   class ControllerTest < ActionController::TestCase
