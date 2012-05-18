@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../../../lib/mylyn_connector'
 class MylynConnector::TimeEntryActivitiesController < MylynConnector::ApplicationController
   unloadable
   include MylynConnector::Rescue::ClassMethods
-  include MylynConnector::Version::ClassMethods
+  include MylynConnector::Version
 
   accept_api_auth :all
   
@@ -15,7 +15,7 @@ class MylynConnector::TimeEntryActivitiesController < MylynConnector::Applicatio
     @activities = TimeEntryActivity.shared.active
 
     respond_to do |format|
-      format.xml {render :layout => false}
+      format.xml {render :layout => nil}
     end
   end
 

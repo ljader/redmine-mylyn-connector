@@ -22,7 +22,7 @@ class MylynConnector::IssuesController < MylynConnector::ApplicationController
   
   def show
     respond_to do |format|
-      format.xml {render :layout => false}
+      format.xml {render :layout => nil}
     end
   end
 
@@ -34,7 +34,7 @@ class MylynConnector::IssuesController < MylynConnector::ApplicationController
       @issues = @query.issues(:include=>[:assigned_to, :tracker, :priority, :category, :fixed_version])
 
       respond_to do |format|
-        format.xml {render :layout => false}
+        format.xml {render :layout => nil}
       end
 
     else
@@ -60,10 +60,10 @@ class MylynConnector::IssuesController < MylynConnector::ApplicationController
     @issues = Issue.find(
       :all,
       :joins => ["join #{Project.table_name} on project_id=#{Project.table_name}.id"],
-      :conditions => ["#{Issue.table_name}.id in (?) and #{Issue.table_name}.updated_on >= ? and " << Project.visible_by, issues, cond]
+      :conditions => ["#{Issue.table_name}.id in (?) and #{Issue.table_name}.updated_on >= ? and " << Project.visible_condition(User.current), issues, cond]
     )
     respond_to do |format|
-      format.xml {render :layout => false}
+      format.xml {render :layout => nil}
     end
   end
 
@@ -76,10 +76,10 @@ class MylynConnector::IssuesController < MylynConnector::ApplicationController
     @issues = Issue.find(
       :all,
       :joins => ["join #{Project.table_name} on project_id=#{Project.table_name}.id"],
-      :conditions => ["#{Issue.table_name}.id in (?) and " << Project.visible_by, issues]
+      :conditions => ["#{Issue.table_name}.id in (?) and " << Project.visible_condition(User.current), issues]
     )
     respond_to do |format|
-      format.xml {render :layout => false}
+      format.xml {render :layout => nil}
     end
   end
 

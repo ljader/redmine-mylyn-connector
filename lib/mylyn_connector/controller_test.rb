@@ -4,7 +4,7 @@ require 'xml'
 module MylynConnector
   class ControllerTest < ActionController::TestCase
 
-    include MylynConnector::Version::ClassMethods
+    include MylynConnector::Version
 
     def self.fixtures(*table_names)
       dir = File.join(File.dirname(__FILE__), "../../test/fixtures/" + self.rr )

@@ -1,6 +1,6 @@
 
 module MylynConnector::IssuesHelper
-  include MylynConnector::Version::ClassMethods
+  include MylynConnector::Version
 
   def edit_allowed? issue
     res = User.current.allowed_to?(:edit_issues, issue.project)
@@ -54,7 +54,7 @@ module MylynConnector::IssuesHelper
     begin
         Issue.find(:all, :joins => :project, :conditions => ["#{Issue.table_name}.parent_id=? AND (" + Issue.visible_condition(User.current) + ")", issue])
       rescue
-        issue.children.to_a.reject!{|i|
+        issue.children.to_a.reject{|i|
           !User.current.allowed_to?({:controller => :issues, :action => :show}, i.project || @projects)
         }
       end unless (issue.leaf?)

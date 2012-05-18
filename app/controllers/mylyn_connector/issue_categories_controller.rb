@@ -14,7 +14,7 @@ class MylynConnector::IssueCategoriesController < MylynConnector::ApplicationCon
     @issue_categories = IssueCategory.find(:all)
 
     respond_to do |format|
-      format.xml {render :layout => false}
+      format.xml {render :layout => nil}
     end
   end
 end

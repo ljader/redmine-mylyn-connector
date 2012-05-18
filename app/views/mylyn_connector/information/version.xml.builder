@@ -5,5 +5,6 @@ xml.version root_attribs do
     :minor => @data[1],
     :tiny => @data[2])
   xml.redmine Redmine::VERSION
-  xml.rails RAILS_GEM_VERSION
+  xml.rails	Gem.loaded_specs["rails"].version
+ #xml.rails RAILS_GEM_VERSION
 end

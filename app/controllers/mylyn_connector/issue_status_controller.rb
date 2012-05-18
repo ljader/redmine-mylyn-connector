@@ -14,7 +14,7 @@ class MylynConnector::IssueStatusController < MylynConnector::ApplicationControl
     @issue_status = IssueStatus.find(:all)
 
     respond_to do |format|
-      format.xml {render :layout => false}
+      format.xml {render :layout => nil}
     end
   end
 end

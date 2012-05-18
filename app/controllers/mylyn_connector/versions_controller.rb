@@ -14,7 +14,7 @@ class MylynConnector::VersionsController < MylynConnector::ApplicationController
     @versions = Version.find(:all)
 
     respond_to do |format|
-      format.xml {render :layout => false}
+      format.xml {render :layout => nil}
     end
   end
 end
