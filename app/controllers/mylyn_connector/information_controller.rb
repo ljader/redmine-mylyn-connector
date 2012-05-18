@@ -2,13 +2,9 @@ require File.dirname(__FILE__) + '/../../../lib/mylyn_connector'
 
 class MylynConnector::InformationController < MylynConnector::ApplicationController
   unloadable
-  include MylynConnector::Rescue::ClassMethods
-  include MylynConnector::Version
 
   accept_api_auth :version, :token, :authtest
-
   skip_before_filter :verify_authenticity_token
-
   helper MylynConnector::MylynHelper
   
   def version

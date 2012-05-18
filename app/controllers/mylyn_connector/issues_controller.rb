@@ -2,7 +2,6 @@ require File.dirname(__FILE__) + '/../../../lib/mylyn_connector'
 
 class MylynConnector::IssuesController < MylynConnector::ApplicationController
   unloadable
-  include MylynConnector::Rescue::ClassMethods
 
   accept_api_auth :show, :index, :list, :updated_since
 
