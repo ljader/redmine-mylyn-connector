@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class MylynConnector::SettingsControllerTest < MylynConnector::ControllerTest
-  fixtures :settings
+  fixtures :users
 
   def setup
     super
@@ -9,9 +9,9 @@ class MylynConnector::SettingsControllerTest < MylynConnector::ControllerTest
   end
 
   def test_all
-    get :all
+    get :all, :format => 'xml'
     assert_response :success
-    assert_template 'all.xml.builder'
+    assert_template 'mylyn_connector/settings/all'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'settings'

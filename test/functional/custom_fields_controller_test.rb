@@ -10,16 +10,16 @@ class MylynConnector::CustomFieldsControllerTest < MylynConnector::ControllerTes
   end
 
   def test_all
-    get :all
+    get :all, :format => 'xml'
     assert_response :success
-    assert_template 'all.xml.builder'
+    assert_template 'mylyn_connector/custom_fields/all'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'customFields'
     valid = xmldoc.validate_schema schema
     assert valid , 'Ergebnis passt nicht zum Schema ' + 'customFields'
 
-    cfl = {:tag => 'customfields', :children => {:count => (11)}, :attributes => {:api => cr}}
+    cfl = {:tag => 'customfields', :children => {:count => 11}, :attributes => {:api => cr}}
     cf = {:tag => 'customfield', :attributes => {:id => 1}, :parent => cfl}
     assert_tag :tag => 'name', :content => 'Database', :parent => cf
     assert_tag :tag => 'type', :content => 'IssueCustomField', :parent => cf
@@ -33,9 +33,9 @@ class MylynConnector::CustomFieldsControllerTest < MylynConnector::ControllerTes
   def test_all_empty_is_valid
     CustomField.delete_all
 
-    get :all
+    get :all, :format => 'xml'
     assert_response :success
-    assert_template 'all.xml.builder'
+    assert_template 'mylyn_connector/custom_fields/all'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'customFields'

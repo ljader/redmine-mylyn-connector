@@ -10,9 +10,9 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
   end
 
   def test_show_unauthenticated
-    get :show, :id => 1
+    get :show, :id => 1, :format => 'xml'
     assert_response :success
-    assert_template 'show.xml.builder'
+    assert_template 'mylyn_connector/issues/show'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'issue'
@@ -89,9 +89,9 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
   def test_authenticated_attachments
     @request.session[:user_id] = 3
 
-    get :show, :id => 3
+    get :show, :id => 3, :format => 'xml'
     assert_response :success
-    assert_template 'show.xml.builder'
+    assert_template 'mylyn_connector/issues/show'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'issue'
@@ -117,9 +117,9 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
   def test_authenticated_subtasks
     @request.session[:user_id] = 3
 
-    get :show, :id => 999
+    get :show, :id => 999, :format => 'xml'
     assert_response :success
-    assert_template 'show.xml.builder'
+    assert_template 'mylyn_connector/issues/show'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'issue'
@@ -152,10 +152,10 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
 #end
 
   def test_updated_since
-    get :updated_since, :issues => '1, 6 ,  8 , 17,20', :unixtime => 11.days.ago.to_i
+    get :updated_since, :issues => '1, 6 ,  8 , 17,20', :unixtime => 11.days.ago.to_i, :format => 'xml'
 
     assert_response :success
-    assert_template 'updated_since.xml.builder'
+    assert_template 'mylyn_connector/issues/updated_since'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'updatedIssues'
@@ -166,10 +166,10 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
   end
 
   def test_list
-    get :list, :issues => '1, 6 ,  8 , 17,20'
+    get :list, :issues => '1, 6 ,  8 , 17,20', :format => 'xml'
 
     assert_response :success
-    assert_template 'list.xml.builder'
+    assert_template 'mylyn_connector/issues/list'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'issues'
@@ -184,15 +184,15 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
   end
 
   def test_show_404
-    get :show, :id => 99
+    get :show, :id => 99, :format => 'xml'
     assert_response 404
   end
 
   def test_query_by_id
-    get :index, :project_id => 1, :query_id => 1
+    get :index, :project_id => 1, :query_id => 1, :format => 'xml'
 
     assert_response :success
-    assert_template 'index.xml.builder'
+    assert_template 'mylyn_connector/issues/index'
 
     #TODO create a schema
 #    xmldoc = XML::Document.string @response.body
@@ -205,10 +205,10 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
   end
 
   def test_grouped_query_by_id
-    get :index, :query_id => 6
+    get :index, :query_id => 6, :format => 'xml'
 
     assert_response :success
-    assert_template 'index.xml.builder'
+    assert_template 'mylyn_connector/issues/index'
 
     #TODO create a schema
 #    xmldoc = XML::Document.string @response.body

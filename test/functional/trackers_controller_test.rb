@@ -9,9 +9,9 @@ class MylynConnector::TrackersControllerTest < MylynConnector::ControllerTest
   end
 
   def test_all
-    get :all
+    get :all, :format => 'xml'
     assert_response :success
-    assert_template 'all.xml.builder'
+    assert_template 'mylyn_connector/trackers/all'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'trackers'
@@ -29,7 +29,7 @@ class MylynConnector::TrackersControllerTest < MylynConnector::ControllerTest
   def test_all_empty_is_valid
     Tracker.delete_all
  
-    get :all
+    get :all, :format => 'xml'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'trackers'

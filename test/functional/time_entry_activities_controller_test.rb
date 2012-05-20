@@ -2,16 +2,19 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class MylynConnector::ActivitiesControllerTest < MylynConnector::ControllerTest
   fixtures :enumerations
+  
 
   def setup
     super
     @controller = MylynConnector::TimeEntryActivitiesController.new
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
   end
 
   def test_all
-    get :all
+    get :all, :format => 'xml'
     assert_response :success
-    assert_template 'all.xml.builder'
+    assert_template 'mylyn_connector/time_entry_activities/all'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'timeEntryActivities'

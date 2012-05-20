@@ -9,9 +9,9 @@ class MylynConnector::QueriesControllerTest < MylynConnector::ControllerTest
   end
 
   def test_all_unauthenticated
-    get :all
+    get :all, :format => 'xml'
     assert_response :success
-    assert_template 'all.xml.builder'
+    assert_template 'mylyn_connector/queries/all'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'queries'
@@ -30,9 +30,9 @@ class MylynConnector::QueriesControllerTest < MylynConnector::ControllerTest
     def test_all_authenticated
     @request.session[:user_id] = 2
 
-      get :all
+      get :all, :format => 'xml'
     assert_response :success
-    assert_template 'all.xml.builder'
+    assert_template 'mylyn_connector/queries/all'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'queries'
@@ -55,7 +55,7 @@ class MylynConnector::QueriesControllerTest < MylynConnector::ControllerTest
   def test_all_empty_is_valid
     Query.delete_all
  
-    get :all
+    get :all, :format => 'xml'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'queries'

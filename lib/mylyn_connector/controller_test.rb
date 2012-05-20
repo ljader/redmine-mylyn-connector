@@ -1,15 +1,14 @@
-require 'rubygems'
+require 'rubygems' 
+require 'xml'
 
 module MylynConnector
   class ControllerTest < ActionController::TestCase
-
-    include MylynConnector::Version
-
+    
     def self.fixtures(*table_names)
       dir = File.join(File.dirname(__FILE__), "../../test/fixtures/" + self.rr )
 
       table_names.each{|x|
-        Fixtures.create_fixtures(dir, x) if File.exist?(dir + "/" + x.to_s + ".yml")
+        ActiveRecord::Fixtures.create_fixtures(dir, x) if File.exist?(dir + "/" + x.to_s + ".yml")
       }
 
       super(table_names)

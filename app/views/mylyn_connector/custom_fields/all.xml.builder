@@ -8,7 +8,7 @@ xml.customFields root_attribs do
       xml.minLength field.min_length
       xml.maxLength field.max_length
       xml.regexp field.regexp
-      if field.possible_values
+      if field.possible_values && field.possible_values.kind_of?(Array)
         xml.possibleValues {
           field.possible_values.each {|value|xml.possibleValue value}
         }
