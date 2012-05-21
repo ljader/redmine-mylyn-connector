@@ -54,13 +54,13 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
 
     acts =  {:tag => 'timeentryactivities', :children => {:count => 2}, :parent=>p1}
     act = {:tag => 'timeentryactivity', :attributes => {:id => 999}, :parent => acts}
-#    assert_tag :tag => 'name', :content => 'Development', :parent => act
+    assert_tag :tag => 'name', :content => 'Development', :parent => act
     assert_tag :tag => 'position', :content => '5', :parent => act
     assert_tag :tag => 'isdefault', :content => 'false', :parent => act
 
     acts =  {:tag => 'timeentryactivities', :children => {:count => 3}, :parent=>p3}
     act = {:tag => 'timeentryactivity', :attributes => {:id => 10}, :parent => acts}
- #   assert_tag :tag => 'name', :content => 'Development', :parent => act
+    assert_tag :tag => 'name', :content => 'Development', :parent => act
     assert_tag :tag => 'position', :content => '2', :parent => act
     assert_tag :tag => 'isdefault', :content => 'true', :parent => act
 

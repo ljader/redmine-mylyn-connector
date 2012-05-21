@@ -132,24 +132,20 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'subtasks', :content => '1000 1001'
   end
   
-#  def test_show_assigned
-#    get :show, :id => 2
-#    assert_response :success
-#    assert_template 'show.rxml'
-#
-#    xmldoc = XML::Document.string @response.body
-#    schema = read_schema 'issue'
-#    valid = xmldoc.validate_schema schema
-#    assert valid , 'Ergenis passt nicht zum Schema ' + 'issue'
-#
-#    assert_tag :tag => 'fixedversionid', :content => '2'
-#    assert_tag :tag => 'assignedtoid', :content => '3'
-#    #TODO test mit anmeldung als user #1, watched => true
-#    assert_tag :tag => 'watched', :content => false
-#    #redmine 0.8: 3
-#    #redmine 0.9: 1 & 3
-#    assert_tag :tag => 'watchers', :content => /(1 )?3/
-#end
+  def test_show_assigned
+    get :show, :id => 2, :format => 'xml'
+    assert_response :success
+    assert_template 'mylyn_connector/issues/show'
+
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'issue'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'issue'
+
+    assert_tag :tag => 'fixedversionid', :content => '2'
+    assert_tag :tag => 'assignedtoid', :content => '3'
+    assert_tag :tag => 'watched', :content => false
+  end
 
   def test_updated_since
     get :updated_since, :issues => '1, 6 ,  8 , 17,20', :unixtime => 11.days.ago.to_i, :format => 'xml'
@@ -188,17 +184,32 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_response 404
   end
 
+  def test_index
+    get :index, :format => 'xml'
+
+    assert_response :success
+    assert_template 'mylyn_connector/issues/index'
+
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'issuesPartial'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'issuesPartial'
+
+    assert_tag :tag => 'issues', :children => {:count => 9}
+    assert_tag :tag => 'issue', :attributes => {:id => 3} #random id within returned
+
+  end
+
   def test_query_by_id
     get :index, :project_id => 1, :query_id => 1, :format => 'xml'
 
     assert_response :success
     assert_template 'mylyn_connector/issues/index'
 
-    #TODO create a schema
-#    xmldoc = XML::Document.string @response.body
-#    schema = read_schema 'issues'
-#    valid = xmldoc.validate_schema schema
-#    assert valid , 'Ergenis passt nicht zum Schema ' + 'issues'
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'issuesPartial'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'issuesPartial'
 
     assert_tag :tag => 'issues', :children => {:count => 1}
     assert_tag :tag => 'issue', :attributes => {:id => 3}
@@ -210,11 +221,10 @@ class MylynConnector::IssuesControllerTest < MylynConnector::ControllerTest
     assert_response :success
     assert_template 'mylyn_connector/issues/index'
 
-    #TODO create a schema
-#    xmldoc = XML::Document.string @response.body
-#    schema = read_schema 'issues'
-#    valid = xmldoc.validate_schema schema
-#    assert valid , 'Ergenis passt nicht zum Schema ' + 'issues'
+    xmldoc = XML::Document.string @response.body
+    schema = read_schema 'issuesPartial'
+    valid = xmldoc.validate_schema schema
+    assert valid , 'Ergenis passt nicht zum Schema ' + 'issuesPartial'
 
     assert_tag :tag => 'issues', :children => {:count => 9}
     assert_tag :tag => 'issue', :attributes => {:id => 1}

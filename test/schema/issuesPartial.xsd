@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://redmin-mylyncon.sf.net/api"
+	targetNamespace="http://redmin-mylyncon.sf.net/api"
+	elementFormDefault="qualified" >
+
+	<xsd:include schemaLocation="types/issue.xsd" />
+	<xsd:include schemaLocation="types/versionstring.xsd" />
+
+	<xsd:element name="issues" xmlns="http://redmin-mylyncon.sf.net/api">
+		<xsd:complexType>
+			<xsd:sequence >
+				<xsd:element name="issue" type="tns:issuePartial" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="api" type="tns:versionstring" use="required" />
+			<xsd:attribute name="authenticated" type="xsd:boolean" use="required" />
+			<xsd:attribute name="authenticatedAs" type="xsd:string" />
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
