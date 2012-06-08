@@ -3,7 +3,7 @@ module MylynConnector
 
     MAJOR = 2
     MINOR = 8
-    TINY  = 0
+    TINY  = 1
 
     # stable/trunk
     BRANCH = 'stable'
