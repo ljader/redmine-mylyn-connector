@@ -19,8 +19,7 @@ Before installing ensure that the Redmine instance is stopped.
 1. <tt>cd [redmine-install-dir]/plugins</tt>
 3. <tt>git clone git://github.com/danmunn/redmine_mylyn_connector.git</tt>
 4. <tt>cd ..</tt>
-5. <tt>rake db:migrate_plugins RAILS_ENV=production</tt>
-6. <tt>bundle install --without development test</tt>
+5. <tt>bundle install --without development test</tt>
 
 After these steps re-start your instance of Redmine and the plugin will be installed.
 
@@ -29,7 +28,7 @@ After these steps re-start your instance of Redmine and the plugin will be insta
 Before uninstalling please ensure that the Redmine instance is stopped.
 
 1. <tt>cd [redmine-install-dir]</tt>
-4. <tt>rm -Rf plugins/redmine_mylyn_connector</tt>
+2. <tt>rm -Rf plugins/redmine_mylyn_connector</tt>
 
 After these steps re-start your instance of Redmine.
 
