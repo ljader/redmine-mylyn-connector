@@ -22,7 +22,13 @@ Before installing ensure that the Redmine instance is stopped.
 5. <tt>rake db:migrate_plugins RAILS_ENV=production</tt>
 6. <tt>bundle install --without development test</tt>
 
-After these steps re-start your instance of Redmine and the plugin will be installed.
+After these steps re-start your instance of Redmine and the plugin will be installed. 
+
+Make sure you enable the REST web service setting on your Redmine server.
+
+On your Redmine server, navigate to <tt>Administration >> Settings >> Authentication</tt>.
+
+Check the <tt>Enable REST web service</tt> box if it is not already.
 
 == Uninstallation
 
