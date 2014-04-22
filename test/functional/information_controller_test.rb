@@ -8,9 +8,9 @@ class MylynConnector::InformationControllerTest < MylynConnector::ControllerTest
     end
 
   def test_version
-    get :version
+    get :version, :format => 'xml'
     assert_response :success
-    assert_template 'version.xml.builder'
+    assert_template 'mylyn_connector/information/version'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'information'

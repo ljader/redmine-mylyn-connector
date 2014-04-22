@@ -82,17 +82,28 @@ enumerations_014:
   position: 4
   active: false
 enumerations_015:
-  name: Development
+  name: Inactive Priority
   id: 15
+  type: IssuePriority
+  position: 6
+  active: false
+enumerations_016:
+  name: Inactive Document Category
+  id: 16
+  type: DocumentCategory
+  active: false
+enumerations_999:
+  name: Development
+  id: 999
   type: TimeEntryActivity
   position: 5
   is_default: false
   active: true
   project_id: 1
   parent_id: 10
-enumerations_016:
+enumerations_1000:
   name: QA
-  id: 16
+  id: 1000
   type: TimeEntryActivity
   position: 3
   active: false

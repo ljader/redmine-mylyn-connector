@@ -11,6 +11,26 @@
 	<xsd:include schemaLocation="timeEntries.xsd" />
 	<xsd:include schemaLocation="datetime.xsd" />
  	<xsd:include schemaLocation="idList.xsd" />
+	
+	<xsd:complexType name="issuePartial">
+		<xsd:sequence>
+			
+			<xsd:element name="subject" >
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="1" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="updatedOn" type="tns:datetime" />
+			<xsd:element name="projectId" type="xsd:integer" />
+			<xsd:element name="statusId" type="xsd:integer" />
+ 			<xsd:element name="priorityId" type="xsd:integer" />
+			
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:integer" use="required" />
+		<xsd:attribute name="editAllowed" type="xsd:boolean" use="required" />
+	</xsd:complexType>
  	
 	<xsd:complexType name="issue">
 		<xsd:sequence>

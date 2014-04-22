@@ -11,9 +11,9 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
   end
 
   def test_all_unauthenticated
-    get :all
+    get :all, :format => 'xml'
     assert_response :success
-    assert_template 'all.xml.builder'
+    assert_template 'mylyn_connector/projects/all'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'projects'
@@ -34,8 +34,8 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'trackers', :content => '1 2 3', :parent => p1
     assert_tag :tag => 'trackers', :content => '2 3', :parent => p3
 
-    assert_tag :tag => 'versions', :content => '1 2 3 4 6 7', :parent => p1
-    assert_tag :tag => 'versions', :content => '4 6 7', :parent => p3
+    assert_tag :tag => 'versions', :content => '1 2 3 7 4 6', :parent => p1
+    assert_tag :tag => 'versions', :content => '7 4 6', :parent => p3
 
     m1 = {:tag => 'members', :children => {:count => 2}, :parent => p1}
     assert_tag :tag => 'member', :attributes => {:userid => 2, :assignable => 'true'}, :parent => m1
@@ -53,7 +53,7 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
     assert_tag :tag => 'issuecustomfieldsbytracker', :content => '2 6', :attributes => {:trackerid => 3}, :parent => {:tag => 'issuecustomfields', :children => {:count => 2}, :parent => p3}
 
     acts =  {:tag => 'timeentryactivities', :children => {:count => 2}, :parent=>p1}
-    act = {:tag => 'timeentryactivity', :attributes => {:id => 15}, :parent => acts}
+    act = {:tag => 'timeentryactivity', :attributes => {:id => 999}, :parent => acts}
     assert_tag :tag => 'name', :content => 'Development', :parent => act
     assert_tag :tag => 'position', :content => '5', :parent => act
     assert_tag :tag => 'isdefault', :content => 'false', :parent => act
@@ -69,9 +69,9 @@ class MylynConnector::ProjectsControllerTest < MylynConnector::ControllerTest
   def test_all_authenticated
     @request.session[:user_id] = 2
 
-    get :all
+    get :all, :format => 'xml'
     assert_response :success
-    assert_template 'all.xml.builder'
+    assert_template 'mylyn_connector/projects/all'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'projects'

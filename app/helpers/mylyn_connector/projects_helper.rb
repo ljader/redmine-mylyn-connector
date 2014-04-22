@@ -1,6 +1,6 @@
 
 module MylynConnector::ProjectsHelper
-  include MylynConnector::Version::ClassMethods
+  include MylynConnector::Version
 
   def get_trackers project
     project.trackers.find(:all);

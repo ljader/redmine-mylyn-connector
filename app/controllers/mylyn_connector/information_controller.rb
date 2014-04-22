@@ -2,20 +2,16 @@ require File.dirname(__FILE__) + '/../../../lib/mylyn_connector'
 
 class MylynConnector::InformationController < MylynConnector::ApplicationController
   unloadable
-  include MylynConnector::Rescue::ClassMethods
-  include MylynConnector::Version::ClassMethods
 
   accept_api_auth :version, :token, :authtest
-
   skip_before_filter :verify_authenticity_token
-
   helper MylynConnector::MylynHelper
   
   def version
     @data = MylynConnector::Version.to_a
 
     respond_to do |format|
-      format.xml {render :layout => false}
+      format.xml {render :layout => nil}
     end
   end
 
@@ -23,7 +19,7 @@ class MylynConnector::InformationController < MylynConnector::ApplicationControl
     #Workaround: we need a session, some operations does'nt support key-auth
     self.logged_user = User.current unless User.current.anonymous?
     
-    render :text => form_authenticity_token
+    render :xml => form_authenticity_token
   end
 
   def authtest

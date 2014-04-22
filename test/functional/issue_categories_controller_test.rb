@@ -10,9 +10,9 @@ class MylynConnector::IssueCategoriesControllerTest < MylynConnector::Controller
   end
 
   def test_all
-    get :all
+    get :all, :format => 'xml'
     assert_response :success
-    assert_template 'all.xml.builder'
+    assert_template 'mylyn_connector/issue_categories/all'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'issueCategories'
@@ -28,9 +28,9 @@ class MylynConnector::IssueCategoriesControllerTest < MylynConnector::Controller
   def test_all_empty_is_valid
     IssueCategory.delete_all
 
-    get :all
+    get :all, :format => 'xml'
     assert_response :success
-    assert_template 'all.xml.builder'
+    assert_template 'mylyn_connector/issue_categories/all'
 
     xmldoc = XML::Document.string @response.body
     schema = read_schema 'issueCategories'
