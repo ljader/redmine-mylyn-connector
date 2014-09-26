@@ -13,9 +13,11 @@ if Gem::Version.new("3.0") > Gem::Version.new(Rails.version) then
       rmc.connect "mylyn/versions", :controller => "MylynConnector::Versions", :action => "all"
       rmc.connect "mylyn/queries", :controller => "MylynConnector::Queries", :action => "all"
       rmc.connect "mylyn/users", :controller => "MylynConnector::Users", :action => "all"
+      rmc.connect "mylyn/groups", :controller => "MylynConnector::Groups", :action => "all"
       rmc.connect "mylyn/timeentryactivities", :controller => "MylynConnector::TimeEntryActivities", :action => "all"
       rmc.connect "mylyn/trackers", :controller => "MylynConnector::Trackers", :action => "all"
       rmc.connect "mylyn/issuestatus", :controller => "MylynConnector::IssueStatus", :action => "all"
+      rmc.connect "mylyn/workflowpermissions", :controller => "MylynConnector::WorkflowPermissions", :action => "all"
       #projects
       rmc.connect "mylyn/projects", :controller => "MylynConnector::Projects", :action => "all"
       rmc.connect "mylyn/issue/:id", :controller => "MylynConnector::Issues", :action => "show"
@@ -41,9 +43,11 @@ else
     get "mylyn/versions", :controller => 'mylyn_connector/versions', :action => 'all', :format => 'xml'
     get "mylyn/queries", :controller => 'mylyn_connector/queries', :action => 'all', :format => 'xml'
     get "mylyn/users", :controller => 'mylyn_connector/users', :action => 'all', :format => 'xml'
+    get "mylyn/groups", :controller => 'mylyn_connector/groups', :action => 'all', :format => 'xml'
     get "mylyn/timeentryactivities", :controller => 'mylyn_connector/time_entry_activities', :action => 'all', :format => 'xml'
     get "mylyn/trackers", :controller => 'mylyn_connector/trackers', :action => 'all', :format => 'xml'
     get "mylyn/issuestatus", :controller => 'mylyn_connector/issue_status', :action => 'all', :format => 'xml'
+    get "mylyn/workflowpermissions", :controller => 'mylyn_connector/workflow_permissions', :action => 'all', :format => 'xml'
     #projects
     get "mylyn/projects", :controller => 'mylyn_connector/projects', :action => 'all', :format => 'xml'
     get "mylyn/issue/:id", :controller => 'mylyn_connector/issues', :action => 'show', :format => 'xml'
