@@ -5,7 +5,7 @@ xml.issueStatuses root_attribs do
       xml.name status.name
       xml.position status.position
       xml.isClosed status.is_closed
-      xml.isDefault status.is_default
+      #xml.isDefault status.is_default
     end
   end
 end

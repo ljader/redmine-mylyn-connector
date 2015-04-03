@@ -3,12 +3,12 @@ module MylynConnector::ProjectsHelper
   include MylynConnector::Version
 
   def get_trackers project
-    project.trackers.find(:all);
+    project.trackers.all;
   end
 
   def get_issue_custom_fields project, tracker
     icf = project.all_issue_custom_fields;
-    icf.delete_if {|x| x.trackers.empty? } #only icf with assigned tracker are valid
+    icf.to_a.delete_if {|x| x.trackers.empty? } #only icf with assigned tracker are valid
 
     icf = icf & tracker.custom_fields
     icf.compact
@@ -36,7 +36,7 @@ module MylynConnector::ProjectsHelper
   end
 
   def move_issue_allowed? project
-    projects = Issue.allowed_target_projects_on_move
+    projects = Issue.allowed_target_projects
     return projects.include? project
   end
 
