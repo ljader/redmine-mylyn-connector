@@ -16,6 +16,7 @@ class MylynConnector::QueriesController < MylynConnector::ApplicationController
    #   :order => "#{Query.table_name}.name ASC"
    # )
     @queries = Query.where(user: User.current)
+
     respond_to do |format|
       format.xml {render :layout => nil}
     end
