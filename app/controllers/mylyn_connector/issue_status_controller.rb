@@ -8,7 +8,7 @@ class MylynConnector::IssueStatusController < MylynConnector::ApplicationControl
   helper MylynConnector::MylynHelper
 
   def all
-    @issue_status = IssueStatus.find(:all)
+    @issue_status = IssueStatus.all
 
     respond_to do |format|
       format.xml {render :layout => nil}

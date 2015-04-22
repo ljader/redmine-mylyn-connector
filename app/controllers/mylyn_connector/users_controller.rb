@@ -8,7 +8,7 @@ class MylynConnector::UsersController < MylynConnector::ApplicationController
   helper MylynConnector::MylynHelper
 
   def all
-    @users  = User.find(:all)
+    @users  = User.all
 
     respond_to do |format|
       format.xml {render :layout => nil}
