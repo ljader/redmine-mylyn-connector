@@ -8,7 +8,7 @@ class MylynConnector::IssueCategoriesController < MylynConnector::ApplicationCon
   helper MylynConnector::MylynHelper
 
   def all
-    @issue_categories = IssueCategory.find(:all)
+    @issue_categories = IssueCategory.all
 
     respond_to do |format|
       format.xml {render :layout => nil}

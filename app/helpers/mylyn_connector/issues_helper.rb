@@ -17,7 +17,7 @@ module MylynConnector::IssuesHelper
   end
 
   def journals issue
-    issue.journals.find(:all, :conditions => ["notes IS NOT NULL AND notes != ''"])
+    issue.journals.where("notes IS NOT NULL AND notes != ''").to_a
   end
 
   def list_status availableStatus
@@ -52,7 +52,10 @@ module MylynConnector::IssuesHelper
 
   def subtasks(issue)
     begin
-        Issue.find(:all, :joins => :project, :conditions => ["#{Issue.table_name}.parent_id=? AND (" + Issue.visible_condition(User.current) + ")", issue])
+        Issue
+          .where("#{Issue.table_name}.parent_id=? AND (" + Issue.visible_condition(User.current) + ")", issue)
+          .joins(:project)
+          .to_a
       rescue
         issue.children.to_a.reject{|i|
           !User.current.allowed_to?({:controller => :issues, :action => :show}, i.project || @projects)

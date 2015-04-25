@@ -8,7 +8,7 @@ class MylynConnector::TrackersController < MylynConnector::ApplicationController
   helper MylynConnector::MylynHelper
 
   def all
-    @trackers = Tracker.find(:all)
+    @trackers = Tracker.all
 
     respond_to do |format|
       format.xml {render :layout => nil}
