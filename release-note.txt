@@ -1,3 +1,6 @@
+Version 2.9.0
+  Version for Redmine 3.0 and higher
+
 Version 2.8.2
   fix	: Backwards compatibility for Redmine 1.3
 
