@@ -17,7 +17,7 @@ As of 1.8.0 of this plugin, Redmine 2.0.0 or greater is required, Rails 2.3.2 (o
 Before installing ensure that the Redmine instance is stopped.
 
 1. <tt>cd [redmine-install-dir]/plugins</tt>
-3. <tt>git clone git://github.com/danmunn/redmine_mylyn_connector.git</tt>
+3. <tt>git clone git@github.com:joaopedrotaveira/redmine_mylyn_connector.git</tt>
 4. <tt>cd ..</tt>
 5. <tt>bundle install --without development test</tt>
 
