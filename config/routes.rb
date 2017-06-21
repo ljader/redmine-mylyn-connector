@@ -27,7 +27,7 @@ if Gem::Version.new("3.0") > Gem::Version.new(Rails.version) then
       #very dirty workaround: enables RESTApiAuth for attachments
       rmc.connect 'mylyn/attachment/:id/:filename', :controller => 'attachments', :action => 'download', :format=> 'xml', :id => /\d+/, :filename => /.*/
     end
-    map.connect 'mylyn/authtest', :controller => 'MylynConnector::Information', :action => 'authtest', :conditions => {:method => :get}
+    map.connect 'mylyn/authtest', :controller => 'MylynConnector::Information', :action => 'authtest', :format=> 'xml', :conditions => {:method => :get}
   end
 else
   #Routing for Redmine 2.x
