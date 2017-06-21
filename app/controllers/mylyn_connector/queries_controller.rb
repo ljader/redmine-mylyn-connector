@@ -14,7 +14,7 @@ class MylynConnector::QueriesController < MylynConnector::ApplicationController
       .joins("left join #{Project.table_name} on project_id=#{Project.table_name}.id")
       .order("#{Query.table_name}.name ASC")
       .to_a
-      
+
     respond_to do |format|
       format.xml {render :layout => nil}
     end
